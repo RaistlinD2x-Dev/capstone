@@ -1,0 +1,32 @@
+{
+  "version": "21.0.0",
+  "files": {
+    "7c58bea8dc0bbb03acddca7f5faa288453e907ac13033fe02f84261de073b57e": {
+      "source": {
+        "path": "asset.7c58bea8dc0bbb03acddca7f5faa288453e907ac13033fe02f84261de073b57e",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "7c58bea8dc0bbb03acddca7f5faa288453e907ac13033fe02f84261de073b57e.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "c0bfbc3bbcecf65b000df841e6c0862a36c56c040bda9e3bc8e788ae5588f998": {
+      "source": {
+        "path": "TimestreamStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "c0bfbc3bbcecf65b000df841e6c0862a36c56c040bda9e3bc8e788ae5588f998.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

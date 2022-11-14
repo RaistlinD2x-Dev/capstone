@@ -1,0 +1,187 @@
+{
+  "version": "21.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "TimestreamStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "TimestreamStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "TimestreamStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "TimestreamStack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c0bfbc3bbcecf65b000df841e6c0862a36c56c040bda9e3bc8e788ae5588f998.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "TimestreamStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "TimestreamStack.assets"
+      ],
+      "metadata": {
+        "/TimestreamStack/StockInfoDatabase": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StockInfoDatabase"
+          }
+        ],
+        "/TimestreamStack/stockInfoTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "stockInfoTable"
+          }
+        ],
+        "/TimestreamStack/stockDataGetterLambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "stockDataGetterLambdaServiceRole6E861C4C"
+          }
+        ],
+        "/TimestreamStack/stockDataGetterLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "stockDataGetterLambdaB977BF61"
+          }
+        ],
+        "/TimestreamStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/TimestreamStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/TimestreamStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/TimestreamStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "TimestreamStack"
+    },
+    "ForecastStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "ForecastStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "ForecastStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "ForecastStack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/18c9b7914ec75df4c796c0207f0217bd835f40881231953b004ef3790230c469.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "ForecastStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "ForecastStack.assets"
+      ],
+      "metadata": {
+        "/ForecastStack/forecastBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "forecastBucket4A2B0532"
+          }
+        ],
+        "/ForecastStack/ForecastModelsDynamoDbTable": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "ForecastModelsDynamoDbTableD8735012"
+            }
+          }
+        ],
+        "/ForecastStack/ForecastModelsDynamoDbTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ForecastModelsDynamoDbTableD8735012"
+          }
+        ],
+        "/ForecastStack/ForecastValuesDynamoDbTable": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "ForecastValuesDynamoDbTable22E2913C"
+            }
+          }
+        ],
+        "/ForecastStack/ForecastValuesDynamoDbTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ForecastValuesDynamoDbTable22E2913C"
+          }
+        ],
+        "/ForecastStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/ForecastStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/ForecastStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/ForecastStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "ForecastStack"
+    }
+  }
+}

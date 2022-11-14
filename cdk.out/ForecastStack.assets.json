@@ -1,0 +1,19 @@
+{
+  "version": "21.0.0",
+  "files": {
+    "18c9b7914ec75df4c796c0207f0217bd835f40881231953b004ef3790230c469": {
+      "source": {
+        "path": "ForecastStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "18c9b7914ec75df4c796c0207f0217bd835f40881231953b004ef3790230c469.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}
