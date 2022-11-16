@@ -53,7 +53,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "282c3f6e3c2dda6afca7e34194810f125663ac5a63ca0c98ee9893627a0577e0.zip"
+     "S3Key": "80aed2cd775f5405c01435a0752e3787b8d53591144c0eea6a75c11bd372a7ed.zip"
     },
     "Role": {
      "Fn::GetAtt": [
@@ -69,7 +69,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "TimestreamStack/stockDataProcessorLambda/Resource",
-    "aws:asset:path": "asset.282c3f6e3c2dda6afca7e34194810f125663ac5a63ca0c98ee9893627a0577e0",
+    "aws:asset:path": "asset.80aed2cd775f5405c01435a0752e3787b8d53591144c0eea6a75c11bd372a7ed",
     "aws:asset:is-bundled": true,
     "aws:asset:property": "Code"
    }

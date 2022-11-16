@@ -5,7 +5,7 @@ from timestream import *
 
 ssm_client = boto3.client('ssm')
 
-def handler():
+def handler(event, context):
   
   stock_getter_api_key = get_parameter_value('twelve-data-api-key')
 
