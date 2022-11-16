@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c0bfbc3bbcecf65b000df841e6c0862a36c56c040bda9e3bc8e788ae5588f998.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1052e86c885ab1cecf63a5cfcc1c0364284fc87df144e98534c890ec2f7a731d.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -51,16 +51,34 @@
             "data": "stockInfoTable"
           }
         ],
-        "/TimestreamStack/stockDataGetterLambda/ServiceRole/Resource": [
+        "/TimestreamStack/Role/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stockDataGetterLambdaServiceRole6E861C4C"
+            "data": "Role1ABCC5F0"
           }
         ],
-        "/TimestreamStack/stockDataGetterLambda/Resource": [
+        "/TimestreamStack/stockDataProcessorLambda/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stockDataGetterLambdaB977BF61"
+            "data": "stockDataProcessorLambdaE8F8784F"
+          }
+        ],
+        "/TimestreamStack/Rule/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Rule4C995B7F"
+          }
+        ],
+        "/TimestreamStack/Rule/AllowEventRuleTimestreamStackstockDataProcessorLambda8340EE41": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RuleAllowEventRuleTimestreamStackstockDataProcessorLambda8340EE41B0413808"
+          }
+        ],
+        "/TimestreamStack/stockDataProcessorLambdaPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "stockDataProcessorLambdaPolicy181BA387"
           }
         ],
         "/TimestreamStack/CDKMetadata/Default": [

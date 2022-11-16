@@ -51,66 +51,53 @@
               "version": "2.47.0"
             }
           },
-          "stockDataGetterLambda": {
-            "id": "stockDataGetterLambda",
-            "path": "TimestreamStack/stockDataGetterLambda",
+          "Role": {
+            "id": "Role",
+            "path": "TimestreamStack/Role",
             "children": {
-              "ServiceRole": {
-                "id": "ServiceRole",
-                "path": "TimestreamStack/stockDataGetterLambda/ServiceRole",
-                "children": {
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "TimestreamStack/stockDataGetterLambda/ServiceRole/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
-                      "aws:cdk:cloudformation:props": {
-                        "assumeRolePolicyDocument": {
-                          "Statement": [
-                            {
-                              "Action": "sts:AssumeRole",
-                              "Effect": "Allow",
-                              "Principal": {
-                                "Service": "lambda.amazonaws.com"
-                              }
-                            }
-                          ],
-                          "Version": "2012-10-17"
-                        },
-                        "managedPolicyArns": [
-                          {
-                            "Fn::Join": [
-                              "",
-                              [
-                                "arn:",
-                                {
-                                  "Ref": "AWS::Partition"
-                                },
-                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-                              ]
-                            ]
+              "Resource": {
+                "id": "Resource",
+                "path": "TimestreamStack/Role/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "lambda.amazonaws.com"
                           }
-                        ]
-                      }
+                        }
+                      ],
+                      "Version": "2012-10-17"
                     },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
-                      "version": "2.47.0"
-                    }
+                    "description": "for stockDataGetterLambda"
                   }
                 },
                 "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "fqn": "aws-cdk-lib.aws_iam.CfnRole",
                   "version": "2.47.0"
                 }
-              },
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.Role",
+              "version": "2.47.0"
+            }
+          },
+          "stockDataProcessorLambda": {
+            "id": "stockDataProcessorLambda",
+            "path": "TimestreamStack/stockDataProcessorLambda",
+            "children": {
               "Code": {
                 "id": "Code",
-                "path": "TimestreamStack/stockDataGetterLambda/Code",
+                "path": "TimestreamStack/stockDataProcessorLambda/Code",
                 "children": {
                   "Stage": {
                     "id": "Stage",
-                    "path": "TimestreamStack/stockDataGetterLambda/Code/Stage",
+                    "path": "TimestreamStack/stockDataProcessorLambda/Code/Stage",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.AssetStaging",
                       "version": "2.47.0"
@@ -118,7 +105,7 @@
                   },
                   "AssetBucket": {
                     "id": "AssetBucket",
-                    "path": "TimestreamStack/stockDataGetterLambda/Code/AssetBucket",
+                    "path": "TimestreamStack/stockDataProcessorLambda/Code/AssetBucket",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                       "version": "2.47.0"
@@ -132,7 +119,7 @@
               },
               "Resource": {
                 "id": "Resource",
-                "path": "TimestreamStack/stockDataGetterLambda/Resource",
+                "path": "TimestreamStack/stockDataProcessorLambda/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                   "aws:cdk:cloudformation:props": {
@@ -140,11 +127,11 @@
                       "s3Bucket": {
                         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                       },
-                      "s3Key": "7c58bea8dc0bbb03acddca7f5faa288453e907ac13033fe02f84261de073b57e.zip"
+                      "s3Key": "282c3f6e3c2dda6afca7e34194810f125663ac5a63ca0c98ee9893627a0577e0.zip"
                     },
                     "role": {
                       "Fn::GetAtt": [
-                        "stockDataGetterLambdaServiceRole6E861C4C",
+                        "Role1ABCC5F0",
                         "Arn"
                       ]
                     },
@@ -160,6 +147,108 @@
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.47.0"
+            }
+          },
+          "Rule": {
+            "id": "Rule",
+            "path": "TimestreamStack/Rule",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "TimestreamStack/Rule/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Events::Rule",
+                  "aws:cdk:cloudformation:props": {
+                    "scheduleExpression": "cron(5 4-11 ? * MON-FRI *)",
+                    "state": "ENABLED",
+                    "targets": [
+                      {
+                        "id": "Target0",
+                        "arn": {
+                          "Fn::GetAtt": [
+                            "stockDataProcessorLambdaE8F8784F",
+                            "Arn"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_events.CfnRule",
+                  "version": "2.47.0"
+                }
+              },
+              "AllowEventRuleTimestreamStackstockDataProcessorLambda8340EE41": {
+                "id": "AllowEventRuleTimestreamStackstockDataProcessorLambda8340EE41",
+                "path": "TimestreamStack/Rule/AllowEventRuleTimestreamStackstockDataProcessorLambda8340EE41",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunction",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "stockDataProcessorLambdaE8F8784F",
+                        "Arn"
+                      ]
+                    },
+                    "principal": "events.amazonaws.com",
+                    "sourceArn": {
+                      "Fn::GetAtt": [
+                        "Rule4C995B7F",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_events.Rule",
+              "version": "2.47.0"
+            }
+          },
+          "stockDataProcessorLambdaPolicy": {
+            "id": "stockDataProcessorLambdaPolicy",
+            "path": "TimestreamStack/stockDataProcessorLambdaPolicy",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "TimestreamStack/stockDataProcessorLambdaPolicy/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                  "aws:cdk:cloudformation:props": {
+                    "policyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "*",
+                          "Effect": "Allow",
+                          "Resource": "*"
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "policyName": "stockDataProcessorLambdaPolicy181BA387",
+                    "roles": [
+                      {
+                        "Ref": "Role1ABCC5F0"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.Policy",
               "version": "2.47.0"
             }
           },
