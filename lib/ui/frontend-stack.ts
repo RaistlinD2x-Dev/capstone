@@ -5,7 +5,6 @@ import * as ecs from 'aws-cdk-lib/aws-ecs';
 import * as elbv2 from 'aws-cdk-lib/aws-elasticloadbalancingv2';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import { Vpc } from 'aws-cdk-lib/aws-ec2';
-import { DockerImageAsset } from 'aws-cdk-lib/aws-ecr-assets';
 
 interface FrontendStackProps extends cdk.StackProps {
   vpc: Vpc;
@@ -51,7 +50,10 @@ export class FrontendStack extends cdk.Stack {
     // rename this
     const webPage = taskDefinition.addContainer('webpage', {
       image: new ecs.AssetImage(path.join(__dirname, 'docker')),
-      // image: ecs.ContainerImage.fromAsset(image),
+      logging: new ecs.AwsLogDriver({
+        streamPrefix: 'webPage',
+        mode: ecs.AwsLogDriverMode.NON_BLOCKING,
+      }),
     });
     webPage.addPortMappings({
       containerPort: 80,
