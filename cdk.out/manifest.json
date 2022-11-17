@@ -7,27 +7,27 @@
         "file": "tree.json"
       }
     },
-    "TimestreamStack.assets": {
+    "NetworkStack.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "TimestreamStack.assets.json",
+        "file": "NetworkStack.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "TimestreamStack": {
+    "NetworkStack": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://unknown-account/unknown-region",
       "properties": {
-        "templateFile": "TimestreamStack.template.json",
+        "templateFile": "NetworkStack.template.json",
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/3c26a073f57b535089119158c137225de9ca2a8179b0424b39faf4f84639773b.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1ca105fd950d9dc19cd79ca279023a9844479f153a1926c72c3fc50c2b2fa32e.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "TimestreamStack.assets"
+          "NetworkStack.assets"
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
@@ -36,99 +36,225 @@
         }
       },
       "dependencies": [
-        "TimestreamStack.assets"
+        "NetworkStack.assets"
       ],
       "metadata": {
-        "/TimestreamStack/StockInfoDatabase": [
+        "/NetworkStack/ApplicationVpc/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "StockInfoDatabase"
+            "data": "ApplicationVpc8AE6A859"
           }
         ],
-        "/TimestreamStack/stockInfoTable": [
+        "/NetworkStack/ApplicationVpc/PublicSubnet1/Subnet": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stockInfoTable"
+            "data": "ApplicationVpcPublicSubnet1Subnet7014005F"
           }
         ],
-        "/TimestreamStack/Role/Resource": [
+        "/NetworkStack/ApplicationVpc/PublicSubnet1/RouteTable": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "Role1ABCC5F0"
+            "data": "ApplicationVpcPublicSubnet1RouteTable6A647E6A"
           }
         ],
-        "/TimestreamStack/stockDataProcessorLambda/Resource": [
+        "/NetworkStack/ApplicationVpc/PublicSubnet1/RouteTableAssociation": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stockDataProcessorLambdaE8F8784F"
+            "data": "ApplicationVpcPublicSubnet1RouteTableAssociation802F127D"
           }
         ],
-        "/TimestreamStack/Rule/Resource": [
+        "/NetworkStack/ApplicationVpc/PublicSubnet1/DefaultRoute": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "Rule4C995B7F"
+            "data": "ApplicationVpcPublicSubnet1DefaultRoute56736F6C"
           }
         ],
-        "/TimestreamStack/Rule/AllowEventRuleTimestreamStackstockDataProcessorLambda8340EE41": [
+        "/NetworkStack/ApplicationVpc/PublicSubnet1/EIP": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "RuleAllowEventRuleTimestreamStackstockDataProcessorLambda8340EE41B0413808"
+            "data": "ApplicationVpcPublicSubnet1EIP13A4D91E"
           }
         ],
-        "/TimestreamStack/stockDataProcessorLambdaPolicy/Resource": [
+        "/NetworkStack/ApplicationVpc/PublicSubnet1/NATGateway": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stockDataProcessorLambdaPolicy181BA387"
+            "data": "ApplicationVpcPublicSubnet1NATGateway945161E1"
           }
         ],
-        "/TimestreamStack/CDKMetadata/Default": [
+        "/NetworkStack/ApplicationVpc/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApplicationVpcPublicSubnet2SubnetE792D9E8"
+          }
+        ],
+        "/NetworkStack/ApplicationVpc/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApplicationVpcPublicSubnet2RouteTableA5B5B5A5"
+          }
+        ],
+        "/NetworkStack/ApplicationVpc/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApplicationVpcPublicSubnet2RouteTableAssociation396F9A40"
+          }
+        ],
+        "/NetworkStack/ApplicationVpc/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApplicationVpcPublicSubnet2DefaultRoute7C19233F"
+          }
+        ],
+        "/NetworkStack/ApplicationVpc/PublicSubnet2/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApplicationVpcPublicSubnet2EIPC49DC683"
+          }
+        ],
+        "/NetworkStack/ApplicationVpc/PublicSubnet2/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApplicationVpcPublicSubnet2NATGatewayFE72F43F"
+          }
+        ],
+        "/NetworkStack/ApplicationVpc/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApplicationVpcPrivateSubnet1Subnet2EB6F2CA"
+          }
+        ],
+        "/NetworkStack/ApplicationVpc/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApplicationVpcPrivateSubnet1RouteTable77A0065C"
+          }
+        ],
+        "/NetworkStack/ApplicationVpc/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApplicationVpcPrivateSubnet1RouteTableAssociationAAD57E37"
+          }
+        ],
+        "/NetworkStack/ApplicationVpc/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApplicationVpcPrivateSubnet1DefaultRoute12A237D9"
+          }
+        ],
+        "/NetworkStack/ApplicationVpc/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApplicationVpcPrivateSubnet2SubnetD832FF78"
+          }
+        ],
+        "/NetworkStack/ApplicationVpc/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApplicationVpcPrivateSubnet2RouteTableAFAC3CEF"
+          }
+        ],
+        "/NetworkStack/ApplicationVpc/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApplicationVpcPrivateSubnet2RouteTableAssociation192E55E3"
+          }
+        ],
+        "/NetworkStack/ApplicationVpc/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApplicationVpcPrivateSubnet2DefaultRouteA08F9FF8"
+          }
+        ],
+        "/NetworkStack/ApplicationVpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApplicationVpcIGWAE2F3715"
+          }
+        ],
+        "/NetworkStack/ApplicationVpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApplicationVpcVPCGWF6FDF6ED"
+          }
+        ],
+        "/NetworkStack/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/TimestreamStack/CDKMetadata/Condition": [
+        "/NetworkStack/CDKMetadata/Condition": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadataAvailable"
           }
         ],
-        "/TimestreamStack/BootstrapVersion": [
+        "/NetworkStack/Exports/Output{\"Ref\":\"ApplicationVpcPrivateSubnet1Subnet2EB6F2CA\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputRefApplicationVpcPrivateSubnet1Subnet2EB6F2CABA3A0144"
+          }
+        ],
+        "/NetworkStack/Exports/Output{\"Ref\":\"ApplicationVpcPrivateSubnet2SubnetD832FF78\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputRefApplicationVpcPrivateSubnet2SubnetD832FF786CE5645F"
+          }
+        ],
+        "/NetworkStack/Exports/Output{\"Ref\":\"ApplicationVpc8AE6A859\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputRefApplicationVpc8AE6A859903F4F10"
+          }
+        ],
+        "/NetworkStack/Exports/Output{\"Ref\":\"ApplicationVpcPublicSubnet1Subnet7014005F\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputRefApplicationVpcPublicSubnet1Subnet7014005F4D6884CE"
+          }
+        ],
+        "/NetworkStack/Exports/Output{\"Ref\":\"ApplicationVpcPublicSubnet2SubnetE792D9E8\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputRefApplicationVpcPublicSubnet2SubnetE792D9E89C23F6AA"
+          }
+        ],
+        "/NetworkStack/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/TimestreamStack/CheckBootstrapVersion": [
+        "/NetworkStack/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "TimestreamStack"
+      "displayName": "NetworkStack"
     },
-    "ForecastStack.assets": {
+    "Frontend.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "ForecastStack.assets.json",
+        "file": "Frontend.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "ForecastStack": {
+    "Frontend": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://unknown-account/unknown-region",
       "properties": {
-        "templateFile": "ForecastStack.template.json",
+        "templateFile": "Frontend.template.json",
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/18c9b7914ec75df4c796c0207f0217bd835f40881231953b004ef3790230c469.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/48febca5d0438653fbc1360f078e363f6b29a93ea9dff01f6d1acc76c0ec8868.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "ForecastStack.assets"
+          "Frontend.assets"
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
@@ -137,69 +263,114 @@
         }
       },
       "dependencies": [
-        "ForecastStack.assets"
+        "NetworkStack",
+        "Frontend.assets"
       ],
       "metadata": {
-        "/ForecastStack/forecastBucket/Resource": [
+        "/Frontend/front-end/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "forecastBucket4A2B0532"
+            "data": "frontend6FE5971B"
           }
         ],
-        "/ForecastStack/ForecastModelsDynamoDbTable": [
-          {
-            "type": "aws:cdk:hasPhysicalName",
-            "data": {
-              "Ref": "ForecastModelsDynamoDbTableD8735012"
-            }
-          }
-        ],
-        "/ForecastStack/ForecastModelsDynamoDbTable/Resource": [
+        "/Frontend/ecsRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ForecastModelsDynamoDbTableD8735012"
+            "data": "ecsRole157644C0"
           }
         ],
-        "/ForecastStack/ForecastValuesDynamoDbTable": [
-          {
-            "type": "aws:cdk:hasPhysicalName",
-            "data": {
-              "Ref": "ForecastValuesDynamoDbTable22E2913C"
-            }
-          }
-        ],
-        "/ForecastStack/ForecastValuesDynamoDbTable/Resource": [
+        "/Frontend/ecsRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ForecastValuesDynamoDbTable22E2913C"
+            "data": "ecsRoleDefaultPolicyCB18EF2D"
           }
         ],
-        "/ForecastStack/CDKMetadata/Default": [
+        "/Frontend/ecsTask/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ecsTask4520BF7C"
+          }
+        ],
+        "/Frontend/FrontendService/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FrontendService71ED3073"
+          }
+        ],
+        "/Frontend/Service/Service": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceD69D759B"
+          }
+        ],
+        "/Frontend/Service/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceSecurityGroupC96ED6A7"
+          }
+        ],
+        "/Frontend/Service/SecurityGroup/from FrontendLBSecurityGroup42AEAD48:80": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceSecurityGroupfromFrontendLBSecurityGroup42AEAD48802B56D4C1"
+          }
+        ],
+        "/Frontend/LB/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LB8A12904C"
+          }
+        ],
+        "/Frontend/LB/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LBSecurityGroup8A41EA2B"
+          }
+        ],
+        "/Frontend/LB/SecurityGroup/to FrontendServiceSecurityGroup88BD60B1:80": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LBSecurityGrouptoFrontendServiceSecurityGroup88BD60B180A6C821EA"
+          }
+        ],
+        "/Frontend/LB/Listener/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LBListener49E825B4"
+          }
+        ],
+        "/Frontend/LB/Listener/ECSGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LBListenerECSGroup1D445DF5"
+          }
+        ],
+        "/Frontend/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/ForecastStack/CDKMetadata/Condition": [
+        "/Frontend/CDKMetadata/Condition": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadataAvailable"
           }
         ],
-        "/ForecastStack/BootstrapVersion": [
+        "/Frontend/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/ForecastStack/CheckBootstrapVersion": [
+        "/Frontend/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "ForecastStack"
+      "displayName": "Frontend"
     }
   }
 }

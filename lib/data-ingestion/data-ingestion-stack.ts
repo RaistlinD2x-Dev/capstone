@@ -8,34 +8,9 @@ import { Runtime } from 'aws-cdk-lib/aws-lambda';
 import * as events from 'aws-cdk-lib/aws-events';
 import * as targets from 'aws-cdk-lib/aws-events-targets';
 
-export class TimestreamStack extends cdk.Stack {
+export class DataIngestionStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-
-    const stockInfoTimeStreamDatabaseName = 'stockInfoDatabase';
-
-    const stockInfoTimeStreamDatabase = new timestream.CfnDatabase(
-      this,
-      'StockInfoDatabase',
-      {
-        databaseName: stockInfoTimeStreamDatabaseName,
-      }
-    );
-
-    const stockInfoTimeStreamTableName = 'stockInfoTable';
-
-    const stockInfoTimeStreamTable = new timestream.CfnTable(
-      this,
-      'stockInfoTable',
-      {
-        databaseName: stockInfoTimeStreamDatabase.ref, // ref required to deal with tokenization of name
-        tableName: stockInfoTimeStreamTableName,
-        retentionProperties: {
-          MemoryStoreRetentionPeriodInHours: '336', // 14 days
-          MagneticStoreRetentionPeriodInDays: '73000', // 200 years
-        },
-      }
-    );
 
     const lambdaRole = new iam.Role(this, 'Role', {
       assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
@@ -65,16 +40,7 @@ export class TimestreamStack extends cdk.Stack {
       }
     );
 
-    // Every 5 minutes, between 9AM and 4PM EST, Monday through Friday run the stock data processor Lambda
-    const rule = new events.Rule(this, 'Rule', {
-      schedule: events.Schedule.cron({
-        minute: '5',
-        hour: '4-11',
-        weekDay: 'MON-FRI',
-      }),
-      targets: [new targets.LambdaFunction(stockDataProcessorLambda)],
-    });
-
+    // TODO fix permissions
     lambdaRole.attachInlinePolicy(
       new iam.Policy(this, 'stockDataProcessorLambdaPolicy', {
         statements: [
@@ -85,5 +51,12 @@ export class TimestreamStack extends cdk.Stack {
         ],
       })
     );
+
+    // Every 5 minutes, between 9AM and 4PM EST, Monday through Friday run the stock data processor Lambda
+    // TODO something is wrong with this, only ran once
+    const rule = new events.Rule(this, 'Rule', {
+      schedule: events.Schedule.rate(cdk.Duration.minutes(5)),
+      targets: [new targets.LambdaFunction(stockDataProcessorLambda)],
+    });
   }
 }
