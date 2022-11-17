@@ -20,8 +20,9 @@ export class FrontendStack extends cdk.Stack {
       vpc,
     });
 
+    // iam role for fargate tasks
     const ecsRole = new iam.Role(this, 'ecsRole', {
-      assumedBy: new iam.ServicePrincipal('ecs.amazonaws.com'),
+      assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
     });
     // TODO fix permissions
     ecsRole.attachInlinePolicy(
@@ -35,52 +36,54 @@ export class FrontendStack extends cdk.Stack {
       })
     );
 
+    // define cpu, ram, and IAM role for use with task
     const taskDefinition = new ecs.TaskDefinition(this, 'FrontendService', {
       compatibility: ecs.Compatibility.FARGATE,
       cpu: '512',
-      memoryMiB: '2048',
+      memoryMiB: '1024',
       executionRole: ecsRole,
       taskRole: ecsRole,
+      networkMode: ecs.NetworkMode.AWS_VPC,
     });
 
-    // const image = new ecs.AssetImage(this, 'BackendImage', {
-    //   directory: path.join(__dirname, 'react-app'),
-    // });
-
-    // rename this
+    // defines container to be used from local context
     const webPage = taskDefinition.addContainer('webpage', {
       image: new ecs.AssetImage(path.join(__dirname, 'docker')),
       logging: new ecs.AwsLogDriver({
         streamPrefix: 'webPage',
         mode: ecs.AwsLogDriverMode.NON_BLOCKING,
       }),
-    });
-    webPage.addPortMappings({
-      containerPort: 80,
-      protocol: ecs.Protocol.TCP,
+      portMappings: [
+        {
+          containerPort: 80,
+          protocol: ecs.Protocol.TCP,
+        },
+      ],
     });
 
+    // create a fargate service to managing fagate tasks
     const service = new ecs.FargateService(this, 'Service', {
       cluster,
       taskDefinition,
+      desiredCount: 1,
+      assignPublicIp: true,
     });
 
+    // Create an internet-available load balancer
     const lb = new elbv2.ApplicationLoadBalancer(this, 'LB', {
       vpc,
       internetFacing: true,
     });
+
+    // sets up LB SG to open port 80
     const listener = lb.addListener('Listener', {
       port: 80,
-      open: true,
     });
 
-    service.registerLoadBalancerTargets({
-      containerName: webPage.containerName,
-      containerPort: webPage.containerPort,
-      newTargetGroupId: 'ECS',
-      listener: ecs.ListenerConfig.applicationListener(listener, {
-        protocol: elbv2.ApplicationProtocol.HTTPS,
-      }),
+    // set target of port 80 received data to the fargate service
+    listener.addTargets('ApplicationFleet', {
+      port: 80,
+      targets: [service],
     });
   }
 }

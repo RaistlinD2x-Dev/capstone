@@ -689,30 +689,6 @@
             "id": "Exports",
             "path": "NetworkStack/Exports",
             "children": {
-              "Output{\"Ref\":\"ApplicationVpcPrivateSubnet1Subnet2EB6F2CA\"}": {
-                "id": "Output{\"Ref\":\"ApplicationVpcPrivateSubnet1Subnet2EB6F2CA\"}",
-                "path": "NetworkStack/Exports/Output{\"Ref\":\"ApplicationVpcPrivateSubnet1Subnet2EB6F2CA\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.47.0"
-                }
-              },
-              "Output{\"Ref\":\"ApplicationVpcPrivateSubnet2SubnetD832FF78\"}": {
-                "id": "Output{\"Ref\":\"ApplicationVpcPrivateSubnet2SubnetD832FF78\"}",
-                "path": "NetworkStack/Exports/Output{\"Ref\":\"ApplicationVpcPrivateSubnet2SubnetD832FF78\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.47.0"
-                }
-              },
-              "Output{\"Ref\":\"ApplicationVpc8AE6A859\"}": {
-                "id": "Output{\"Ref\":\"ApplicationVpc8AE6A859\"}",
-                "path": "NetworkStack/Exports/Output{\"Ref\":\"ApplicationVpc8AE6A859\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.47.0"
-                }
-              },
               "Output{\"Ref\":\"ApplicationVpcPublicSubnet1Subnet7014005F\"}": {
                 "id": "Output{\"Ref\":\"ApplicationVpcPublicSubnet1Subnet7014005F\"}",
                 "path": "NetworkStack/Exports/Output{\"Ref\":\"ApplicationVpcPublicSubnet1Subnet7014005F\"}",
@@ -724,6 +700,14 @@
               "Output{\"Ref\":\"ApplicationVpcPublicSubnet2SubnetE792D9E8\"}": {
                 "id": "Output{\"Ref\":\"ApplicationVpcPublicSubnet2SubnetE792D9E8\"}",
                 "path": "NetworkStack/Exports/Output{\"Ref\":\"ApplicationVpcPublicSubnet2SubnetE792D9E8\"}",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.47.0"
+                }
+              },
+              "Output{\"Ref\":\"ApplicationVpc8AE6A859\"}": {
+                "id": "Output{\"Ref\":\"ApplicationVpc8AE6A859\"}",
+                "path": "NetworkStack/Exports/Output{\"Ref\":\"ApplicationVpc8AE6A859\"}",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnOutput",
                   "version": "2.47.0"
@@ -783,7 +767,7 @@
                           "Action": "sts:AssumeRole",
                           "Effect": "Allow",
                           "Principal": {
-                            "Service": "ecs.amazonaws.com"
+                            "Service": "ecs-tasks.amazonaws.com"
                           }
                         }
                       ],
@@ -843,6 +827,19 @@
                               "Action": "ecr:GetAuthorizationToken",
                               "Effect": "Allow",
                               "Resource": "*"
+                            },
+                            {
+                              "Action": [
+                                "logs:CreateLogStream",
+                                "logs:PutLogEvents"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": {
+                                "Fn::GetAtt": [
+                                  "FrontendServicewebpageLogGroupB258EF7A",
+                                  "Arn"
+                                ]
+                              }
                             }
                           ],
                           "Version": "2012-10-17"
@@ -933,7 +930,20 @@
                             "containerPort": 80,
                             "protocol": "tcp"
                           }
-                        ]
+                        ],
+                        "logConfiguration": {
+                          "logDriver": "awslogs",
+                          "options": {
+                            "awslogs-group": {
+                              "Ref": "FrontendServicewebpageLogGroupB258EF7A"
+                            },
+                            "awslogs-stream-prefix": "webPage",
+                            "awslogs-region": {
+                              "Ref": "AWS::Region"
+                            },
+                            "mode": "non-blocking"
+                          }
+                        }
                       }
                     ],
                     "cpu": "512",
@@ -944,7 +954,7 @@
                       ]
                     },
                     "family": "FrontendFrontendServiceA6BEC57C",
-                    "memory": "2048",
+                    "memory": "1024",
                     "networkMode": "awsvpc",
                     "requiresCompatibilities": [
                       "FARGATE"
@@ -991,6 +1001,28 @@
                       "fqn": "aws-cdk-lib.aws_ecr_assets.DockerImageAsset",
                       "version": "2.47.0"
                     }
+                  },
+                  "LogGroup": {
+                    "id": "LogGroup",
+                    "path": "Frontend/FrontendService/webpage/LogGroup",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "Frontend/FrontendService/webpage/LogGroup/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Logs::LogGroup",
+                          "aws:cdk:cloudformation:props": {}
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_logs.CfnLogGroup",
+                          "version": "2.47.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_logs.LogGroup",
+                      "version": "2.47.0"
+                    }
                   }
                 },
                 "constructInfo": {
@@ -1021,13 +1053,14 @@
                       "maximumPercent": 200,
                       "minimumHealthyPercent": 50
                     },
+                    "desiredCount": 1,
                     "enableEcsManagedTags": false,
                     "healthCheckGracePeriodSeconds": 60,
                     "launchType": "FARGATE",
                     "loadBalancers": [
                       {
                         "targetGroupArn": {
-                          "Ref": "LBListenerECSGroup1D445DF5"
+                          "Ref": "LBListenerApplicationFleetGroupF144153C"
                         },
                         "containerName": "webpage",
                         "containerPort": 80
@@ -1035,13 +1068,13 @@
                     ],
                     "networkConfiguration": {
                       "awsvpcConfiguration": {
-                        "assignPublicIp": "DISABLED",
+                        "assignPublicIp": "ENABLED",
                         "subnets": [
                           {
-                            "Fn::ImportValue": "NetworkStack:ExportsOutputRefApplicationVpcPrivateSubnet1Subnet2EB6F2CABA3A0144"
+                            "Fn::ImportValue": "NetworkStack:ExportsOutputRefApplicationVpcPublicSubnet1Subnet7014005F4D6884CE"
                           },
                           {
-                            "Fn::ImportValue": "NetworkStack:ExportsOutputRefApplicationVpcPrivateSubnet2SubnetD832FF786CE5645F"
+                            "Fn::ImportValue": "NetworkStack:ExportsOutputRefApplicationVpcPublicSubnet2SubnetE792D9E89C23F6AA"
                           }
                         ],
                         "securityGroups": [
@@ -1253,7 +1286,7 @@
                           {
                             "type": "forward",
                             "targetGroupArn": {
-                              "Ref": "LBListenerECSGroup1D445DF5"
+                              "Ref": "LBListenerApplicationFleetGroupF144153C"
                             }
                           }
                         ],
@@ -1269,18 +1302,18 @@
                       "version": "2.47.0"
                     }
                   },
-                  "ECSGroup": {
-                    "id": "ECSGroup",
-                    "path": "Frontend/LB/Listener/ECSGroup",
+                  "ApplicationFleetGroup": {
+                    "id": "ApplicationFleetGroup",
+                    "path": "Frontend/LB/Listener/ApplicationFleetGroup",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "Frontend/LB/Listener/ECSGroup/Resource",
+                        "path": "Frontend/LB/Listener/ApplicationFleetGroup/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
                           "aws:cdk:cloudformation:props": {
-                            "port": 443,
-                            "protocol": "HTTPS",
+                            "port": 80,
+                            "protocol": "HTTP",
                             "targetGroupAttributes": [
                               {
                                 "key": "stickiness.enabled",
@@ -1331,6 +1364,468 @@
               "Condition": {
                 "id": "Condition",
                 "path": "Frontend/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.1.138"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.47.0"
+        }
+      },
+      "Datastore": {
+        "id": "Datastore",
+        "path": "Datastore",
+        "children": {
+          "StockInfoDatabase": {
+            "id": "StockInfoDatabase",
+            "path": "Datastore/StockInfoDatabase",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::Timestream::Database",
+              "aws:cdk:cloudformation:props": {
+                "databaseName": "stockInfoDatabase"
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_timestream.CfnDatabase",
+              "version": "2.47.0"
+            }
+          },
+          "stockInfoTable": {
+            "id": "stockInfoTable",
+            "path": "Datastore/stockInfoTable",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::Timestream::Table",
+              "aws:cdk:cloudformation:props": {
+                "databaseName": {
+                  "Ref": "StockInfoDatabase"
+                },
+                "retentionProperties": {
+                  "MemoryStoreRetentionPeriodInHours": "336",
+                  "MagneticStoreRetentionPeriodInDays": "73000"
+                },
+                "tableName": "stockInfoTable"
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_timestream.CfnTable",
+              "version": "2.47.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "Datastore/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "Datastore/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.47.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "Datastore/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.1.138"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.47.0"
+        }
+      },
+      "DataIngestion": {
+        "id": "DataIngestion",
+        "path": "DataIngestion",
+        "children": {
+          "Role": {
+            "id": "Role",
+            "path": "DataIngestion/Role",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "DataIngestion/Role/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "lambda.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "description": "for stockDataGetterLambda"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.Role",
+              "version": "2.47.0"
+            }
+          },
+          "stockDataProcessorLambda": {
+            "id": "stockDataProcessorLambda",
+            "path": "DataIngestion/stockDataProcessorLambda",
+            "children": {
+              "Code": {
+                "id": "Code",
+                "path": "DataIngestion/stockDataProcessorLambda/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "DataIngestion/stockDataProcessorLambda/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "DataIngestion/stockDataProcessorLambda/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.47.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "DataIngestion/stockDataProcessorLambda/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                      },
+                      "s3Key": "80aed2cd775f5405c01435a0752e3787b8d53591144c0eea6a75c11bd372a7ed.zip"
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "Role1ABCC5F0",
+                        "Arn"
+                      ]
+                    },
+                    "handler": "index.handler",
+                    "runtime": "python3.9"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.47.0"
+            }
+          },
+          "stockDataProcessorLambdaPolicy": {
+            "id": "stockDataProcessorLambdaPolicy",
+            "path": "DataIngestion/stockDataProcessorLambdaPolicy",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "DataIngestion/stockDataProcessorLambdaPolicy/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                  "aws:cdk:cloudformation:props": {
+                    "policyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "*",
+                          "Effect": "Allow",
+                          "Resource": "*"
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "policyName": "stockDataProcessorLambdaPolicy181BA387",
+                    "roles": [
+                      {
+                        "Ref": "Role1ABCC5F0"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.Policy",
+              "version": "2.47.0"
+            }
+          },
+          "Rule": {
+            "id": "Rule",
+            "path": "DataIngestion/Rule",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "DataIngestion/Rule/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Events::Rule",
+                  "aws:cdk:cloudformation:props": {
+                    "scheduleExpression": "rate(5 minutes)",
+                    "state": "ENABLED",
+                    "targets": [
+                      {
+                        "id": "Target0",
+                        "arn": {
+                          "Fn::GetAtt": [
+                            "stockDataProcessorLambdaE8F8784F",
+                            "Arn"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_events.CfnRule",
+                  "version": "2.47.0"
+                }
+              },
+              "AllowEventRuleDataIngestionstockDataProcessorLambdaB05476BA": {
+                "id": "AllowEventRuleDataIngestionstockDataProcessorLambdaB05476BA",
+                "path": "DataIngestion/Rule/AllowEventRuleDataIngestionstockDataProcessorLambdaB05476BA",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunction",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "stockDataProcessorLambdaE8F8784F",
+                        "Arn"
+                      ]
+                    },
+                    "principal": "events.amazonaws.com",
+                    "sourceArn": {
+                      "Fn::GetAtt": [
+                        "Rule4C995B7F",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_events.Rule",
+              "version": "2.47.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "DataIngestion/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "DataIngestion/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.47.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "DataIngestion/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.1.138"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.47.0"
+        }
+      },
+      "Forecast": {
+        "id": "Forecast",
+        "path": "Forecast",
+        "children": {
+          "forecastBucket": {
+            "id": "forecastBucket",
+            "path": "Forecast/forecastBucket",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Forecast/forecastBucket/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                  "aws:cdk:cloudformation:props": {}
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_s3.Bucket",
+              "version": "2.47.0"
+            }
+          },
+          "ForecastModelsDynamoDbTable": {
+            "id": "ForecastModelsDynamoDbTable",
+            "path": "Forecast/ForecastModelsDynamoDbTable",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Forecast/ForecastModelsDynamoDbTable/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                  "aws:cdk:cloudformation:props": {
+                    "keySchema": [
+                      {
+                        "attributeName": "id",
+                        "keyType": "HASH"
+                      }
+                    ],
+                    "attributeDefinitions": [
+                      {
+                        "attributeName": "id",
+                        "attributeType": "S"
+                      }
+                    ],
+                    "provisionedThroughput": {
+                      "readCapacityUnits": 5,
+                      "writeCapacityUnits": 5
+                    },
+                    "tableName": "forecast-model-table"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
+                  "version": "2.47.0"
+                }
+              },
+              "ScalingRole": {
+                "id": "ScalingRole",
+                "path": "Forecast/ForecastModelsDynamoDbTable/ScalingRole",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_dynamodb.Table",
+              "version": "2.47.0"
+            }
+          },
+          "ForecastValuesDynamoDbTable": {
+            "id": "ForecastValuesDynamoDbTable",
+            "path": "Forecast/ForecastValuesDynamoDbTable",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Forecast/ForecastValuesDynamoDbTable/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                  "aws:cdk:cloudformation:props": {
+                    "keySchema": [
+                      {
+                        "attributeName": "id",
+                        "keyType": "HASH"
+                      }
+                    ],
+                    "attributeDefinitions": [
+                      {
+                        "attributeName": "id",
+                        "attributeType": "S"
+                      }
+                    ],
+                    "provisionedThroughput": {
+                      "readCapacityUnits": 5,
+                      "writeCapacityUnits": 5
+                    },
+                    "tableName": "forecast-values-table"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
+                  "version": "2.47.0"
+                }
+              },
+              "ScalingRole": {
+                "id": "ScalingRole",
+                "path": "Forecast/ForecastValuesDynamoDbTable/ScalingRole",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_dynamodb.Table",
+              "version": "2.47.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "Forecast/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "Forecast/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.47.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "Forecast/CDKMetadata/Condition",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnCondition",
                   "version": "2.47.0"
