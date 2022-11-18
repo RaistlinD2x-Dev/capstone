@@ -2,6 +2,10 @@
 
 This project is to support day trading efforts. It uses machine learning and technical indicators to determine ideal points to buy and sell. The differentiator here is to focus on sub-1% daily growth through trading on microfluctuations such that compound growth may get up to ~500%.
 
+### **Solution Architecture**
+
+<img title="Architecture Diagram" alt="Architecture Diagram" src="./diagrams/architecture_diagram.png">
+
 ### **API**
 
     # Get all forecasts in metadata table
