@@ -10,7 +10,7 @@ import { ApiStack } from '../lib/api/api-stack';
 
 const app = new cdk.App();
 
-// const network = new NetworkStack(app, 'NetworkStack');
+const network = new NetworkStack(app, 'NetworkStack');
 
 // const frontend = new FrontendStack(app, 'Frontend', {
 //   vpc: network.vpc,
@@ -20,6 +20,8 @@ const datastore = new DataStoreStack(app, 'Datastore', {});
 
 const dataIngestion = new DataIngestionStack(app, 'DataIngestion', {});
 
-const forecast = new ForecastStack(app, 'Forecast', {});
+const forecast = new ForecastStack(app, 'Forecast', {
+  vpc: network.vpc,
+});
 
 const api = new ApiStack(app, 'API', {});

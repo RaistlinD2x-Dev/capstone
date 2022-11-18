@@ -1,10 +1,17 @@
-# **isWealthy: True**
+# **NOTE:** NOT COMPLETE
+Please note that this project is still a work in progress. As of 11/17/2022 the front end is commented out and the React app is simply the default project. Furthermore plenty of back end work is being done.
+
+# **isWealthy: True or iW:T for short**
 
 This project is to support day trading efforts. It uses machine learning and technical indicators to determine ideal points to buy and sell. The differentiator here is to focus on sub-1% daily growth through trading on microfluctuations such that compound growth may get up to ~500%.
+
+**TODO** Possibly use anomaly detection to determine anomalies in forecasted values. If values achieve sufficienty regularity and deviation from the mean of the values then the stock becomes a target for buy/sell transactions. The periodicity, or regularity, by which sufficient deviation occurs in the course of single days will be a prime indicator of probable success or failure. 
 
 ### **Solution Architecture**
 
 <img title="Architecture Diagram" alt="Architecture Diagram" src="./diagrams/architecture_diagram.png">
+
+<br>
 
 ### **API**
 

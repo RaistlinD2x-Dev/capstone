@@ -1,7 +1,7 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as timestream from 'aws-cdk-lib/aws-timestream';
-import { CfnTable } from 'aws-cdk-lib/aws-dynamodb';
+import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 
 export class DataStoreStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -29,6 +29,40 @@ export class DataStoreStack extends cdk.Stack {
           MemoryStoreRetentionPeriodInHours: '336', // 14 days
           MagneticStoreRetentionPeriodInDays: '73000', // 200 years
         },
+      }
+    );
+
+    const modelMetaDataTable = new dynamodb.Table(this, 'modelMetaDataTable', {
+      partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
+      sortKey: { name: 'dateCreated', type: dynamodb.AttributeType.STRING },
+    });
+
+    const forecastedValuesTable = new dynamodb.Table(
+      this,
+      'forecastedValuesTable',
+      {
+        partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
+        sortKey: { name: 'timestamp', type: dynamodb.AttributeType.STRING },
+      }
+    );
+
+    const forecastModelDynamoDbTable = new dynamodb.Table(
+      this,
+      'ForecastModelsDynamoDbTable',
+      {
+        tableName: 'forecast-model-table',
+        partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
+        removalPolicy: cdk.RemovalPolicy.DESTROY,
+      }
+    );
+
+    const forecastValuesDynamoDbTable = new dynamodb.Table(
+      this,
+      'ForecastValuesDynamoDbTable',
+      {
+        tableName: 'forecast-values-table',
+        partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
+        removalPolicy: cdk.RemovalPolicy.DESTROY,
       }
     );
   }
