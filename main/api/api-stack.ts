@@ -15,11 +15,11 @@ export class ApiStack extends cdk.Stack {
       stringValue: api.url,
     });
 
-    const helloWorldLambda = pythonLambdaGenerator(this, 'helloworld');
+    const stocksLambda = pythonLambdaGenerator(this, 'stocks', `${__dirname}/lambdas/stocks`);
 
-    api.root.addResource('helloworld').addMethod(
+    api.root.addResource('stocks').addMethod(
       'GET',
-      new apigateway.LambdaIntegration(helloWorldLambda, {
+      new apigateway.LambdaIntegration(stocksLambda, {
         proxy: true,
       })
     );

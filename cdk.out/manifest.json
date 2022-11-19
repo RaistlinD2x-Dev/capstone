@@ -331,7 +331,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/58c0ec4e701466c392a150c6e0c954305bd419355bb7ff87304fb42bd2dbba9e.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ffd9aad0ae423cddd93cf9f49482119994df57073cd9a72f0c388779b9d4f0ce.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -347,10 +347,10 @@
         "DataIngestion.assets"
       ],
       "metadata": {
-        "/DataIngestion/Role/Resource": [
+        "/DataIngestion/stockDataProcessorRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "Role1ABCC5F0"
+            "data": "stockDataProcessorRoleAC352F1E"
           }
         ],
         "/DataIngestion/stockDataProcessorLambda/Resource": [
@@ -515,7 +515,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/a41093bb3b1669769696b5b27d58528c48a43c05e34e6a26e78857cf7a2334ad.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1fa642dda8b62db61d0670337ce5158e4514d13bc5f8ec9c9661dfa2bc821dee.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -540,7 +540,7 @@
         "/API/capstone-api/Deployment/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "capstoneapiDeployment78060EE6e4e678cb3ec6d79b2d3ddceaa256f3c5"
+            "data": "capstoneapiDeployment78060EE6ec62272b7a3d33bb5f12c822c2ae8ddf"
           }
         ],
         "/API/capstone-api/DeploymentStage.prod/Resource": [
@@ -555,28 +555,28 @@
             "data": "capstoneapiEndpoint45299CE2"
           }
         ],
-        "/API/capstone-api/Default/helloworld/Resource": [
+        "/API/capstone-api/Default/stocks/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "capstoneapihelloworld9DFB0669"
+            "data": "capstoneapistocks99CE804A"
           }
         ],
-        "/API/capstone-api/Default/helloworld/GET/ApiPermission.APIcapstoneapiCD2B1242.GET..helloworld": [
+        "/API/capstone-api/Default/stocks/GET/ApiPermission.APIcapstoneapiCD2B1242.GET..stocks": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "capstoneapihelloworldGETApiPermissionAPIcapstoneapiCD2B1242GEThelloworldB0C73243"
+            "data": "capstoneapistocksGETApiPermissionAPIcapstoneapiCD2B1242GETstocks59CAFA02"
           }
         ],
-        "/API/capstone-api/Default/helloworld/GET/ApiPermission.Test.APIcapstoneapiCD2B1242.GET..helloworld": [
+        "/API/capstone-api/Default/stocks/GET/ApiPermission.Test.APIcapstoneapiCD2B1242.GET..stocks": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "capstoneapihelloworldGETApiPermissionTestAPIcapstoneapiCD2B1242GEThelloworld584D9386"
+            "data": "capstoneapistocksGETApiPermissionTestAPIcapstoneapiCD2B1242GETstocks899E7C0D"
           }
         ],
-        "/API/capstone-api/Default/helloworld/GET/Resource": [
+        "/API/capstone-api/Default/stocks/GET/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "capstoneapihelloworldGETA4CE29ED"
+            "data": "capstoneapistocksGETB4919A93"
           }
         ],
         "/API/apiUrlParameter/Resource": [
@@ -585,22 +585,22 @@
             "data": "apiUrlParameter46A80F52"
           }
         ],
-        "/API/helloworldRole/Resource": [
+        "/API/stocksRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "helloworldRole022E1464"
+            "data": "stocksRole91BA7A9A"
           }
         ],
-        "/API/helloworldLambda/Resource": [
+        "/API/stocksLambda/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "helloworldLambdaFCC34334"
+            "data": "stocksLambda6A6F2FDB"
           }
         ],
-        "/API/helloworldLambdaPolicy/Resource": [
+        "/API/stocksLambdaPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "helloworldLambdaPolicy23442484"
+            "data": "stocksLambdaPolicy9CCBD648"
           }
         ],
         "/API/CDKMetadata/Default": [

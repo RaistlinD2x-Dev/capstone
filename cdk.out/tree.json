@@ -972,13 +972,13 @@
         "id": "DataIngestion",
         "path": "DataIngestion",
         "children": {
-          "Role": {
-            "id": "Role",
-            "path": "DataIngestion/Role",
+          "stockDataProcessorRole": {
+            "id": "stockDataProcessorRole",
+            "path": "DataIngestion/stockDataProcessorRole",
             "children": {
               "Resource": {
                 "id": "Resource",
-                "path": "DataIngestion/Role/Resource",
+                "path": "DataIngestion/stockDataProcessorRole/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                   "aws:cdk:cloudformation:props": {
@@ -993,8 +993,7 @@
                         }
                       ],
                       "Version": "2012-10-17"
-                    },
-                    "description": "for stockDataGetterLambda"
+                    }
                   }
                 },
                 "constructInfo": {
@@ -1052,7 +1051,7 @@
                     },
                     "role": {
                       "Fn::GetAtt": [
-                        "Role1ABCC5F0",
+                        "stockDataProcessorRoleAC352F1E",
                         "Arn"
                       ]
                     },
@@ -1094,7 +1093,7 @@
                     "policyName": "stockDataProcessorLambdaPolicy181BA387",
                     "roles": [
                       {
-                        "Ref": "Role1ABCC5F0"
+                        "Ref": "stockDataProcessorRoleAC352F1E"
                       }
                     ]
                   }
@@ -1120,7 +1119,7 @@
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::Events::Rule",
                   "aws:cdk:cloudformation:props": {
-                    "scheduleExpression": "cron(0/5 4-11 ? * MON-FRI *)",
+                    "scheduleExpression": "cron(0/5 15-22 ? * MON-FRI *)",
                     "state": "ENABLED",
                     "targets": [
                       {
@@ -1605,7 +1604,7 @@
                           "Ref": "capstoneapiC27E1B4A"
                         },
                         "deploymentId": {
-                          "Ref": "capstoneapiDeployment78060EE6e4e678cb3ec6d79b2d3ddceaa256f3c5"
+                          "Ref": "capstoneapiDeployment78060EE6ec62272b7a3d33bb5f12c822c2ae8ddf"
                         },
                         "stageName": "prod"
                       }
@@ -1633,13 +1632,13 @@
                 "id": "Default",
                 "path": "API/capstone-api/Default",
                 "children": {
-                  "helloworld": {
-                    "id": "helloworld",
-                    "path": "API/capstone-api/Default/helloworld",
+                  "stocks": {
+                    "id": "stocks",
+                    "path": "API/capstone-api/Default/stocks",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "API/capstone-api/Default/helloworld/Resource",
+                        "path": "API/capstone-api/Default/stocks/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
                           "aws:cdk:cloudformation:props": {
@@ -1649,7 +1648,7 @@
                                 "RootResourceId"
                               ]
                             },
-                            "pathPart": "helloworld",
+                            "pathPart": "stocks",
                             "restApiId": {
                               "Ref": "capstoneapiC27E1B4A"
                             }
@@ -1662,18 +1661,18 @@
                       },
                       "GET": {
                         "id": "GET",
-                        "path": "API/capstone-api/Default/helloworld/GET",
+                        "path": "API/capstone-api/Default/stocks/GET",
                         "children": {
-                          "ApiPermission.APIcapstoneapiCD2B1242.GET..helloworld": {
-                            "id": "ApiPermission.APIcapstoneapiCD2B1242.GET..helloworld",
-                            "path": "API/capstone-api/Default/helloworld/GET/ApiPermission.APIcapstoneapiCD2B1242.GET..helloworld",
+                          "ApiPermission.APIcapstoneapiCD2B1242.GET..stocks": {
+                            "id": "ApiPermission.APIcapstoneapiCD2B1242.GET..stocks",
+                            "path": "API/capstone-api/Default/stocks/GET/ApiPermission.APIcapstoneapiCD2B1242.GET..stocks",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
                               "aws:cdk:cloudformation:props": {
                                 "action": "lambda:InvokeFunction",
                                 "functionName": {
                                   "Fn::GetAtt": [
-                                    "helloworldLambdaFCC34334",
+                                    "stocksLambda6A6F2FDB",
                                     "Arn"
                                   ]
                                 },
@@ -1702,7 +1701,7 @@
                                       {
                                         "Ref": "capstoneapiDeploymentStageprod53EA311A"
                                       },
-                                      "/GET/helloworld"
+                                      "/GET/stocks"
                                     ]
                                   ]
                                 }
@@ -1713,16 +1712,16 @@
                               "version": "2.47.0"
                             }
                           },
-                          "ApiPermission.Test.APIcapstoneapiCD2B1242.GET..helloworld": {
-                            "id": "ApiPermission.Test.APIcapstoneapiCD2B1242.GET..helloworld",
-                            "path": "API/capstone-api/Default/helloworld/GET/ApiPermission.Test.APIcapstoneapiCD2B1242.GET..helloworld",
+                          "ApiPermission.Test.APIcapstoneapiCD2B1242.GET..stocks": {
+                            "id": "ApiPermission.Test.APIcapstoneapiCD2B1242.GET..stocks",
+                            "path": "API/capstone-api/Default/stocks/GET/ApiPermission.Test.APIcapstoneapiCD2B1242.GET..stocks",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
                               "aws:cdk:cloudformation:props": {
                                 "action": "lambda:InvokeFunction",
                                 "functionName": {
                                   "Fn::GetAtt": [
-                                    "helloworldLambdaFCC34334",
+                                    "stocksLambda6A6F2FDB",
                                     "Arn"
                                   ]
                                 },
@@ -1747,7 +1746,7 @@
                                       {
                                         "Ref": "capstoneapiC27E1B4A"
                                       },
-                                      "/test-invoke-stage/GET/helloworld"
+                                      "/test-invoke-stage/GET/stocks"
                                     ]
                                   ]
                                 }
@@ -1760,13 +1759,13 @@
                           },
                           "Resource": {
                             "id": "Resource",
-                            "path": "API/capstone-api/Default/helloworld/GET/Resource",
+                            "path": "API/capstone-api/Default/stocks/GET/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
                               "aws:cdk:cloudformation:props": {
                                 "httpMethod": "GET",
                                 "resourceId": {
-                                  "Ref": "capstoneapihelloworld9DFB0669"
+                                  "Ref": "capstoneapistocks99CE804A"
                                 },
                                 "restApiId": {
                                   "Ref": "capstoneapiC27E1B4A"
@@ -1789,7 +1788,7 @@
                                         ":lambda:path/2015-03-31/functions/",
                                         {
                                           "Fn::GetAtt": [
-                                            "helloworldLambdaFCC34334",
+                                            "stocksLambda6A6F2FDB",
                                             "Arn"
                                           ]
                                         },
@@ -1879,13 +1878,13 @@
               "version": "2.47.0"
             }
           },
-          "helloworldRole": {
-            "id": "helloworldRole",
-            "path": "API/helloworldRole",
+          "stocksRole": {
+            "id": "stocksRole",
+            "path": "API/stocksRole",
             "children": {
               "Resource": {
                 "id": "Resource",
-                "path": "API/helloworldRole/Resource",
+                "path": "API/stocksRole/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                   "aws:cdk:cloudformation:props": {
@@ -1914,17 +1913,17 @@
               "version": "2.47.0"
             }
           },
-          "helloworldLambda": {
-            "id": "helloworldLambda",
-            "path": "API/helloworldLambda",
+          "stocksLambda": {
+            "id": "stocksLambda",
+            "path": "API/stocksLambda",
             "children": {
               "Code": {
                 "id": "Code",
-                "path": "API/helloworldLambda/Code",
+                "path": "API/stocksLambda/Code",
                 "children": {
                   "Stage": {
                     "id": "Stage",
-                    "path": "API/helloworldLambda/Code/Stage",
+                    "path": "API/stocksLambda/Code/Stage",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.AssetStaging",
                       "version": "2.47.0"
@@ -1932,7 +1931,7 @@
                   },
                   "AssetBucket": {
                     "id": "AssetBucket",
-                    "path": "API/helloworldLambda/Code/AssetBucket",
+                    "path": "API/stocksLambda/Code/AssetBucket",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                       "version": "2.47.0"
@@ -1946,7 +1945,7 @@
               },
               "Resource": {
                 "id": "Resource",
-                "path": "API/helloworldLambda/Resource",
+                "path": "API/stocksLambda/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                   "aws:cdk:cloudformation:props": {
@@ -1954,11 +1953,11 @@
                       "s3Bucket": {
                         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                       },
-                      "s3Key": "d1d9cba5543fa4f38f26af7f5ea0426c2ae8f96b9f889c309e3650b88b502e70.zip"
+                      "s3Key": "46f9598e755cdf7a481c568a3e830a5124dac64d0071d24d1e57ef531d8d9771.zip"
                     },
                     "role": {
                       "Fn::GetAtt": [
-                        "helloworldRole022E1464",
+                        "stocksRole91BA7A9A",
                         "Arn"
                       ]
                     },
@@ -1977,13 +1976,13 @@
               "version": "2.47.0"
             }
           },
-          "helloworldLambdaPolicy": {
-            "id": "helloworldLambdaPolicy",
-            "path": "API/helloworldLambdaPolicy",
+          "stocksLambdaPolicy": {
+            "id": "stocksLambdaPolicy",
+            "path": "API/stocksLambdaPolicy",
             "children": {
               "Resource": {
                 "id": "Resource",
-                "path": "API/helloworldLambdaPolicy/Resource",
+                "path": "API/stocksLambdaPolicy/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                   "aws:cdk:cloudformation:props": {
@@ -1997,10 +1996,10 @@
                       ],
                       "Version": "2012-10-17"
                     },
-                    "policyName": "helloworldLambdaPolicy23442484",
+                    "policyName": "stocksLambdaPolicy9CCBD648",
                     "roles": [
                       {
-                        "Ref": "helloworldRole022E1464"
+                        "Ref": "stocksRole91BA7A9A"
                       }
                     ]
                   }

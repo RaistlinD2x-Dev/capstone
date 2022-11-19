@@ -10,13 +10,14 @@ export class DataIngestionStack extends cdk.Stack {
 
     const stockDataProcessorLambda = pythonLambdaGenerator(
       this,
-      'stockDataProcessorLambda'
+      'stockDataProcessor',
+      `${__dirname}/lambdas/stock-data-processor`
     );
 
     // Every 5 minutes, between 9AM and 4PM EST, Monday through Friday run the stock data processor Lambda
     // TODO something is wrong with this, only ran once
     const rule = new events.Rule(this, 'Rule', {
-      schedule: events.Schedule.expression('cron(0/5 4-11 ? * MON-FRI *)'),
+      schedule: events.Schedule.expression('cron(0/5 15-22 ? * MON-FRI *)'),
       targets: [new targets.LambdaFunction(stockDataProcessorLambda)],
     });
   }

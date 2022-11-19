@@ -4,20 +4,18 @@ import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as path from 'path';
 import { Runtime } from 'aws-cdk-lib/aws-lambda';
 
-export const pythonLambdaGenerator = (
-  thisRef: Construct,
-  lambdaName: string
-) => {
+export const pythonLambdaGenerator = (thisRef: Construct, lambdaName: string, dirPath: string) => {
+  console.log(dirPath);
+  console.log(__dirname);
+
   const lambdaRole = new iam.Role(thisRef, `${lambdaName}Role`, {
     assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
   });
 
-  const bundling = {};
-
   const lambdaHandler = new lambda.Function(thisRef, `${lambdaName}Lambda`, {
     runtime: lambda.Runtime.PYTHON_3_9,
     handler: 'index.handler',
-    code: lambda.Code.fromAsset(path.join(`./main/api/lambdas/${lambdaName}`), {
+    code: lambda.Code.fromAsset(dirPath, {
       bundling: {
         image: Runtime.PYTHON_3_9.bundlingImage,
         command: [
