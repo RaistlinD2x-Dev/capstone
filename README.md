@@ -63,6 +63,7 @@ EventBridge, previously known as CloudWatch, has the capability to create rate o
 <br>
 
 API Key Parameter Store Name: 'twelve-data-api-key'
+<br>
 Website to vendor: https://rapidapi.com/twelvedata/api/twelve-data1
 
 
