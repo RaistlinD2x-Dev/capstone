@@ -1120,7 +1120,7 @@
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::Events::Rule",
                   "aws:cdk:cloudformation:props": {
-                    "scheduleExpression": "rate(5 minutes)",
+                    "scheduleExpression": "cron(0/5 4-11 ? * MON-FRI *)",
                     "state": "ENABLED",
                     "targets": [
                       {

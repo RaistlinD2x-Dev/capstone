@@ -2,7 +2,7 @@ import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
-import { lambdaGenerator } from './lambda-generator';
+import { pythonLambdaGenerator } from '../../utils/python-lambda-generator';
 
 export class ApiStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -15,7 +15,7 @@ export class ApiStack extends cdk.Stack {
       stringValue: api.url,
     });
 
-    const helloWorldLambda = lambdaGenerator(this, 'helloworld');
+    const helloWorldLambda = pythonLambdaGenerator(this, 'helloworld');
 
     api.root.addResource('helloworld').addMethod(
       'GET',

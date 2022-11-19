@@ -7,6 +7,7 @@ This project is to support day trading efforts. It uses machine learning and tec
 
 **TODO** Possibly use anomaly detection to determine anomalies in forecasted values. If values achieve sufficient regularity and deviation from the mean of the values then the stock becomes a target for buy/sell transactions. The periodicity, or regularity, by which sufficient deviation occurs in the course of single days will be a prime indicator of probable success or failure. 
 
+### **TODO** Update architecture to include authorization
 ### **Solution Architecture**
 
 <img title="Architecture Diagram" alt="Architecture Diagram" src="./diagrams/architecture_diagram.png">
