@@ -7,6 +7,9 @@ export class NetworkStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    this.vpc = new ec2.Vpc(this, 'ApplicationVpc');
+    this.vpc = new ec2.Vpc(this, 'ApplicationVpc', {
+      maxAzs: 1,
+      natGateways: 0,
+    });
   }
 }

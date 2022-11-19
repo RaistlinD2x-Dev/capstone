@@ -64,7 +64,7 @@
                             }
                           ]
                         },
-                        "cidrBlock": "10.0.0.0/18",
+                        "cidrBlock": "10.0.0.0/17",
                         "mapPublicIpOnLaunch": true,
                         "tags": [
                           {
@@ -155,54 +155,6 @@
                       "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
                       "version": "2.47.0"
                     }
-                  },
-                  "EIP": {
-                    "id": "EIP",
-                    "path": "NetworkStack/ApplicationVpc/PublicSubnet1/EIP",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
-                      "aws:cdk:cloudformation:props": {
-                        "domain": "vpc",
-                        "tags": [
-                          {
-                            "key": "Name",
-                            "value": "NetworkStack/ApplicationVpc/PublicSubnet1"
-                          }
-                        ]
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
-                      "version": "2.47.0"
-                    }
-                  },
-                  "NATGateway": {
-                    "id": "NATGateway",
-                    "path": "NetworkStack/ApplicationVpc/PublicSubnet1/NATGateway",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
-                      "aws:cdk:cloudformation:props": {
-                        "subnetId": {
-                          "Ref": "ApplicationVpcPublicSubnet1Subnet7014005F"
-                        },
-                        "allocationId": {
-                          "Fn::GetAtt": [
-                            "ApplicationVpcPublicSubnet1EIP13A4D91E",
-                            "AllocationId"
-                          ]
-                        },
-                        "tags": [
-                          {
-                            "key": "Name",
-                            "value": "NetworkStack/ApplicationVpc/PublicSubnet1"
-                          }
-                        ]
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
-                      "version": "2.47.0"
-                    }
                   }
                 },
                 "constructInfo": {
@@ -210,180 +162,13 @@
                   "version": "2.47.0"
                 }
               },
-              "PublicSubnet2": {
-                "id": "PublicSubnet2",
-                "path": "NetworkStack/ApplicationVpc/PublicSubnet2",
+              "IsolatedSubnet1": {
+                "id": "IsolatedSubnet1",
+                "path": "NetworkStack/ApplicationVpc/IsolatedSubnet1",
                 "children": {
                   "Subnet": {
                     "id": "Subnet",
-                    "path": "NetworkStack/ApplicationVpc/PublicSubnet2/Subnet",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
-                      "aws:cdk:cloudformation:props": {
-                        "vpcId": {
-                          "Ref": "ApplicationVpc8AE6A859"
-                        },
-                        "availabilityZone": {
-                          "Fn::Select": [
-                            1,
-                            {
-                              "Fn::GetAZs": ""
-                            }
-                          ]
-                        },
-                        "cidrBlock": "10.0.64.0/18",
-                        "mapPublicIpOnLaunch": true,
-                        "tags": [
-                          {
-                            "key": "aws-cdk:subnet-name",
-                            "value": "Public"
-                          },
-                          {
-                            "key": "aws-cdk:subnet-type",
-                            "value": "Public"
-                          },
-                          {
-                            "key": "Name",
-                            "value": "NetworkStack/ApplicationVpc/PublicSubnet2"
-                          }
-                        ]
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
-                      "version": "2.47.0"
-                    }
-                  },
-                  "Acl": {
-                    "id": "Acl",
-                    "path": "NetworkStack/ApplicationVpc/PublicSubnet2/Acl",
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.Resource",
-                      "version": "2.47.0"
-                    }
-                  },
-                  "RouteTable": {
-                    "id": "RouteTable",
-                    "path": "NetworkStack/ApplicationVpc/PublicSubnet2/RouteTable",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
-                      "aws:cdk:cloudformation:props": {
-                        "vpcId": {
-                          "Ref": "ApplicationVpc8AE6A859"
-                        },
-                        "tags": [
-                          {
-                            "key": "Name",
-                            "value": "NetworkStack/ApplicationVpc/PublicSubnet2"
-                          }
-                        ]
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
-                      "version": "2.47.0"
-                    }
-                  },
-                  "RouteTableAssociation": {
-                    "id": "RouteTableAssociation",
-                    "path": "NetworkStack/ApplicationVpc/PublicSubnet2/RouteTableAssociation",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
-                      "aws:cdk:cloudformation:props": {
-                        "routeTableId": {
-                          "Ref": "ApplicationVpcPublicSubnet2RouteTableA5B5B5A5"
-                        },
-                        "subnetId": {
-                          "Ref": "ApplicationVpcPublicSubnet2SubnetE792D9E8"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
-                      "version": "2.47.0"
-                    }
-                  },
-                  "DefaultRoute": {
-                    "id": "DefaultRoute",
-                    "path": "NetworkStack/ApplicationVpc/PublicSubnet2/DefaultRoute",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
-                      "aws:cdk:cloudformation:props": {
-                        "routeTableId": {
-                          "Ref": "ApplicationVpcPublicSubnet2RouteTableA5B5B5A5"
-                        },
-                        "destinationCidrBlock": "0.0.0.0/0",
-                        "gatewayId": {
-                          "Ref": "ApplicationVpcIGWAE2F3715"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
-                      "version": "2.47.0"
-                    }
-                  },
-                  "EIP": {
-                    "id": "EIP",
-                    "path": "NetworkStack/ApplicationVpc/PublicSubnet2/EIP",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
-                      "aws:cdk:cloudformation:props": {
-                        "domain": "vpc",
-                        "tags": [
-                          {
-                            "key": "Name",
-                            "value": "NetworkStack/ApplicationVpc/PublicSubnet2"
-                          }
-                        ]
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
-                      "version": "2.47.0"
-                    }
-                  },
-                  "NATGateway": {
-                    "id": "NATGateway",
-                    "path": "NetworkStack/ApplicationVpc/PublicSubnet2/NATGateway",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
-                      "aws:cdk:cloudformation:props": {
-                        "subnetId": {
-                          "Ref": "ApplicationVpcPublicSubnet2SubnetE792D9E8"
-                        },
-                        "allocationId": {
-                          "Fn::GetAtt": [
-                            "ApplicationVpcPublicSubnet2EIPC49DC683",
-                            "AllocationId"
-                          ]
-                        },
-                        "tags": [
-                          {
-                            "key": "Name",
-                            "value": "NetworkStack/ApplicationVpc/PublicSubnet2"
-                          }
-                        ]
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
-                      "version": "2.47.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
-                  "version": "2.47.0"
-                }
-              },
-              "PrivateSubnet1": {
-                "id": "PrivateSubnet1",
-                "path": "NetworkStack/ApplicationVpc/PrivateSubnet1",
-                "children": {
-                  "Subnet": {
-                    "id": "Subnet",
-                    "path": "NetworkStack/ApplicationVpc/PrivateSubnet1/Subnet",
+                    "path": "NetworkStack/ApplicationVpc/IsolatedSubnet1/Subnet",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
                       "aws:cdk:cloudformation:props": {
@@ -398,20 +183,20 @@
                             }
                           ]
                         },
-                        "cidrBlock": "10.0.128.0/18",
+                        "cidrBlock": "10.0.128.0/17",
                         "mapPublicIpOnLaunch": false,
                         "tags": [
                           {
                             "key": "aws-cdk:subnet-name",
-                            "value": "Private"
+                            "value": "Isolated"
                           },
                           {
                             "key": "aws-cdk:subnet-type",
-                            "value": "Private"
+                            "value": "Isolated"
                           },
                           {
                             "key": "Name",
-                            "value": "NetworkStack/ApplicationVpc/PrivateSubnet1"
+                            "value": "NetworkStack/ApplicationVpc/IsolatedSubnet1"
                           }
                         ]
                       }
@@ -423,7 +208,7 @@
                   },
                   "Acl": {
                     "id": "Acl",
-                    "path": "NetworkStack/ApplicationVpc/PrivateSubnet1/Acl",
+                    "path": "NetworkStack/ApplicationVpc/IsolatedSubnet1/Acl",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.47.0"
@@ -431,7 +216,7 @@
                   },
                   "RouteTable": {
                     "id": "RouteTable",
-                    "path": "NetworkStack/ApplicationVpc/PrivateSubnet1/RouteTable",
+                    "path": "NetworkStack/ApplicationVpc/IsolatedSubnet1/RouteTable",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
                       "aws:cdk:cloudformation:props": {
@@ -441,7 +226,7 @@
                         "tags": [
                           {
                             "key": "Name",
-                            "value": "NetworkStack/ApplicationVpc/PrivateSubnet1"
+                            "value": "NetworkStack/ApplicationVpc/IsolatedSubnet1"
                           }
                         ]
                       }
@@ -453,159 +238,20 @@
                   },
                   "RouteTableAssociation": {
                     "id": "RouteTableAssociation",
-                    "path": "NetworkStack/ApplicationVpc/PrivateSubnet1/RouteTableAssociation",
+                    "path": "NetworkStack/ApplicationVpc/IsolatedSubnet1/RouteTableAssociation",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
                       "aws:cdk:cloudformation:props": {
                         "routeTableId": {
-                          "Ref": "ApplicationVpcPrivateSubnet1RouteTable77A0065C"
+                          "Ref": "ApplicationVpcIsolatedSubnet1RouteTable4A7CD5BC"
                         },
                         "subnetId": {
-                          "Ref": "ApplicationVpcPrivateSubnet1Subnet2EB6F2CA"
+                          "Ref": "ApplicationVpcIsolatedSubnet1Subnet8A61A252"
                         }
                       }
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
-                      "version": "2.47.0"
-                    }
-                  },
-                  "DefaultRoute": {
-                    "id": "DefaultRoute",
-                    "path": "NetworkStack/ApplicationVpc/PrivateSubnet1/DefaultRoute",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
-                      "aws:cdk:cloudformation:props": {
-                        "routeTableId": {
-                          "Ref": "ApplicationVpcPrivateSubnet1RouteTable77A0065C"
-                        },
-                        "destinationCidrBlock": "0.0.0.0/0",
-                        "natGatewayId": {
-                          "Ref": "ApplicationVpcPublicSubnet1NATGateway945161E1"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
-                      "version": "2.47.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
-                  "version": "2.47.0"
-                }
-              },
-              "PrivateSubnet2": {
-                "id": "PrivateSubnet2",
-                "path": "NetworkStack/ApplicationVpc/PrivateSubnet2",
-                "children": {
-                  "Subnet": {
-                    "id": "Subnet",
-                    "path": "NetworkStack/ApplicationVpc/PrivateSubnet2/Subnet",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
-                      "aws:cdk:cloudformation:props": {
-                        "vpcId": {
-                          "Ref": "ApplicationVpc8AE6A859"
-                        },
-                        "availabilityZone": {
-                          "Fn::Select": [
-                            1,
-                            {
-                              "Fn::GetAZs": ""
-                            }
-                          ]
-                        },
-                        "cidrBlock": "10.0.192.0/18",
-                        "mapPublicIpOnLaunch": false,
-                        "tags": [
-                          {
-                            "key": "aws-cdk:subnet-name",
-                            "value": "Private"
-                          },
-                          {
-                            "key": "aws-cdk:subnet-type",
-                            "value": "Private"
-                          },
-                          {
-                            "key": "Name",
-                            "value": "NetworkStack/ApplicationVpc/PrivateSubnet2"
-                          }
-                        ]
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
-                      "version": "2.47.0"
-                    }
-                  },
-                  "Acl": {
-                    "id": "Acl",
-                    "path": "NetworkStack/ApplicationVpc/PrivateSubnet2/Acl",
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.Resource",
-                      "version": "2.47.0"
-                    }
-                  },
-                  "RouteTable": {
-                    "id": "RouteTable",
-                    "path": "NetworkStack/ApplicationVpc/PrivateSubnet2/RouteTable",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
-                      "aws:cdk:cloudformation:props": {
-                        "vpcId": {
-                          "Ref": "ApplicationVpc8AE6A859"
-                        },
-                        "tags": [
-                          {
-                            "key": "Name",
-                            "value": "NetworkStack/ApplicationVpc/PrivateSubnet2"
-                          }
-                        ]
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
-                      "version": "2.47.0"
-                    }
-                  },
-                  "RouteTableAssociation": {
-                    "id": "RouteTableAssociation",
-                    "path": "NetworkStack/ApplicationVpc/PrivateSubnet2/RouteTableAssociation",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
-                      "aws:cdk:cloudformation:props": {
-                        "routeTableId": {
-                          "Ref": "ApplicationVpcPrivateSubnet2RouteTableAFAC3CEF"
-                        },
-                        "subnetId": {
-                          "Ref": "ApplicationVpcPrivateSubnet2SubnetD832FF78"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
-                      "version": "2.47.0"
-                    }
-                  },
-                  "DefaultRoute": {
-                    "id": "DefaultRoute",
-                    "path": "NetworkStack/ApplicationVpc/PrivateSubnet2/DefaultRoute",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
-                      "aws:cdk:cloudformation:props": {
-                        "routeTableId": {
-                          "Ref": "ApplicationVpcPrivateSubnet2RouteTableAFAC3CEF"
-                        },
-                        "destinationCidrBlock": "0.0.0.0/0",
-                        "natGatewayId": {
-                          "Ref": "ApplicationVpcPublicSubnet2NATGatewayFE72F43F"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
                       "version": "2.47.0"
                     }
                   }
@@ -840,13 +486,13 @@
               "version": "2.47.0"
             }
           },
-          "ForecastModelsDynamoDbTable": {
-            "id": "ForecastModelsDynamoDbTable",
-            "path": "Datastore/ForecastModelsDynamoDbTable",
+          "StockSelectionDynamoDbTable": {
+            "id": "StockSelectionDynamoDbTable",
+            "path": "Datastore/StockSelectionDynamoDbTable",
             "children": {
               "Resource": {
                 "id": "Resource",
-                "path": "Datastore/ForecastModelsDynamoDbTable/Resource",
+                "path": "Datastore/StockSelectionDynamoDbTable/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
                   "aws:cdk:cloudformation:props": {
@@ -866,7 +512,7 @@
                       "readCapacityUnits": 5,
                       "writeCapacityUnits": 5
                     },
-                    "tableName": "forecast-model-table"
+                    "tableName": "stock-selection-table"
                   }
                 },
                 "constructInfo": {
@@ -876,7 +522,7 @@
               },
               "ScalingRole": {
                 "id": "ScalingRole",
-                "path": "Datastore/ForecastModelsDynamoDbTable/ScalingRole",
+                "path": "Datastore/StockSelectionDynamoDbTable/ScalingRole",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.Resource",
                   "version": "2.47.0"
@@ -888,51 +534,31 @@
               "version": "2.47.0"
             }
           },
-          "ForecastValuesDynamoDbTable": {
-            "id": "ForecastValuesDynamoDbTable",
-            "path": "Datastore/ForecastValuesDynamoDbTable",
+          "stockSelectionParameter": {
+            "id": "stockSelectionParameter",
+            "path": "Datastore/stockSelectionParameter",
             "children": {
               "Resource": {
                 "id": "Resource",
-                "path": "Datastore/ForecastValuesDynamoDbTable/Resource",
+                "path": "Datastore/stockSelectionParameter/Resource",
                 "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                  "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
                   "aws:cdk:cloudformation:props": {
-                    "keySchema": [
-                      {
-                        "attributeName": "id",
-                        "keyType": "HASH"
-                      }
-                    ],
-                    "attributeDefinitions": [
-                      {
-                        "attributeName": "id",
-                        "attributeType": "S"
-                      }
-                    ],
-                    "provisionedThroughput": {
-                      "readCapacityUnits": 5,
-                      "writeCapacityUnits": 5
+                    "type": "String",
+                    "value": {
+                      "Ref": "StockSelectionDynamoDbTableBE2BF0F5"
                     },
-                    "tableName": "forecast-values-table"
+                    "name": "stock-selection"
                   }
                 },
                 "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
-                  "version": "2.47.0"
-                }
-              },
-              "ScalingRole": {
-                "id": "ScalingRole",
-                "path": "Datastore/ForecastValuesDynamoDbTable/ScalingRole",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.Resource",
+                  "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
                   "version": "2.47.0"
                 }
               }
             },
             "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_dynamodb.Table",
+              "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
               "version": "2.47.0"
             }
           },
@@ -1047,7 +673,7 @@
                       "s3Bucket": {
                         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                       },
-                      "s3Key": "80aed2cd775f5405c01435a0752e3787b8d53591144c0eea6a75c11bd372a7ed.zip"
+                      "s3Key": "1fa89e0fbad68b1c01650ffa82489fab560867901c207640776a172f16dbd62c.zip"
                     },
                     "role": {
                       "Fn::GetAtt": [
@@ -1119,7 +745,7 @@
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::Events::Rule",
                   "aws:cdk:cloudformation:props": {
-                    "scheduleExpression": "cron(0/5 15-22 ? * MON-FRI *)",
+                    "scheduleExpression": "cron(0/1 14-21 ? * MON-FRI *)",
                     "state": "ENABLED",
                     "targets": [
                       {
@@ -1953,7 +1579,7 @@
                       "s3Bucket": {
                         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                       },
-                      "s3Key": "46f9598e755cdf7a481c568a3e830a5124dac64d0071d24d1e57ef531d8d9771.zip"
+                      "s3Key": "729824032cb02274aa7e067690c86143c7837e0694ca16e1d5b77d0fd310ab4b.zip"
                     },
                     "role": {
                       "Fn::GetAtt": [
