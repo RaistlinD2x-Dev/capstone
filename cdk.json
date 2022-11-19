@@ -1,9 +1,7 @@
 {
-  "app": "npx ts-node --prefer-ts-exts bin/final-project.ts",
+  "app": "npx ts-node --prefer-ts-exts index.ts",
   "watch": {
-    "include": [
-      "**"
-    ],
+    "include": ["**"],
     "exclude": [
       "README.md",
       "cdk*.json",
@@ -34,11 +32,8 @@
     "@aws-cdk/aws-sns-subscriptions:restrictSqsDescryption": true,
     "@aws-cdk/aws-apigateway:disableCloudWatchRole": true,
     "@aws-cdk/core:enablePartitionLiterals": true,
-    "@aws-cdk/core:target-partitions": [
-      "aws",
-      "aws-cn"
-    ],
-    "domainName": "jesserichey.grafana.dev",
+    "@aws-cdk/core:target-partitions": ["aws", "aws-cn"],
+    "domainName": "",
     "hostedZoneId": "",
     "zoneName": ""
   }

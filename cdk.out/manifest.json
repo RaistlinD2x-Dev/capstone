@@ -515,7 +515,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/8dca878950906b780ca4fb121482250d3805fe80871958c94d955635407e88fb.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/a41093bb3b1669769696b5b27d58528c48a43c05e34e6a26e78857cf7a2334ad.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -540,7 +540,7 @@
         "/API/capstone-api/Deployment/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "capstoneapiDeployment78060EE6127cd9b1fd3f8152799f0d07a5ea13e6"
+            "data": "capstoneapiDeployment78060EE6e4e678cb3ec6d79b2d3ddceaa256f3c5"
           }
         ],
         "/API/capstone-api/DeploymentStage.prod/Resource": [
@@ -585,22 +585,22 @@
             "data": "apiUrlParameter46A80F52"
           }
         ],
-        "/API/helloWorldRole/Resource": [
+        "/API/helloworldRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "helloWorldRoleCD79DA46"
+            "data": "helloworldRole022E1464"
           }
         ],
-        "/API/helloWorldLambda/Resource": [
+        "/API/helloworldLambda/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "helloWorldLambda81908354"
+            "data": "helloworldLambdaFCC34334"
           }
         ],
-        "/API/helloWorldLambdaPolicy/Resource": [
+        "/API/helloworldLambdaPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "helloWorldLambdaPolicyB2A5173B"
+            "data": "helloworldLambdaPolicy23442484"
           }
         ],
         "/API/CDKMetadata/Default": [
