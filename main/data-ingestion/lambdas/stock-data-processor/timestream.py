@@ -6,53 +6,61 @@ from constants import *
 def write_records_with_common_attributes(stock_data):
     tsw = boto3.client('timestream-write')
     print("Writing records extracting common attributes")
+    print(stock_data)
 
-    dimensions = [
-        {'Name': 'ticker', 'Value': stock_data['meta']['symbol']},
-    ]
+    try:
+        for stock in stock_data:
 
-    common_attributes = {
-        'Dimensions': dimensions,
-        'MeasureValueType': 'MULTI',
-    }
+            dimensions = [
+                {'Name': 'ticker', 'Value': stock['meta']['symbol']},
+            ]
 
-    records = []
-    for i in range(0, len(stock_data['values']), 100):
-        record_set = []
-        for record in stock_data['values'][i:i + 100]:
-            print(record['datetime'])
-            item = {
-                'Time': convert_to_epoch_time(record['datetime']),
-                'MeasureName': 'Price',
-                'MeasureValues': [
-                    {
-                        'Name': 'low',
-                        'Value': record['low'],
-                        'Type': 'DOUBLE',
-                    },
-                    {
-                        'Name': 'high',
-                        'Value': record['high'],
-                        'Type': 'DOUBLE',
-                        
-                    }
-                ]
-                
+            common_attributes = {
+                'Dimensions': dimensions,
+                'MeasureValueType': 'MULTI',
             }
 
+            records = []
+            for i in range(0, len(stock['values']), 100):
+                record_set = []
+                for record in stock['values'][i:i + 100]:
+                    print(record['datetime'])
+                    item = {
+                        'Time': convert_to_epoch_time(record['datetime']),
+                        'MeasureName': 'Price',
+                        'MeasureValues': [
+                            {
+                                'Name': 'low',
+                                'Value': record['low'],
+                                'Type': 'DOUBLE',
+                            },
+                            {
+                                'Name': 'high',
+                                'Value': record['high'],
+                                'Type': 'DOUBLE',
+                                
+                            }
+                        ]
+                        
+                    }
 
-            record_set.append(item)
-        records.append(record_set)
 
-    for record in records:
-        try:
-            result = tsw.write_records(DatabaseName=DATABASE_NAME, TableName=TABLE_NAME,
-                                                Records=record, CommonAttributes=common_attributes)
-            print("WriteRecords Status: [%s]" % result['ResponseMetadata']['HTTPStatusCode'])
-        except tsw.exceptions.RejectedRecordsException as err:
-            print_rejected_records_exceptions(err)
-        except Exception as err:
-            print("Error:", err)
+                    record_set.append(item)
+                records.append(record_set)
+
+            for record in records:
+                try:
+                    result = tsw.write_records(DatabaseName=DATABASE_NAME, TableName=TABLE_NAME,
+                                                        Records=record, CommonAttributes=common_attributes)
+                    print("WriteRecords Status: [%s]" % result['ResponseMetadata']['HTTPStatusCode'])
+                except tsw.exceptions.RejectedRecordsException as err:
+                    print_rejected_records_exceptions(err)
+                except Exception as err:
+                    print("Error:", err)
+        
+    except Exception as err:
+        print(err)
+
             
 
 def print_rejected_records_exceptions(err):

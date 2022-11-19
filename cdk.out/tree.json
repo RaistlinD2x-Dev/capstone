@@ -511,8 +511,7 @@
                     "provisionedThroughput": {
                       "readCapacityUnits": 5,
                       "writeCapacityUnits": 5
-                    },
-                    "tableName": "stock-selection-table"
+                    }
                   }
                 },
                 "constructInfo": {
@@ -673,7 +672,7 @@
                       "s3Bucket": {
                         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                       },
-                      "s3Key": "1fa89e0fbad68b1c01650ffa82489fab560867901c207640776a172f16dbd62c.zip"
+                      "s3Key": "53591b081c3fbc0b0b1caadfe6b70ddca79420c0ee72b033d6453b9f83aebffd.zip"
                     },
                     "role": {
                       "Fn::GetAtt": [
@@ -682,7 +681,8 @@
                       ]
                     },
                     "handler": "index.handler",
-                    "runtime": "python3.9"
+                    "runtime": "python3.9",
+                    "timeout": 90
                   }
                 },
                 "constructInfo": {
@@ -1588,7 +1588,8 @@
                       ]
                     },
                     "handler": "index.handler",
-                    "runtime": "python3.9"
+                    "runtime": "python3.9",
+                    "timeout": 90
                   }
                 },
                 "constructInfo": {

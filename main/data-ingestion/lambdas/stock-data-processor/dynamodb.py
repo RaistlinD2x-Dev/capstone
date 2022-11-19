@@ -1,21 +1,21 @@
 import boto3
 from ssm import *
 
-
-session = boto3.Session()
-ddb = session.client('dynamodb')
-
-
 def get_stock_selection_data():
 
-    param_name = 'stock-selection'
-    table_name = get_parameter_value(param_name)
+    stock_selection_param = 'stock-selection'
+    table_name = get_parameter_value(stock_selection_param)
+    
+    dynamodb = boto3.resource('dynamodb')
+    table = dynamodb.Table(table_name)
 
-    response = ddb.query(
-        TableName=table_name,
-        Select='ALL_ATTRIBUTES'
-    )
+    response = table.scan()
+    data = response['Items']
 
-    print(response)
+    while 'LastEvaluatedKey' in response:
+        response = table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
+        data.extend(response['Items'])
 
-    return response
+    print(data)
+
+    return data

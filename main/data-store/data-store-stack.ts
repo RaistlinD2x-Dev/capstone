@@ -37,7 +37,6 @@ export class DataStoreStack extends cdk.Stack {
 
     // Choose up to 8 stocks and the interval of stock data to be received
     const stockSelectionDynamoDbTable = new dynamodb.Table(this, 'StockSelectionDynamoDbTable', {
-      tableName: 'stock-selection-table',
       partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
       removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
