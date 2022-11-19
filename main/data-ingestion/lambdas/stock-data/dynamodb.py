@@ -1,9 +1,11 @@
 import boto3
 from ssm import *
 
+from constants import *
+
 def get_stock_selection_data():
 
-    stock_selection_param = 'stock-selection'
+    stock_selection_param = STOCK_SELECTION_TABLE_PARAM_NAME
     table_name = get_parameter_value(stock_selection_param)
     
     dynamodb = boto3.resource('dynamodb')

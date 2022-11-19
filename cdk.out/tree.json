@@ -597,6 +597,144 @@
         "id": "DataIngestion",
         "path": "DataIngestion",
         "children": {
+          "stockDataRole": {
+            "id": "stockDataRole",
+            "path": "DataIngestion/stockDataRole",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "DataIngestion/stockDataRole/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "lambda.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.Role",
+              "version": "2.47.0"
+            }
+          },
+          "stockDataLambda": {
+            "id": "stockDataLambda",
+            "path": "DataIngestion/stockDataLambda",
+            "children": {
+              "Code": {
+                "id": "Code",
+                "path": "DataIngestion/stockDataLambda/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "DataIngestion/stockDataLambda/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "DataIngestion/stockDataLambda/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.47.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "DataIngestion/stockDataLambda/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                      },
+                      "s3Key": "5aac8511a513800ec5dfd62b32beaf2450c09691517e4228f49695ce35729a80.zip"
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "stockDataRole24CC5183",
+                        "Arn"
+                      ]
+                    },
+                    "handler": "index.handler",
+                    "runtime": "python3.9",
+                    "timeout": 90
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.47.0"
+            }
+          },
+          "stockDataLambdaPolicy": {
+            "id": "stockDataLambdaPolicy",
+            "path": "DataIngestion/stockDataLambdaPolicy",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "DataIngestion/stockDataLambdaPolicy/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                  "aws:cdk:cloudformation:props": {
+                    "policyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "*",
+                          "Effect": "Allow",
+                          "Resource": "*"
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "policyName": "stockDataLambdaPolicy0156761A",
+                    "roles": [
+                      {
+                        "Ref": "stockDataRole24CC5183"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.Policy",
+              "version": "2.47.0"
+            }
+          },
           "stockDataProcessorRole": {
             "id": "stockDataProcessorRole",
             "path": "DataIngestion/stockDataProcessorRole",
@@ -672,7 +810,7 @@
                       "s3Bucket": {
                         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                       },
-                      "s3Key": "53591b081c3fbc0b0b1caadfe6b70ddca79420c0ee72b033d6453b9f83aebffd.zip"
+                      "s3Key": "9c384efee2c7ba9ad131dc60631a91031049faa034c004ddfc37c6c89b3c6749.zip"
                     },
                     "role": {
                       "Fn::GetAtt": [
@@ -735,6 +873,299 @@
               "version": "2.47.0"
             }
           },
+          "stockDataTask": {
+            "id": "stockDataTask",
+            "path": "DataIngestion/stockDataTask",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_stepfunctions_tasks.LambdaInvoke",
+              "version": "2.47.0"
+            }
+          },
+          "stockDataMap": {
+            "id": "stockDataMap",
+            "path": "DataIngestion/stockDataMap",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_stepfunctions.Map",
+              "version": "2.47.0"
+            }
+          },
+          "stockDataProcessorTask": {
+            "id": "stockDataProcessorTask",
+            "path": "DataIngestion/stockDataProcessorTask",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_stepfunctions_tasks.LambdaInvoke",
+              "version": "2.47.0"
+            }
+          },
+          "startState": {
+            "id": "startState",
+            "path": "DataIngestion/startState",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_stepfunctions.Pass",
+              "version": "2.47.0"
+            }
+          },
+          "dataIngestionStepFunction": {
+            "id": "dataIngestionStepFunction",
+            "path": "DataIngestion/dataIngestionStepFunction",
+            "children": {
+              "Role": {
+                "id": "Role",
+                "path": "DataIngestion/dataIngestionStepFunction/Role",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "DataIngestion/dataIngestionStepFunction/Role/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "states.",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      ".amazonaws.com"
+                                    ]
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "DataIngestion/dataIngestionStepFunction/Role/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "DataIngestion/dataIngestionStepFunction/Role/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "lambda:InvokeFunction",
+                                  "Effect": "Allow",
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "stockDataLambda2ED9D139",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Fn::GetAtt": [
+                                        "stockDataProcessorLambdaE8F8784F",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          {
+                                            "Fn::GetAtt": [
+                                              "stockDataLambda2ED9D139",
+                                              "Arn"
+                                            ]
+                                          },
+                                          ":*"
+                                        ]
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          {
+                                            "Fn::GetAtt": [
+                                              "stockDataProcessorLambdaE8F8784F",
+                                              "Arn"
+                                            ]
+                                          },
+                                          ":*"
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "dataIngestionStepFunctionRoleDefaultPolicyDCCC7E47",
+                            "roles": [
+                              {
+                                "Ref": "dataIngestionStepFunctionRole7F03A99B"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.47.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.47.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "DataIngestion/dataIngestionStepFunction/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::StepFunctions::StateMachine",
+                  "aws:cdk:cloudformation:props": {
+                    "roleArn": {
+                      "Fn::GetAtt": [
+                        "dataIngestionStepFunctionRole7F03A99B",
+                        "Arn"
+                      ]
+                    },
+                    "definitionString": {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "{\"StartAt\":\"startState\",\"States\":{\"startState\":{\"Type\":\"Pass\",\"Next\":\"stockDataTask\"},\"stockDataTask\":{\"Next\":\"stockDataMap\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"OutputPath\":\"$.Payload\",\"Resource\":\"arn:",
+                          {
+                            "Ref": "AWS::Partition"
+                          },
+                          ":states:::lambda:invoke\",\"Parameters\":{\"FunctionName\":\"",
+                          {
+                            "Fn::GetAtt": [
+                              "stockDataLambda2ED9D139",
+                              "Arn"
+                            ]
+                          },
+                          "\",\"Payload.$\":\"$\"}},\"stockDataMap\":{\"Type\":\"Map\",\"End\":true,\"Iterator\":{\"StartAt\":\"stockDataProcessorTask\",\"States\":{\"stockDataProcessorTask\":{\"End\":true,\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"Resource\":\"arn:",
+                          {
+                            "Ref": "AWS::Partition"
+                          },
+                          ":states:::lambda:invoke\",\"Parameters\":{\"FunctionName\":\"",
+                          {
+                            "Fn::GetAtt": [
+                              "stockDataProcessorLambdaE8F8784F",
+                              "Arn"
+                            ]
+                          },
+                          "\",\"Payload.$\":\"$\"}}}}}}}"
+                        ]
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_stepfunctions.CfnStateMachine",
+                  "version": "2.47.0"
+                }
+              },
+              "EventsRole": {
+                "id": "EventsRole",
+                "path": "DataIngestion/dataIngestionStepFunction/EventsRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "DataIngestion/dataIngestionStepFunction/EventsRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "events.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "DataIngestion/dataIngestionStepFunction/EventsRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "DataIngestion/dataIngestionStepFunction/EventsRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "states:StartExecution",
+                                  "Effect": "Allow",
+                                  "Resource": {
+                                    "Ref": "dataIngestionStepFunction1E493635"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "dataIngestionStepFunctionEventsRoleDefaultPolicy062BCD31",
+                            "roles": [
+                              {
+                                "Ref": "dataIngestionStepFunctionEventsRoleCC78D1E0"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.47.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_stepfunctions.StateMachine",
+              "version": "2.47.0"
+            }
+          },
           "Rule": {
             "id": "Rule",
             "path": "DataIngestion/Rule",
@@ -751,8 +1182,11 @@
                       {
                         "id": "Target0",
                         "arn": {
+                          "Ref": "dataIngestionStepFunction1E493635"
+                        },
+                        "roleArn": {
                           "Fn::GetAtt": [
-                            "stockDataProcessorLambdaE8F8784F",
+                            "dataIngestionStepFunctionEventsRoleCC78D1E0",
                             "Arn"
                           ]
                         }
@@ -762,33 +1196,6 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_events.CfnRule",
-                  "version": "2.47.0"
-                }
-              },
-              "AllowEventRuleDataIngestionstockDataProcessorLambdaB05476BA": {
-                "id": "AllowEventRuleDataIngestionstockDataProcessorLambdaB05476BA",
-                "path": "DataIngestion/Rule/AllowEventRuleDataIngestionstockDataProcessorLambdaB05476BA",
-                "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
-                  "aws:cdk:cloudformation:props": {
-                    "action": "lambda:InvokeFunction",
-                    "functionName": {
-                      "Fn::GetAtt": [
-                        "stockDataProcessorLambdaE8F8784F",
-                        "Arn"
-                      ]
-                    },
-                    "principal": "events.amazonaws.com",
-                    "sourceArn": {
-                      "Fn::GetAtt": [
-                        "Rule4C995B7F",
-                        "Arn"
-                      ]
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
                   "version": "2.47.0"
                 }
               }

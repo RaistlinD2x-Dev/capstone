@@ -237,7 +237,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/fdb3708fcc7181c97271890720317c93b6258a716b54075618e8b60e0b0a4cd9.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/b57c95093cf973d98e2ee4a060aba40fed629f0896e0b92f8a5b2b993179dd9d.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -253,6 +253,24 @@
         "DataIngestion.assets"
       ],
       "metadata": {
+        "/DataIngestion/stockDataRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "stockDataRole24CC5183"
+          }
+        ],
+        "/DataIngestion/stockDataLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "stockDataLambda2ED9D139"
+          }
+        ],
+        "/DataIngestion/stockDataLambdaPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "stockDataLambdaPolicy0156761A"
+          }
+        ],
         "/DataIngestion/stockDataProcessorRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -271,16 +289,40 @@
             "data": "stockDataProcessorLambdaPolicy181BA387"
           }
         ],
+        "/DataIngestion/dataIngestionStepFunction/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "dataIngestionStepFunctionRole7F03A99B"
+          }
+        ],
+        "/DataIngestion/dataIngestionStepFunction/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "dataIngestionStepFunctionRoleDefaultPolicyDCCC7E47"
+          }
+        ],
+        "/DataIngestion/dataIngestionStepFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "dataIngestionStepFunction1E493635"
+          }
+        ],
+        "/DataIngestion/dataIngestionStepFunction/EventsRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "dataIngestionStepFunctionEventsRoleCC78D1E0"
+          }
+        ],
+        "/DataIngestion/dataIngestionStepFunction/EventsRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "dataIngestionStepFunctionEventsRoleDefaultPolicy062BCD31"
+          }
+        ],
         "/DataIngestion/Rule/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "Rule4C995B7F"
-          }
-        ],
-        "/DataIngestion/Rule/AllowEventRuleDataIngestionstockDataProcessorLambdaB05476BA": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "RuleAllowEventRuleDataIngestionstockDataProcessorLambdaB05476BAB37161AB"
           }
         ],
         "/DataIngestion/CDKMetadata/Default": [

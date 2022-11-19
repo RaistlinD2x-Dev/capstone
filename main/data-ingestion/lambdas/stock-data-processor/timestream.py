@@ -9,44 +9,43 @@ def write_records_with_common_attributes(stock_data):
     print(stock_data)
 
     try:
-        for stock in stock_data:
 
-            dimensions = [
-                {'Name': 'ticker', 'Value': stock['meta']['symbol']},
-            ]
+        dimensions = [
+            {'Name': 'ticker', 'Value': stock_data['meta']['symbol']},
+        ]
 
-            common_attributes = {
-                'Dimensions': dimensions,
-                'MeasureValueType': 'MULTI',
-            }
+        common_attributes = {
+            'Dimensions': dimensions,
+            'MeasureValueType': 'MULTI',
+        }
 
-            records = []
-            for i in range(0, len(stock['values']), 100):
-                record_set = []
-                for record in stock['values'][i:i + 100]:
-                    print(record['datetime'])
-                    item = {
-                        'Time': convert_to_epoch_time(record['datetime']),
-                        'MeasureName': 'Price',
-                        'MeasureValues': [
-                            {
-                                'Name': 'low',
-                                'Value': record['low'],
-                                'Type': 'DOUBLE',
-                            },
-                            {
-                                'Name': 'high',
-                                'Value': record['high'],
-                                'Type': 'DOUBLE',
-                                
-                            }
-                        ]
-                        
-                    }
+        records = []
+        for i in range(0, len(stock_data['values']), 100):
+            record_set = []
+            for record in stock_data['values'][i:i + 100]:
+                print(record['datetime'])
+                item = {
+                    'Time': convert_to_epoch_time(record['datetime']),
+                    'MeasureName': 'Price',
+                    'MeasureValues': [
+                        {
+                            'Name': 'low',
+                            'Value': record['low'],
+                            'Type': 'DOUBLE',
+                        },
+                        {
+                            'Name': 'high',
+                            'Value': record['high'],
+                            'Type': 'DOUBLE',
+                            
+                        }
+                    ]
+                    
+                }
 
 
-                    record_set.append(item)
-                records.append(record_set)
+                record_set.append(item)
+            records.append(record_set)
 
             for record in records:
                 try:

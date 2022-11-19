@@ -1,7 +1,10 @@
 import requests
 
+
+from constants import *
+
 def get_stock_data(api_key, stock_selection):
-    url = "https://twelve-data1.p.rapidapi.com/time_series"
+    url = API_URL
 
     selection_array = []
     for selection in stock_selection:

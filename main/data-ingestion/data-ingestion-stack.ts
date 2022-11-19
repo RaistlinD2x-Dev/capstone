@@ -3,10 +3,18 @@ import { Construct } from 'constructs';
 import * as events from 'aws-cdk-lib/aws-events';
 import * as targets from 'aws-cdk-lib/aws-events-targets';
 import { pythonLambdaGenerator } from '../../utils/python-lambda-generator';
+import * as tasks from 'aws-cdk-lib/aws-stepfunctions-tasks';
+import * as sfn from 'aws-cdk-lib/aws-stepfunctions';
 
 export class DataIngestionStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
+
+    const stockDataLambda = pythonLambdaGenerator(
+      this,
+      'stockData',
+      `${__dirname}/lambdas/stock-data`
+    );
 
     const stockDataProcessorLambda = pythonLambdaGenerator(
       this,
@@ -14,11 +22,45 @@ export class DataIngestionStack extends cdk.Stack {
       `${__dirname}/lambdas/stock-data-processor`
     );
 
-    // Every 5 minutes, between 9AM and 4PM EST, Monday through Friday run the stock data processor Lambda
-    // TODO something is wrong with this, only ran once
+    const stockDataInvoke = new tasks.LambdaInvoke(this, 'stockDataTask', {
+      lambdaFunction: stockDataLambda,
+      outputPath: '$.Payload',
+    });
+
+    const stockDataMap = new sfn.Map(this, 'stockDataMap');
+
+    const stockDataProcessorInvoke = new tasks.LambdaInvoke(this, 'stockDataProcessorTask', {
+      lambdaFunction: stockDataProcessorLambda,
+    });
+
+    const startState = new sfn.Pass(this, 'startState');
+    const dataIngestionStepFunction = new sfn.StateMachine(this, 'dataIngestionStepFunction', {
+      definition: startState
+        .next(stockDataInvoke)
+        .next(stockDataMap.iterator(stockDataProcessorInvoke)),
+    });
+
+    // const stockDataStateMachine = new sfn.StateMachine(this, 'stockDataStateMachine', {
+    //   definition: sfn.Chain.start(
+    //     new cdk.aws_stepfunctions_tasks.LambdaInvoke(this, 'getStockData', {
+    //       lambdaFunction: stockDataLambda,
+    //     }).next(
+    //       new sfn.Map(this, 'stockDataMap', {
+    //         itemsPath: '$',
+    //       }).iterator(
+    //         new tasks.LambdaInvoke(this, 'stockDataProcessor', {
+    //           lambdaFunction: stockDataProcessorLambda,
+    //           inputPath: '$.Payload',
+    //         })
+    //       )
+    //     )
+    //   ),
+    // });
+
+    // Every 1 minute, between the hours of 9AM and 5PM EST Monday through Friday, invoke the state machine
     const rule = new events.Rule(this, 'Rule', {
       schedule: events.Schedule.expression('cron(0/1 14-21 ? * MON-FRI *)'),
-      targets: [new targets.LambdaFunction(stockDataProcessorLambda)],
+      targets: [new targets.SfnStateMachine(dataIngestionStepFunction)],
     });
   }
 }
