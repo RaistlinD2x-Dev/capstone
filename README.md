@@ -59,6 +59,9 @@ Containerization of applications and services is a modern and simplistic approac
 ### **EventBridge (Cron)**
 
 EventBridge, previously known as CloudWatch, has the capability to create rate or cron like events to activate other services. To continuously update our stock data, a cron job will be ran every 5 minutes, between the hours of 0900 - 1700 hours EST, Monday through Friday. This will pull the API from an SSM Parameter Store location and use this to make a request to the third part vendor of stock data. Setting up the API key is a manual task that needs to be done independant of the deployment of this solution.
+
+<br>
+
 API Key Parameter Store Name: 'twelve-data-api-key'
 Website to vendor: https://rapidapi.com/twelvedata/api/twelve-data1
 
