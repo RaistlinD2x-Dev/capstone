@@ -40,23 +40,6 @@ export class DataIngestionStack extends cdk.Stack {
         .next(stockDataMap.iterator(stockDataProcessorInvoke)),
     });
 
-    // const stockDataStateMachine = new sfn.StateMachine(this, 'stockDataStateMachine', {
-    //   definition: sfn.Chain.start(
-    //     new cdk.aws_stepfunctions_tasks.LambdaInvoke(this, 'getStockData', {
-    //       lambdaFunction: stockDataLambda,
-    //     }).next(
-    //       new sfn.Map(this, 'stockDataMap', {
-    //         itemsPath: '$',
-    //       }).iterator(
-    //         new tasks.LambdaInvoke(this, 'stockDataProcessor', {
-    //           lambdaFunction: stockDataProcessorLambda,
-    //           inputPath: '$.Payload',
-    //         })
-    //       )
-    //     )
-    //   ),
-    // });
-
     // Every 1 minute, between the hours of 9AM and 5PM EST Monday through Friday, invoke the state machine
     const rule = new events.Rule(this, 'Rule', {
       schedule: events.Schedule.expression('cron(0/1 14-21 ? * MON-FRI *)'),

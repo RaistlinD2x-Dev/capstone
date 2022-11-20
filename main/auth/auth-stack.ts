@@ -6,9 +6,7 @@ export class CdkStarterStack extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // 👇 User Pool
     const userPool = new cognito.UserPool(this, 'userpool', {
-      userPoolName: 'my-user-pool',
       selfSignUpEnabled: true,
       signInAliases: {
         email: true,
@@ -84,9 +82,7 @@ export class CdkStarterStack extends cdk.Stack {
         custom: true,
         userSrp: true,
       },
-      supportedIdentityProviders: [
-        cognito.UserPoolClientIdentityProvider.COGNITO,
-      ],
+      supportedIdentityProviders: [cognito.UserPoolClientIdentityProvider.COGNITO],
       readAttributes: clientReadAttributes,
       writeAttributes: clientWriteAttributes,
     });
