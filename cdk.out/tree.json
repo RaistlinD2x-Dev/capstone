@@ -337,6 +337,302 @@
           "version": "2.47.0"
         }
       },
+      "AuthStack": {
+        "id": "AuthStack",
+        "path": "AuthStack",
+        "children": {
+          "userpool": {
+            "id": "userpool",
+            "path": "AuthStack/userpool",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "AuthStack/userpool/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Cognito::UserPool",
+                  "aws:cdk:cloudformation:props": {
+                    "accountRecoverySetting": {
+                      "recoveryMechanisms": [
+                        {
+                          "name": "verified_email",
+                          "priority": 1
+                        }
+                      ]
+                    },
+                    "adminCreateUserConfig": {
+                      "allowAdminCreateUserOnly": false
+                    },
+                    "autoVerifiedAttributes": [
+                      "email"
+                    ],
+                    "emailVerificationMessage": "The verification code to your new account is {####}",
+                    "emailVerificationSubject": "Verify your new account",
+                    "policies": {
+                      "passwordPolicy": {
+                        "minimumLength": 6,
+                        "requireLowercase": true,
+                        "requireUppercase": false,
+                        "requireNumbers": true,
+                        "requireSymbols": false
+                      }
+                    },
+                    "schema": [
+                      {
+                        "name": "given_name",
+                        "mutable": true,
+                        "required": true
+                      },
+                      {
+                        "name": "family_name",
+                        "mutable": true,
+                        "required": true
+                      },
+                      {
+                        "name": "country",
+                        "attributeDataType": "String",
+                        "mutable": true
+                      },
+                      {
+                        "name": "city",
+                        "attributeDataType": "String",
+                        "mutable": true
+                      },
+                      {
+                        "name": "isAdmin",
+                        "attributeDataType": "String",
+                        "mutable": true
+                      }
+                    ],
+                    "smsVerificationMessage": "The verification code to your new account is {####}",
+                    "usernameAttributes": [
+                      "email"
+                    ],
+                    "verificationMessageTemplate": {
+                      "defaultEmailOption": "CONFIRM_WITH_CODE",
+                      "emailMessage": "The verification code to your new account is {####}",
+                      "emailSubject": "Verify your new account",
+                      "smsMessage": "The verification code to your new account is {####}"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cognito.CfnUserPool",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_cognito.UserPool",
+              "version": "2.47.0"
+            }
+          },
+          "userpool-client": {
+            "id": "userpool-client",
+            "path": "AuthStack/userpool-client",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "AuthStack/userpool-client/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Cognito::UserPoolClient",
+                  "aws:cdk:cloudformation:props": {
+                    "userPoolId": {
+                      "Ref": "userpool0AC4AA96"
+                    },
+                    "allowedOAuthFlows": [
+                      "implicit",
+                      "code"
+                    ],
+                    "allowedOAuthFlowsUserPoolClient": true,
+                    "allowedOAuthScopes": [
+                      "profile",
+                      "phone",
+                      "email",
+                      "openid",
+                      "aws.cognito.signin.user.admin"
+                    ],
+                    "callbackUrLs": [
+                      "https://example.com"
+                    ],
+                    "explicitAuthFlows": [
+                      "ALLOW_ADMIN_USER_PASSWORD_AUTH",
+                      "ALLOW_CUSTOM_AUTH",
+                      "ALLOW_USER_SRP_AUTH",
+                      "ALLOW_REFRESH_TOKEN_AUTH"
+                    ],
+                    "readAttributes": [
+                      "address",
+                      "birthdate",
+                      "custom:city",
+                      "custom:country",
+                      "custom:isAdmin",
+                      "email",
+                      "email_verified",
+                      "family_name",
+                      "gender",
+                      "given_name",
+                      "locale",
+                      "middle_name",
+                      "name",
+                      "nickname",
+                      "phone_number",
+                      "phone_number_verified",
+                      "picture",
+                      "preferred_username",
+                      "profile",
+                      "updated_at",
+                      "website",
+                      "zoneinfo"
+                    ],
+                    "supportedIdentityProviders": [
+                      "COGNITO"
+                    ],
+                    "writeAttributes": [
+                      "address",
+                      "birthdate",
+                      "custom:city",
+                      "custom:country",
+                      "email",
+                      "family_name",
+                      "gender",
+                      "given_name",
+                      "locale",
+                      "middle_name",
+                      "name",
+                      "nickname",
+                      "phone_number",
+                      "picture",
+                      "preferred_username",
+                      "profile",
+                      "updated_at",
+                      "website",
+                      "zoneinfo"
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cognito.CfnUserPoolClient",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_cognito.UserPoolClient",
+              "version": "2.47.0"
+            }
+          },
+          "userPoolIdParam": {
+            "id": "userPoolIdParam",
+            "path": "AuthStack/userPoolIdParam",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "AuthStack/userPoolIdParam/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
+                  "aws:cdk:cloudformation:props": {
+                    "type": "String",
+                    "value": {
+                      "Ref": "userpool0AC4AA96"
+                    },
+                    "name": "userPoolId"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
+              "version": "2.47.0"
+            }
+          },
+          "userPoolClientIdParam": {
+            "id": "userPoolClientIdParam",
+            "path": "AuthStack/userPoolClientIdParam",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "AuthStack/userPoolClientIdParam/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
+                  "aws:cdk:cloudformation:props": {
+                    "type": "String",
+                    "value": {
+                      "Ref": "userpoolclientDA356A8E"
+                    },
+                    "name": "userPoolClientId"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
+              "version": "2.47.0"
+            }
+          },
+          "userPoolIdOutput": {
+            "id": "userPoolIdOutput",
+            "path": "AuthStack/userPoolIdOutput",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.47.0"
+            }
+          },
+          "userPoolClientIdOutput": {
+            "id": "userPoolClientIdOutput",
+            "path": "AuthStack/userPoolClientIdOutput",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.47.0"
+            }
+          },
+          "userPoolUrlOutput": {
+            "id": "userPoolUrlOutput",
+            "path": "AuthStack/userPoolUrlOutput",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.47.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "AuthStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "AuthStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.47.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "AuthStack/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.1.162"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.47.0"
+        }
+      },
       "Datastore": {
         "id": "Datastore",
         "path": "Datastore",

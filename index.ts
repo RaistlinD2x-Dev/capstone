@@ -7,10 +7,13 @@ import { DataStoreStack } from './main/data-store/data-store-stack';
 import { DataIngestionStack } from './main/data-ingestion/data-ingestion-stack';
 import { ForecastStack } from './main/forecast/forecast-stack';
 import { ApiStack } from './main/api/api-stack';
+import { AuthStack } from './main/auth/auth-stack';
 
 const app = new cdk.App();
 
 const network = new NetworkStack(app, 'NetworkStack');
+
+const auth = new AuthStack(app, 'AuthStack');
 
 // const frontend = new FrontendStack(app, 'Frontend', {
 //   vpc: network.vpc,

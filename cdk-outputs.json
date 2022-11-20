@@ -1,0 +1,9 @@
+{
+  "API": {
+    "capstoneapiEndpoint45299CE2": "https://oyz2cagor4.execute-api.us-east-1.amazonaws.com/prod/"
+  },
+  "AuthStack": {
+    "userPoolIdOutput": "us-east-1_mt4bWcYuf",
+    "userPoolClientIdOutput": "77f0ius6p4rofaa1ffir0fsp1d"
+  }
+}

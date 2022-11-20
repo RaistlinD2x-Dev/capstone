@@ -2,7 +2,7 @@ import * as cognito from 'aws-cdk-lib/aws-cognito';
 import * as cdk from 'aws-cdk-lib';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
 
-export class CdkStarterStack extends cdk.Stack {
+export class AuthStack extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
@@ -37,7 +37,7 @@ export class CdkStarterStack extends cdk.Stack {
         requireSymbols: false,
       },
       accountRecovery: cognito.AccountRecovery.EMAIL_ONLY,
-      removalPolicy: cdk.RemovalPolicy.RETAIN,
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
 
     const standardCognitoAttributes = {
@@ -74,7 +74,6 @@ export class CdkStarterStack extends cdk.Stack {
       })
       .withCustomAttributes(...['country', 'city']);
 
-    // 👇 User Pool Client
     const userPoolClient = new cognito.UserPoolClient(this, 'userpool-client', {
       userPool,
       authFlows: {
@@ -82,19 +81,35 @@ export class CdkStarterStack extends cdk.Stack {
         custom: true,
         userSrp: true,
       },
-      supportedIdentityProviders: [cognito.UserPoolClientIdentityProvider.COGNITO],
+      supportedIdentityProviders: [
+        cognito.UserPoolClientIdentityProvider.COGNITO,
+        // cognito.UserPoolClientIdentityProvider.AMAZON,
+        // cognito.UserPoolClientIdentityProvider.APPLE,
+        // cognito.UserPoolClientIdentityProvider.FACEBOOK,
+        // cognito.UserPoolClientIdentityProvider.GOOGLE,
+      ],
       readAttributes: clientReadAttributes,
       writeAttributes: clientWriteAttributes,
     });
 
-    new ssm.StringParameter(this, 'userPoolId', {
+    new ssm.StringParameter(this, 'userPoolIdParam', {
       parameterName: 'userPoolId',
       stringValue: userPool.userPoolId,
     });
 
-    new ssm.StringParameter(this, 'userPoolClientId', {
+    new ssm.StringParameter(this, 'userPoolClientIdParam', {
       parameterName: 'userPoolClientId',
       stringValue: userPoolClient.userPoolClientId,
+    });
+
+    new cdk.CfnOutput(this, 'userPoolIdOutput', {
+      value: userPool.userPoolId,
+    });
+    new cdk.CfnOutput(this, 'userPoolClientIdOutput', {
+      value: userPoolClient.userPoolClientId,
+    });
+    new cdk.CfnOutput(this, 'userPoolUrlOutput', {
+      value: userPool.userPoolProviderUrl,
     });
   }
 }

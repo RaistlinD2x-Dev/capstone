@@ -126,6 +126,107 @@
       },
       "displayName": "NetworkStack"
     },
+    "AuthStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "AuthStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "AuthStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "AuthStack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/2d17a12399523c418e7a7f6bedb5efb8c6a567f9f81df690fa75513a56c9cd45.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "AuthStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "AuthStack.assets"
+      ],
+      "metadata": {
+        "/AuthStack/userpool/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "userpool0AC4AA96"
+          }
+        ],
+        "/AuthStack/userpool-client/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "userpoolclientDA356A8E"
+          }
+        ],
+        "/AuthStack/userPoolIdParam/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "userPoolIdParam85CE1A9E"
+          }
+        ],
+        "/AuthStack/userPoolClientIdParam/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "userPoolClientIdParam463E0F5C"
+          }
+        ],
+        "/AuthStack/userPoolIdOutput": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "userPoolIdOutput"
+          }
+        ],
+        "/AuthStack/userPoolClientIdOutput": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "userPoolClientIdOutput"
+          }
+        ],
+        "/AuthStack/userPoolUrlOutput": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "userPoolUrlOutput"
+          }
+        ],
+        "/AuthStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/AuthStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/AuthStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/AuthStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "AuthStack"
+    },
     "Datastore.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
