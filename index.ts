@@ -13,7 +13,7 @@ const app = new cdk.App();
 
 const network = new NetworkStack(app, 'NetworkStack');
 
-const auth = new AuthStack(app, 'AuthStack');
+// const auth = new AuthStack(app, 'AuthStack');
 
 // const frontend = new FrontendStack(app, 'Frontend', {
 //   vpc: network.vpc,
@@ -27,4 +27,4 @@ const forecast = new ForecastStack(app, 'Forecast', {
   vpc: network.vpc,
 });
 
-const api = new ApiStack(app, 'API', {});
+const api = new ApiStack(app, 'API');

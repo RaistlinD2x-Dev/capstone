@@ -1,8 +1,21 @@
 import * as cognito from 'aws-cdk-lib/aws-cognito';
 import * as cdk from 'aws-cdk-lib';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
+import * as apigw from 'aws-cdk-lib/aws-apigateway';
+import { CognitoUserPoolsAuthorizer, TokenAuthorizer } from 'aws-cdk-lib/aws-apigateway';
+import { UserPool } from 'aws-cdk-lib/aws-cognito';
+
+// ********************************************************
+// Deprecated, keeping for reference by other projects.
+// Problem with circular reference when attempting to attach
+// API Authorizer lambda or cognito to API Gateway
+// ********************************************************
 
 export class AuthStack extends cdk.Stack {
+  public readonly tokenAuthorizer: TokenAuthorizer;
+  public readonly userPool: UserPool;
+  public cognitoUserPoolsAuthorizer: CognitoUserPoolsAuthorizer;
+
   constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
@@ -37,7 +50,13 @@ export class AuthStack extends cdk.Stack {
         requireSymbols: false,
       },
       accountRecovery: cognito.AccountRecovery.EMAIL_ONLY,
-      removalPolicy: cdk.RemovalPolicy.DESTROY,
+      removalPolicy: cdk.RemovalPolicy.RETAIN,
+    });
+
+    const domain = userPool.addDomain('CognitoDomain', {
+      cognitoDomain: {
+        domainPrefix: 'capstone-project',
+      },
     });
 
     const standardCognitoAttributes = {
@@ -78,6 +97,7 @@ export class AuthStack extends cdk.Stack {
       userPool,
       authFlows: {
         adminUserPassword: true,
+        userPassword: true,
         custom: true,
         userSrp: true,
       },
@@ -88,8 +108,31 @@ export class AuthStack extends cdk.Stack {
         // cognito.UserPoolClientIdentityProvider.FACEBOOK,
         // cognito.UserPoolClientIdentityProvider.GOOGLE,
       ],
+      oAuth: {
+        callbackUrls: ['http://localhost:3000'],
+        flows: {
+          implicitCodeGrant: true,
+        },
+      },
       readAttributes: clientReadAttributes,
       writeAttributes: clientWriteAttributes,
+    });
+
+    const cognitoAuthorizer = new apigw.CognitoUserPoolsAuthorizer(this, 'CognitoAuthorizer', {
+      cognitoUserPools: [userPool],
+    });
+
+    const signInUrl = domain.signInUrl(userPoolClient, {
+      redirectUri: 'http://localhost:3000', // must be a URL configured under 'callbackUrls' with the client
+    });
+
+    new ssm.StringParameter(this, 'signInUrl', {
+      parameterName: 'signInUrl',
+      stringValue: signInUrl,
+    });
+
+    new cdk.CfnOutput(this, 'signInUrlOutput', {
+      value: signInUrl,
     });
 
     new ssm.StringParameter(this, 'userPoolIdParam', {
