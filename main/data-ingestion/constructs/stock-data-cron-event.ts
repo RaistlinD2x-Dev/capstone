@@ -1,6 +1,5 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { Function } from 'aws-cdk-lib/aws-lambda';
 import * as events from 'aws-cdk-lib/aws-events';
 import * as targets from 'aws-cdk-lib/aws-events-targets';
 import { StateMachine } from 'aws-cdk-lib/aws-stepfunctions';

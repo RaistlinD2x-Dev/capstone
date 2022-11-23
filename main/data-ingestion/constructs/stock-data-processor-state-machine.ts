@@ -25,6 +25,8 @@ export class StockDataProcessorStateMachine extends Construct {
       lambdaFunction: props.stockDataProcessor,
     });
 
+    // Step Function to orchestrate the capturing of 1 min of stock data for each stock ticker selected
+    // send array of selected stock data to map iterator for lambda processing
     const startState = new sfn.Pass(this, 'startState');
     const dataIngestionStepFunction = new sfn.StateMachine(this, 'dataIngestionStepFunction', {
       definition: startState

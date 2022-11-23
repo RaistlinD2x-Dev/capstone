@@ -2,8 +2,8 @@ import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as apigw from 'aws-cdk-lib/aws-apigateway';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
-import { pythonLambdaGenerator } from '../../../utils/python-lambda-generator';
 import { UserPool } from 'aws-cdk-lib/aws-cognito';
+import { GetStocks } from './lambdas/get-stocks';
 
 interface ApiGatewayProps extends cdk.StackProps {
   userPool: UserPool;
@@ -21,20 +21,16 @@ export class ApiGateway extends Construct {
     });
     cognitoAuthorizer._attachToApi(api);
 
-    const stocksLambda = pythonLambdaGenerator(
-      this,
-      'stocks',
-      `${__dirname}../../../../src/lambdas/stocks`
-    );
+    // get all stocks on the NASDAQ Exchange
+    // TODO think about possibly passing in query param for different exchanges
+    const { getStocksLambda } = new GetStocks(this, 'GetStocks');
 
+    // assign get-stocks lambda to api resource path /stocks
     const stocks = api.root.addResource('stocks');
-
-    stocks.addMethod(
-      'GET',
-      new apigw.LambdaIntegration(stocksLambda, {
-        proxy: true,
-      })
-    );
+    const stocksLambdaIntegration = new apigw.LambdaIntegration(getStocksLambda, {
+      proxy: true,
+    });
+    stocks.addMethod('GET', stocksLambdaIntegration);
 
     // storing API URL for use with front end
     new ssm.StringParameter(this, 'apiUrlParameter', {
