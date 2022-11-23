@@ -12,4 +12,6 @@ def handler(event, context):
 
     stock_data = get_stock_data(stock_getter_api_key, stock_selection)
 
+    print(stock_data)
+
     return stock_data

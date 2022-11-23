@@ -10,7 +10,6 @@ interface StockDataProcessorStateMachineProps extends cdk.StackProps {
 }
 
 export class StockDataProcessorStateMachine extends Construct {
-  public readonly stockDataProcessorStateMachine: Function;
   constructor(scope: Construct, id: string, props: StockDataProcessorStateMachineProps) {
     super(scope, id);
 
@@ -28,7 +27,7 @@ export class StockDataProcessorStateMachine extends Construct {
     // Step Function to orchestrate the capturing of 1 min of stock data for each stock ticker selected
     // send array of selected stock data to map iterator for lambda processing
     const startState = new sfn.Pass(this, 'startState');
-    const dataIngestionStepFunction = new sfn.StateMachine(this, 'dataIngestionStepFunction', {
+    new sfn.StateMachine(this, 'dataIngestionStepFunction', {
       definition: startState
         .next(stockDataInvoke)
         .next(stockDataMap.iterator(stockDataProcessorInvoke)),

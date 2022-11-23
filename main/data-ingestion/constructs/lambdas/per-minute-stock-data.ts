@@ -20,7 +20,7 @@ export class PerMinuteStockData extends Construct {
       handler: 'index.handler',
       timeout: cdk.Duration.seconds(90),
       code: lambda.Code.fromAsset(
-        path.join(__dirname, '../../../../src/lambdas/stock-data-processor'),
+        path.join(__dirname, '../../../../src/lambdas/per-minute-stock-data'),
         {
           bundling: {
             image: lambda.Runtime.PYTHON_3_9.bundlingImage,
