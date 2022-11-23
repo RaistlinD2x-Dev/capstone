@@ -4,6 +4,8 @@ import * as apigw from 'aws-cdk-lib/aws-apigateway';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { UserPool } from 'aws-cdk-lib/aws-cognito';
 import { GetStocks } from './lambdas/get-stocks';
+import { GetStocksPrice } from './lambdas/get-stocks-price';
+import { GetStocksWithTicker } from './lambdas/get-stocks-with-ticker';
 
 interface ApiGatewayProps extends cdk.StackProps {
   userPool: UserPool;
@@ -31,6 +33,30 @@ export class ApiGateway extends Construct {
       proxy: true,
     });
     stocks.addMethod('GET', stocksLambdaIntegration);
+
+    // get all stocks on the NASDAQ Exchange
+    // TODO think about possibly passing in query param for different exchanges
+    const { getStocksWithTickerLambda } = new GetStocksWithTicker(this, 'GetStocksWithTicker');
+
+    // assign get-stocks lambda to api resource path /stocks
+    const stocksWithTicker = stocks.addResource('{ticker}');
+    const stocksWithTickerLambdaIntegration = new apigw.LambdaIntegration(
+      getStocksWithTickerLambda,
+      {
+        proxy: true,
+      }
+    );
+    stocksWithTicker.addMethod('GET', stocksWithTickerLambdaIntegration);
+
+    // get real-time stock price, stock ticker received via query params
+    const { getStocksPriceLambda } = new GetStocksPrice(this, 'GetStocksPrice');
+
+    // assign get-stocks-price lambda to api resource path /stocks/price
+    const stockPrice = stocksWithTicker.addResource('price');
+    const stocksPriceLambdaIntegration = new apigw.LambdaIntegration(getStocksPriceLambda, {
+      proxy: true,
+    });
+    stockPrice.addMethod('GET', stocksPriceLambdaIntegration);
 
     // storing API URL for use with front end
     new ssm.StringParameter(this, 'apiUrlParameter', {

@@ -2038,7 +2038,7 @@
                               "Ref": "ApiGatewaycapstoneapi080D3FC1"
                             },
                             "deploymentId": {
-                              "Ref": "ApiGatewaycapstoneapiDeploymentDC5EF1DAddc48c166de845135649f067a9fc8b4a"
+                              "Ref": "ApiGatewaycapstoneapiDeploymentDC5EF1DAf062e6c2ec9fbea57f602504287ca308"
                             },
                             "stageName": "prod"
                           }
@@ -2244,6 +2244,370 @@
                               "fqn": "aws-cdk-lib.aws_apigateway.Method",
                               "version": "2.47.0"
                             }
+                          },
+                          "{ticker}": {
+                            "id": "{ticker}",
+                            "path": "API/ApiGateway/capstone-api/Default/stocks/{ticker}",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "API/ApiGateway/capstone-api/Default/stocks/{ticker}/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
+                                  "aws:cdk:cloudformation:props": {
+                                    "parentId": {
+                                      "Ref": "ApiGatewaycapstoneapistocksA9C1001F"
+                                    },
+                                    "pathPart": "{ticker}",
+                                    "restApiId": {
+                                      "Ref": "ApiGatewaycapstoneapi080D3FC1"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_apigateway.CfnResource",
+                                  "version": "2.47.0"
+                                }
+                              },
+                              "GET": {
+                                "id": "GET",
+                                "path": "API/ApiGateway/capstone-api/Default/stocks/{ticker}/GET",
+                                "children": {
+                                  "ApiPermission.APIApiGatewaycapstoneapiAE8F62FC.GET..stocks.{ticker}": {
+                                    "id": "ApiPermission.APIApiGatewaycapstoneapiAE8F62FC.GET..stocks.{ticker}",
+                                    "path": "API/ApiGateway/capstone-api/Default/stocks/{ticker}/GET/ApiPermission.APIApiGatewaycapstoneapiAE8F62FC.GET..stocks.{ticker}",
+                                    "attributes": {
+                                      "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                                      "aws:cdk:cloudformation:props": {
+                                        "action": "lambda:InvokeFunction",
+                                        "functionName": {
+                                          "Fn::GetAtt": [
+                                            "ApiGatewayGetStocksWithTickergetStocksWithTickerLambda44CB0766",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "principal": "apigateway.amazonaws.com",
+                                        "sourceArn": {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              "arn:",
+                                              {
+                                                "Ref": "AWS::Partition"
+                                              },
+                                              ":execute-api:",
+                                              {
+                                                "Ref": "AWS::Region"
+                                              },
+                                              ":",
+                                              {
+                                                "Ref": "AWS::AccountId"
+                                              },
+                                              ":",
+                                              {
+                                                "Ref": "ApiGatewaycapstoneapi080D3FC1"
+                                              },
+                                              "/",
+                                              {
+                                                "Ref": "ApiGatewaycapstoneapiDeploymentStageprod5FA68FCD"
+                                              },
+                                              "/GET/stocks/*"
+                                            ]
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                                      "version": "2.47.0"
+                                    }
+                                  },
+                                  "ApiPermission.Test.APIApiGatewaycapstoneapiAE8F62FC.GET..stocks.{ticker}": {
+                                    "id": "ApiPermission.Test.APIApiGatewaycapstoneapiAE8F62FC.GET..stocks.{ticker}",
+                                    "path": "API/ApiGateway/capstone-api/Default/stocks/{ticker}/GET/ApiPermission.Test.APIApiGatewaycapstoneapiAE8F62FC.GET..stocks.{ticker}",
+                                    "attributes": {
+                                      "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                                      "aws:cdk:cloudformation:props": {
+                                        "action": "lambda:InvokeFunction",
+                                        "functionName": {
+                                          "Fn::GetAtt": [
+                                            "ApiGatewayGetStocksWithTickergetStocksWithTickerLambda44CB0766",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "principal": "apigateway.amazonaws.com",
+                                        "sourceArn": {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              "arn:",
+                                              {
+                                                "Ref": "AWS::Partition"
+                                              },
+                                              ":execute-api:",
+                                              {
+                                                "Ref": "AWS::Region"
+                                              },
+                                              ":",
+                                              {
+                                                "Ref": "AWS::AccountId"
+                                              },
+                                              ":",
+                                              {
+                                                "Ref": "ApiGatewaycapstoneapi080D3FC1"
+                                              },
+                                              "/test-invoke-stage/GET/stocks/*"
+                                            ]
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                                      "version": "2.47.0"
+                                    }
+                                  },
+                                  "Resource": {
+                                    "id": "Resource",
+                                    "path": "API/ApiGateway/capstone-api/Default/stocks/{ticker}/GET/Resource",
+                                    "attributes": {
+                                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                                      "aws:cdk:cloudformation:props": {
+                                        "httpMethod": "GET",
+                                        "resourceId": {
+                                          "Ref": "ApiGatewaycapstoneapistockstickerCAEB266B"
+                                        },
+                                        "restApiId": {
+                                          "Ref": "ApiGatewaycapstoneapi080D3FC1"
+                                        },
+                                        "authorizationType": "NONE",
+                                        "integration": {
+                                          "type": "AWS_PROXY",
+                                          "uri": {
+                                            "Fn::Join": [
+                                              "",
+                                              [
+                                                "arn:",
+                                                {
+                                                  "Ref": "AWS::Partition"
+                                                },
+                                                ":apigateway:",
+                                                {
+                                                  "Ref": "AWS::Region"
+                                                },
+                                                ":lambda:path/2015-03-31/functions/",
+                                                {
+                                                  "Fn::GetAtt": [
+                                                    "ApiGatewayGetStocksWithTickergetStocksWithTickerLambda44CB0766",
+                                                    "Arn"
+                                                  ]
+                                                },
+                                                "/invocations"
+                                              ]
+                                            ]
+                                          },
+                                          "integrationHttpMethod": "POST"
+                                        }
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                                      "version": "2.47.0"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                                  "version": "2.47.0"
+                                }
+                              },
+                              "price": {
+                                "id": "price",
+                                "path": "API/ApiGateway/capstone-api/Default/stocks/{ticker}/price",
+                                "children": {
+                                  "Resource": {
+                                    "id": "Resource",
+                                    "path": "API/ApiGateway/capstone-api/Default/stocks/{ticker}/price/Resource",
+                                    "attributes": {
+                                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
+                                      "aws:cdk:cloudformation:props": {
+                                        "parentId": {
+                                          "Ref": "ApiGatewaycapstoneapistockstickerCAEB266B"
+                                        },
+                                        "pathPart": "price",
+                                        "restApiId": {
+                                          "Ref": "ApiGatewaycapstoneapi080D3FC1"
+                                        }
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.aws_apigateway.CfnResource",
+                                      "version": "2.47.0"
+                                    }
+                                  },
+                                  "GET": {
+                                    "id": "GET",
+                                    "path": "API/ApiGateway/capstone-api/Default/stocks/{ticker}/price/GET",
+                                    "children": {
+                                      "ApiPermission.APIApiGatewaycapstoneapiAE8F62FC.GET..stocks.{ticker}.price": {
+                                        "id": "ApiPermission.APIApiGatewaycapstoneapiAE8F62FC.GET..stocks.{ticker}.price",
+                                        "path": "API/ApiGateway/capstone-api/Default/stocks/{ticker}/price/GET/ApiPermission.APIApiGatewaycapstoneapiAE8F62FC.GET..stocks.{ticker}.price",
+                                        "attributes": {
+                                          "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                                          "aws:cdk:cloudformation:props": {
+                                            "action": "lambda:InvokeFunction",
+                                            "functionName": {
+                                              "Fn::GetAtt": [
+                                                "ApiGatewayGetStocksPriceGetStocksPriceLambdaEF0FDDE6",
+                                                "Arn"
+                                              ]
+                                            },
+                                            "principal": "apigateway.amazonaws.com",
+                                            "sourceArn": {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  "arn:",
+                                                  {
+                                                    "Ref": "AWS::Partition"
+                                                  },
+                                                  ":execute-api:",
+                                                  {
+                                                    "Ref": "AWS::Region"
+                                                  },
+                                                  ":",
+                                                  {
+                                                    "Ref": "AWS::AccountId"
+                                                  },
+                                                  ":",
+                                                  {
+                                                    "Ref": "ApiGatewaycapstoneapi080D3FC1"
+                                                  },
+                                                  "/",
+                                                  {
+                                                    "Ref": "ApiGatewaycapstoneapiDeploymentStageprod5FA68FCD"
+                                                  },
+                                                  "/GET/stocks/*/price"
+                                                ]
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "constructInfo": {
+                                          "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                                          "version": "2.47.0"
+                                        }
+                                      },
+                                      "ApiPermission.Test.APIApiGatewaycapstoneapiAE8F62FC.GET..stocks.{ticker}.price": {
+                                        "id": "ApiPermission.Test.APIApiGatewaycapstoneapiAE8F62FC.GET..stocks.{ticker}.price",
+                                        "path": "API/ApiGateway/capstone-api/Default/stocks/{ticker}/price/GET/ApiPermission.Test.APIApiGatewaycapstoneapiAE8F62FC.GET..stocks.{ticker}.price",
+                                        "attributes": {
+                                          "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                                          "aws:cdk:cloudformation:props": {
+                                            "action": "lambda:InvokeFunction",
+                                            "functionName": {
+                                              "Fn::GetAtt": [
+                                                "ApiGatewayGetStocksPriceGetStocksPriceLambdaEF0FDDE6",
+                                                "Arn"
+                                              ]
+                                            },
+                                            "principal": "apigateway.amazonaws.com",
+                                            "sourceArn": {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  "arn:",
+                                                  {
+                                                    "Ref": "AWS::Partition"
+                                                  },
+                                                  ":execute-api:",
+                                                  {
+                                                    "Ref": "AWS::Region"
+                                                  },
+                                                  ":",
+                                                  {
+                                                    "Ref": "AWS::AccountId"
+                                                  },
+                                                  ":",
+                                                  {
+                                                    "Ref": "ApiGatewaycapstoneapi080D3FC1"
+                                                  },
+                                                  "/test-invoke-stage/GET/stocks/*/price"
+                                                ]
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "constructInfo": {
+                                          "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                                          "version": "2.47.0"
+                                        }
+                                      },
+                                      "Resource": {
+                                        "id": "Resource",
+                                        "path": "API/ApiGateway/capstone-api/Default/stocks/{ticker}/price/GET/Resource",
+                                        "attributes": {
+                                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                                          "aws:cdk:cloudformation:props": {
+                                            "httpMethod": "GET",
+                                            "resourceId": {
+                                              "Ref": "ApiGatewaycapstoneapistockstickerpriceAE3842B8"
+                                            },
+                                            "restApiId": {
+                                              "Ref": "ApiGatewaycapstoneapi080D3FC1"
+                                            },
+                                            "authorizationType": "NONE",
+                                            "integration": {
+                                              "type": "AWS_PROXY",
+                                              "uri": {
+                                                "Fn::Join": [
+                                                  "",
+                                                  [
+                                                    "arn:",
+                                                    {
+                                                      "Ref": "AWS::Partition"
+                                                    },
+                                                    ":apigateway:",
+                                                    {
+                                                      "Ref": "AWS::Region"
+                                                    },
+                                                    ":lambda:path/2015-03-31/functions/",
+                                                    {
+                                                      "Fn::GetAtt": [
+                                                        "ApiGatewayGetStocksPriceGetStocksPriceLambdaEF0FDDE6",
+                                                        "Arn"
+                                                      ]
+                                                    },
+                                                    "/invocations"
+                                                  ]
+                                                ]
+                                              },
+                                              "integrationHttpMethod": "POST"
+                                            }
+                                          }
+                                        },
+                                        "constructInfo": {
+                                          "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                                          "version": "2.47.0"
+                                        }
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                                      "version": "2.47.0"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_apigateway.Resource",
+                                  "version": "2.47.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.Resource",
+                              "version": "2.47.0"
+                            }
                           }
                         },
                         "constructInfo": {
@@ -2427,6 +2791,302 @@
                             "roles": [
                               {
                                 "Ref": "ApiGatewayGetStocksgetStocksRoleC5D88DB6"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.47.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.0.0"
+                }
+              },
+              "GetStocksWithTicker": {
+                "id": "GetStocksWithTicker",
+                "path": "API/ApiGateway/GetStocksWithTicker",
+                "children": {
+                  "getStocksWithTickerRole": {
+                    "id": "getStocksWithTickerRole",
+                    "path": "API/ApiGateway/GetStocksWithTicker/getStocksWithTickerRole",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "API/ApiGateway/GetStocksWithTicker/getStocksWithTickerRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "lambda.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.47.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "getStocksWithTickerLambda": {
+                    "id": "getStocksWithTickerLambda",
+                    "path": "API/ApiGateway/GetStocksWithTicker/getStocksWithTickerLambda",
+                    "children": {
+                      "Code": {
+                        "id": "Code",
+                        "path": "API/ApiGateway/GetStocksWithTicker/getStocksWithTickerLambda/Code",
+                        "children": {
+                          "Stage": {
+                            "id": "Stage",
+                            "path": "API/ApiGateway/GetStocksWithTicker/getStocksWithTickerLambda/Code/Stage",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.AssetStaging",
+                              "version": "2.47.0"
+                            }
+                          },
+                          "AssetBucket": {
+                            "id": "AssetBucket",
+                            "path": "API/ApiGateway/GetStocksWithTicker/getStocksWithTickerLambda/Code/AssetBucket",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                              "version": "2.47.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                          "version": "2.47.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "API/ApiGateway/GetStocksWithTicker/getStocksWithTickerLambda/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                          "aws:cdk:cloudformation:props": {
+                            "code": {
+                              "s3Bucket": {
+                                "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                              },
+                              "s3Key": "2e6d3a77eabff5570626dfbecaf3d1e8080ceac139d240892f9a057d822d87b5.zip"
+                            },
+                            "role": {
+                              "Fn::GetAtt": [
+                                "ApiGatewayGetStocksWithTickergetStocksWithTickerRole4E6095DB",
+                                "Arn"
+                              ]
+                            },
+                            "handler": "index.handler",
+                            "runtime": "python3.9",
+                            "timeout": 90
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                          "version": "2.47.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.Function",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "getStocksWithTickerLambdaPolicy": {
+                    "id": "getStocksWithTickerLambdaPolicy",
+                    "path": "API/ApiGateway/GetStocksWithTicker/getStocksWithTickerLambdaPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "API/ApiGateway/GetStocksWithTicker/getStocksWithTickerLambdaPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "*",
+                                  "Effect": "Allow",
+                                  "Resource": "*"
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "ApiGatewayGetStocksWithTickergetStocksWithTickerLambdaPolicy2240A4A1",
+                            "roles": [
+                              {
+                                "Ref": "ApiGatewayGetStocksWithTickergetStocksWithTickerRole4E6095DB"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.47.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.0.0"
+                }
+              },
+              "GetStocksPrice": {
+                "id": "GetStocksPrice",
+                "path": "API/ApiGateway/GetStocksPrice",
+                "children": {
+                  "GetStocksPriceRole": {
+                    "id": "GetStocksPriceRole",
+                    "path": "API/ApiGateway/GetStocksPrice/GetStocksPriceRole",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "API/ApiGateway/GetStocksPrice/GetStocksPriceRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "lambda.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.47.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "GetStocksPriceLambda": {
+                    "id": "GetStocksPriceLambda",
+                    "path": "API/ApiGateway/GetStocksPrice/GetStocksPriceLambda",
+                    "children": {
+                      "Code": {
+                        "id": "Code",
+                        "path": "API/ApiGateway/GetStocksPrice/GetStocksPriceLambda/Code",
+                        "children": {
+                          "Stage": {
+                            "id": "Stage",
+                            "path": "API/ApiGateway/GetStocksPrice/GetStocksPriceLambda/Code/Stage",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.AssetStaging",
+                              "version": "2.47.0"
+                            }
+                          },
+                          "AssetBucket": {
+                            "id": "AssetBucket",
+                            "path": "API/ApiGateway/GetStocksPrice/GetStocksPriceLambda/Code/AssetBucket",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                              "version": "2.47.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                          "version": "2.47.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "API/ApiGateway/GetStocksPrice/GetStocksPriceLambda/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                          "aws:cdk:cloudformation:props": {
+                            "code": {
+                              "s3Bucket": {
+                                "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                              },
+                              "s3Key": "510b32549e93c10598d004adc99fefa2c049538b22d7a262e3be87889d54dcec.zip"
+                            },
+                            "role": {
+                              "Fn::GetAtt": [
+                                "ApiGatewayGetStocksPriceGetStocksPriceRoleF47562BF",
+                                "Arn"
+                              ]
+                            },
+                            "handler": "index.handler",
+                            "runtime": "python3.9",
+                            "timeout": 90
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                          "version": "2.47.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.Function",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "GetStocksPriceLambdaPolicy": {
+                    "id": "GetStocksPriceLambdaPolicy",
+                    "path": "API/ApiGateway/GetStocksPrice/GetStocksPriceLambdaPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "API/ApiGateway/GetStocksPrice/GetStocksPriceLambdaPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "*",
+                                  "Effect": "Allow",
+                                  "Resource": "*"
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "ApiGatewayGetStocksPriceGetStocksPriceLambdaPolicy4694424C",
+                            "roles": [
+                              {
+                                "Ref": "ApiGatewayGetStocksPriceGetStocksPriceRoleF47562BF"
                               }
                             ]
                           }
