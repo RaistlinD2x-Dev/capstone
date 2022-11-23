@@ -2,6 +2,7 @@ import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as path from 'path';
 import { Runtime } from 'aws-cdk-lib/aws-lambda';
 
 export const pythonLambdaGenerator = (thisRef: Construct, lambdaName: string, dirPath: string) => {
@@ -16,7 +17,7 @@ export const pythonLambdaGenerator = (thisRef: Construct, lambdaName: string, di
     runtime: lambda.Runtime.PYTHON_3_9,
     handler: 'index.handler',
     timeout: cdk.Duration.seconds(90),
-    code: lambda.Code.fromAsset(dirPath, {
+    code: lambda.Code.fromAsset(path.join(dirPath), {
       bundling: {
         image: Runtime.PYTHON_3_9.bundlingImage,
         command: [

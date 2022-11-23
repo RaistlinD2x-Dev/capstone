@@ -237,7 +237,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/b57c95093cf973d98e2ee4a060aba40fed629f0896e0b92f8a5b2b993179dd9d.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e9cf61e51f0c83ef4c466aa2c5d9d2802c56774e8ea96a68bce6d9ebffdb891e.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -253,76 +253,46 @@
         "DataIngestion.assets"
       ],
       "metadata": {
-        "/DataIngestion/stockDataRole/Resource": [
+        "/DataIngestion/PerMinuteStockData/perMinuteStockDataLambda/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stockDataRole24CC5183"
+            "data": "PerMinuteStockDataperMinuteStockDataLambdaServiceRoleFAA11CA1"
           }
         ],
-        "/DataIngestion/stockDataLambda/Resource": [
+        "/DataIngestion/PerMinuteStockData/perMinuteStockDataLambda/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stockDataLambda2ED9D139"
+            "data": "PerMinuteStockDataperMinuteStockDataLambdaCE32530A"
           }
         ],
-        "/DataIngestion/stockDataLambdaPolicy/Resource": [
+        "/DataIngestion/StockDataProcessor/stockDataProcessorLambda/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stockDataLambdaPolicy0156761A"
+            "data": "StockDataProcessorstockDataProcessorLambdaServiceRole45794E24"
           }
         ],
-        "/DataIngestion/stockDataProcessorRole/Resource": [
+        "/DataIngestion/StockDataProcessor/stockDataProcessorLambda/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stockDataProcessorRoleAC352F1E"
+            "data": "StockDataProcessorstockDataProcessorLambdaB24BFA09"
           }
         ],
-        "/DataIngestion/stockDataProcessorLambda/Resource": [
+        "/DataIngestion/StockDataProcessorStateMachine/dataIngestionStepFunction/Role/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stockDataProcessorLambdaE8F8784F"
+            "data": "StockDataProcessorStateMachinedataIngestionStepFunctionRole47C06F38"
           }
         ],
-        "/DataIngestion/stockDataProcessorLambdaPolicy/Resource": [
+        "/DataIngestion/StockDataProcessorStateMachine/dataIngestionStepFunction/Role/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stockDataProcessorLambdaPolicy181BA387"
+            "data": "StockDataProcessorStateMachinedataIngestionStepFunctionRoleDefaultPolicyB847C559"
           }
         ],
-        "/DataIngestion/dataIngestionStepFunction/Role/Resource": [
+        "/DataIngestion/StockDataProcessorStateMachine/dataIngestionStepFunction/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "dataIngestionStepFunctionRole7F03A99B"
-          }
-        ],
-        "/DataIngestion/dataIngestionStepFunction/Role/DefaultPolicy/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "dataIngestionStepFunctionRoleDefaultPolicyDCCC7E47"
-          }
-        ],
-        "/DataIngestion/dataIngestionStepFunction/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "dataIngestionStepFunction1E493635"
-          }
-        ],
-        "/DataIngestion/dataIngestionStepFunction/EventsRole/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "dataIngestionStepFunctionEventsRoleCC78D1E0"
-          }
-        ],
-        "/DataIngestion/dataIngestionStepFunction/EventsRole/DefaultPolicy/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "dataIngestionStepFunctionEventsRoleDefaultPolicy062BCD31"
-          }
-        ],
-        "/DataIngestion/Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Rule4C995B7F"
+            "data": "StockDataProcessorStateMachinedataIngestionStepFunction26147C63"
           }
         ],
         "/DataIngestion/CDKMetadata/Default": [
@@ -463,7 +433,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/03772760b3ef05892ac0a04f69572cb0c714689305becbd1960aed8598b9b5f2.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/11b27e7898de3adaba070ec1f8f920649509095701e8d0c1f95c9b0807f7455a.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -479,142 +449,142 @@
         "API.assets"
       ],
       "metadata": {
-        "/API/capstone-api/Resource": [
+        "/API/IWTUserPool/userpool/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "capstoneapiC27E1B4A"
+            "data": "IWTUserPooluserpool17AD12D1"
           }
         ],
-        "/API/capstone-api/Deployment/Resource": [
+        "/API/IWTUserPool/userpool/CognitoDomain/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "capstoneapiDeployment78060EE6ec62272b7a3d33bb5f12c822c2ae8ddf"
+            "data": "IWTUserPooluserpoolCognitoDomain5C8E4088"
           }
         ],
-        "/API/capstone-api/DeploymentStage.prod/Resource": [
+        "/API/IWTUserPool/userPoolIdOutput": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "capstoneapiDeploymentStageprod53EA311A"
+            "data": "IWTUserPooluserPoolIdOutputFE7964E6"
           }
         ],
-        "/API/capstone-api/Endpoint": [
+        "/API/IWTUserPool/userPoolUrlOutput": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "capstoneapiEndpoint45299CE2"
+            "data": "IWTUserPooluserPoolUrlOutputD0F51EC3"
           }
         ],
-        "/API/capstone-api/Default/stocks/Resource": [
+        "/API/IWTUserPool/userPoolIdParam/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "capstoneapistocks99CE804A"
+            "data": "IWTUserPooluserPoolIdParam79B4AA7C"
           }
         ],
-        "/API/capstone-api/Default/stocks/GET/ApiPermission.APIcapstoneapiCD2B1242.GET..stocks": [
+        "/API/IWTUserPoolClient/userpool-client/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "capstoneapistocksGETApiPermissionAPIcapstoneapiCD2B1242GETstocks59CAFA02"
+            "data": "IWTUserPoolClientuserpoolclientF40C1407"
           }
         ],
-        "/API/capstone-api/Default/stocks/GET/ApiPermission.Test.APIcapstoneapiCD2B1242.GET..stocks": [
+        "/API/IWTUserPoolClient/signInUrl/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "capstoneapistocksGETApiPermissionTestAPIcapstoneapiCD2B1242GETstocks899E7C0D"
+            "data": "IWTUserPoolClientsignInUrlBDC09C34"
           }
         ],
-        "/API/capstone-api/Default/stocks/GET/Resource": [
+        "/API/IWTUserPoolClient/signInUrlOutput": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "capstoneapistocksGETB4919A93"
+            "data": "IWTUserPoolClientsignInUrlOutputD538F788"
           }
         ],
-        "/API/apiUrlParameter/Resource": [
+        "/API/IWTUserPoolClient/userPoolClientIdOutput": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "apiUrlParameter46A80F52"
+            "data": "IWTUserPoolClientuserPoolClientIdOutput1CDEE9E2"
           }
         ],
-        "/API/stocksRole/Resource": [
+        "/API/IWTUserPoolClient/userPoolClientIdParam/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stocksRole91BA7A9A"
+            "data": "IWTUserPoolClientuserPoolClientIdParam9BE19E0F"
           }
         ],
-        "/API/stocksLambda/Resource": [
+        "/API/ApiGateway/capstone-api/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stocksLambda6A6F2FDB"
+            "data": "ApiGatewaycapstoneapi080D3FC1"
           }
         ],
-        "/API/stocksLambdaPolicy/Resource": [
+        "/API/ApiGateway/capstone-api/Deployment/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stocksLambdaPolicy9CCBD648"
+            "data": "ApiGatewaycapstoneapiDeploymentDC5EF1DAf58da038b712260b9e2a00988602c18f"
           }
         ],
-        "/API/userpool/Resource": [
+        "/API/ApiGateway/capstone-api/DeploymentStage.prod/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "userpool0AC4AA96"
+            "data": "ApiGatewaycapstoneapiDeploymentStageprod5FA68FCD"
           }
         ],
-        "/API/userpool/CognitoDomain/Resource": [
+        "/API/ApiGateway/capstone-api/Endpoint": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "userpoolCognitoDomainA7EF0A14"
+            "data": "ApiGatewaycapstoneapiEndpointD5A38333"
           }
         ],
-        "/API/userpool-client/Resource": [
+        "/API/ApiGateway/capstone-api/Default/stocks/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "userpoolclientDA356A8E"
+            "data": "ApiGatewaycapstoneapistocksA9C1001F"
           }
         ],
-        "/API/CognitoAuthorizer/Resource": [
+        "/API/ApiGateway/capstone-api/Default/stocks/GET/ApiPermission.APIApiGatewaycapstoneapiAE8F62FC.GET..stocks": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CognitoAuthorizerF3215DBC"
+            "data": "ApiGatewaycapstoneapistocksGETApiPermissionAPIApiGatewaycapstoneapiAE8F62FCGETstocksE6980791"
           }
         ],
-        "/API/signInUrl/Resource": [
+        "/API/ApiGateway/capstone-api/Default/stocks/GET/ApiPermission.Test.APIApiGatewaycapstoneapiAE8F62FC.GET..stocks": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "signInUrlECD74FFB"
+            "data": "ApiGatewaycapstoneapistocksGETApiPermissionTestAPIApiGatewaycapstoneapiAE8F62FCGETstocks9D96FF03"
           }
         ],
-        "/API/signInUrlOutput": [
+        "/API/ApiGateway/capstone-api/Default/stocks/GET/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "signInUrlOutput"
+            "data": "ApiGatewaycapstoneapistocksGETC2488F8C"
           }
         ],
-        "/API/userPoolIdParam/Resource": [
+        "/API/ApiGateway/CognitoAuthorizer/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "userPoolIdParam85CE1A9E"
+            "data": "ApiGatewayCognitoAuthorizer77052CC4"
           }
         ],
-        "/API/userPoolClientIdParam/Resource": [
+        "/API/ApiGateway/stocksRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "userPoolClientIdParam463E0F5C"
+            "data": "ApiGatewaystocksRoleD5ACF72C"
           }
         ],
-        "/API/userPoolIdOutput": [
+        "/API/ApiGateway/stocksLambda/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "userPoolIdOutput"
+            "data": "ApiGatewaystocksLambda955F580F"
           }
         ],
-        "/API/userPoolClientIdOutput": [
+        "/API/ApiGateway/stocksLambdaPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "userPoolClientIdOutput"
+            "data": "ApiGatewaystocksLambdaPolicy39E049A2"
           }
         ],
-        "/API/userPoolUrlOutput": [
+        "/API/ApiGateway/apiUrlParameter/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "userPoolUrlOutput"
+            "data": "ApiGatewayapiUrlParameter0A6CFFB7"
           }
         ],
         "/API/CDKMetadata/Default": [
