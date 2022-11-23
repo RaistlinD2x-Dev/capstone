@@ -142,7 +142,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/0dfb34abe3dd1605896cb6c03a1de28b506079de88fcab84486ab1c82241f270.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/6d7c349c4c3fd8deea212ca5bd1be19379aeecd458ba2951bad38b4488bc79e6.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -158,40 +158,58 @@
         "Datastore.assets"
       ],
       "metadata": {
-        "/Datastore/StockInfoDatabase": [
+        "/Datastore/DynamodbForecastedValues/forecastedValuesTable/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "StockInfoDatabase"
+            "data": "DynamodbForecastedValuesforecastedValuesTableE036920A"
           }
         ],
-        "/Datastore/stockInfoTable": [
+        "/Datastore/DynamodbForecastedValues/dynamodbModelMetadata/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stockInfoTable"
+            "data": "DynamodbForecastedValuesdynamodbModelMetadataF78CB1E4"
           }
         ],
-        "/Datastore/modelMetaDataTable/Resource": [
+        "/Datastore/DyanmodbModelMetadata/modelMetaDataTable/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "modelMetaDataTable23B4B4AC"
+            "data": "DyanmodbModelMetadatamodelMetaDataTable3C4F9030"
           }
         ],
-        "/Datastore/forecastedValuesTable/Resource": [
+        "/Datastore/DyanmodbModelMetadata/dynamodbModelMetadata/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "forecastedValuesTableD4BEF39B"
+            "data": "DyanmodbModelMetadatadynamodbModelMetadata25C7006D"
           }
         ],
-        "/Datastore/StockSelectionDynamoDbTable/Resource": [
+        "/Datastore/DynamodbStockSelection/StockSelectionDynamoDbTable/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "StockSelectionDynamoDbTableBE2BF0F5"
+            "data": "DynamodbStockSelectionStockSelectionDynamoDbTableD869E788"
           }
         ],
-        "/Datastore/stockSelectionParameter/Resource": [
+        "/Datastore/DynamodbStockSelection/stockSelectionParameter/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stockSelectionParameter9F58B6BE"
+            "data": "DynamodbStockSelectionstockSelectionParameterFA18B90E"
+          }
+        ],
+        "/Datastore/TimestreamStockInfo/StockInfoDatabase": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TimestreamStockInfoStockInfoDatabaseCAB52C55"
+          }
+        ],
+        "/Datastore/TimestreamStockInfo/stockInfoTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TimestreamStockInfostockInfoTable35C20695"
+          }
+        ],
+        "/Datastore/TimestreamStockInfo/timestreamStockInfoDatabaseName/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TimestreamStockInfotimestreamStockInfoDatabaseNameB76B5B80"
           }
         ],
         "/Datastore/CDKMetadata/Default": [
@@ -433,7 +451,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/11b27e7898de3adaba070ec1f8f920649509095701e8d0c1f95c9b0807f7455a.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/63c4884d47ebf5734d1f750eae4299af77fa90bc3a052e55fabbecf8c23d22c0.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [

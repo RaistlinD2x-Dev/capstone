@@ -341,224 +341,346 @@
         "id": "Datastore",
         "path": "Datastore",
         "children": {
-          "StockInfoDatabase": {
-            "id": "StockInfoDatabase",
-            "path": "Datastore/StockInfoDatabase",
-            "attributes": {
-              "aws:cdk:cloudformation:type": "AWS::Timestream::Database",
-              "aws:cdk:cloudformation:props": {
-                "databaseName": "stockInfoDatabase"
-              }
-            },
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_timestream.CfnDatabase",
-              "version": "2.47.0"
-            }
-          },
-          "stockInfoTable": {
-            "id": "stockInfoTable",
-            "path": "Datastore/stockInfoTable",
-            "attributes": {
-              "aws:cdk:cloudformation:type": "AWS::Timestream::Table",
-              "aws:cdk:cloudformation:props": {
-                "databaseName": {
-                  "Ref": "StockInfoDatabase"
-                },
-                "retentionProperties": {
-                  "MemoryStoreRetentionPeriodInHours": "336",
-                  "MagneticStoreRetentionPeriodInDays": "73000"
-                },
-                "tableName": "stockInfoTable"
-              }
-            },
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_timestream.CfnTable",
-              "version": "2.47.0"
-            }
-          },
-          "modelMetaDataTable": {
-            "id": "modelMetaDataTable",
-            "path": "Datastore/modelMetaDataTable",
+          "DynamodbForecastedValues": {
+            "id": "DynamodbForecastedValues",
+            "path": "Datastore/DynamodbForecastedValues",
             "children": {
-              "Resource": {
-                "id": "Resource",
-                "path": "Datastore/modelMetaDataTable/Resource",
-                "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
-                  "aws:cdk:cloudformation:props": {
-                    "keySchema": [
-                      {
-                        "attributeName": "id",
-                        "keyType": "HASH"
-                      },
-                      {
-                        "attributeName": "dateCreated",
-                        "keyType": "RANGE"
+              "forecastedValuesTable": {
+                "id": "forecastedValuesTable",
+                "path": "Datastore/DynamodbForecastedValues/forecastedValuesTable",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Datastore/DynamodbForecastedValues/forecastedValuesTable/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                      "aws:cdk:cloudformation:props": {
+                        "keySchema": [
+                          {
+                            "attributeName": "id",
+                            "keyType": "HASH"
+                          },
+                          {
+                            "attributeName": "timestamp",
+                            "keyType": "RANGE"
+                          }
+                        ],
+                        "attributeDefinitions": [
+                          {
+                            "attributeName": "id",
+                            "attributeType": "S"
+                          },
+                          {
+                            "attributeName": "timestamp",
+                            "attributeType": "S"
+                          }
+                        ],
+                        "provisionedThroughput": {
+                          "readCapacityUnits": 5,
+                          "writeCapacityUnits": 5
+                        }
                       }
-                    ],
-                    "attributeDefinitions": [
-                      {
-                        "attributeName": "id",
-                        "attributeType": "S"
-                      },
-                      {
-                        "attributeName": "dateCreated",
-                        "attributeType": "S"
-                      }
-                    ],
-                    "provisionedThroughput": {
-                      "readCapacityUnits": 5,
-                      "writeCapacityUnits": 5
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
-                  "version": "2.47.0"
-                }
-              },
-              "ScalingRole": {
-                "id": "ScalingRole",
-                "path": "Datastore/modelMetaDataTable/ScalingRole",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.Resource",
-                  "version": "2.47.0"
-                }
-              }
-            },
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_dynamodb.Table",
-              "version": "2.47.0"
-            }
-          },
-          "forecastedValuesTable": {
-            "id": "forecastedValuesTable",
-            "path": "Datastore/forecastedValuesTable",
-            "children": {
-              "Resource": {
-                "id": "Resource",
-                "path": "Datastore/forecastedValuesTable/Resource",
-                "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
-                  "aws:cdk:cloudformation:props": {
-                    "keySchema": [
-                      {
-                        "attributeName": "id",
-                        "keyType": "HASH"
-                      },
-                      {
-                        "attributeName": "timestamp",
-                        "keyType": "RANGE"
-                      }
-                    ],
-                    "attributeDefinitions": [
-                      {
-                        "attributeName": "id",
-                        "attributeType": "S"
-                      },
-                      {
-                        "attributeName": "timestamp",
-                        "attributeType": "S"
-                      }
-                    ],
-                    "provisionedThroughput": {
-                      "readCapacityUnits": 5,
-                      "writeCapacityUnits": 5
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
-                  "version": "2.47.0"
-                }
-              },
-              "ScalingRole": {
-                "id": "ScalingRole",
-                "path": "Datastore/forecastedValuesTable/ScalingRole",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.Resource",
-                  "version": "2.47.0"
-                }
-              }
-            },
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_dynamodb.Table",
-              "version": "2.47.0"
-            }
-          },
-          "StockSelectionDynamoDbTable": {
-            "id": "StockSelectionDynamoDbTable",
-            "path": "Datastore/StockSelectionDynamoDbTable",
-            "children": {
-              "Resource": {
-                "id": "Resource",
-                "path": "Datastore/StockSelectionDynamoDbTable/Resource",
-                "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
-                  "aws:cdk:cloudformation:props": {
-                    "keySchema": [
-                      {
-                        "attributeName": "id",
-                        "keyType": "HASH"
-                      }
-                    ],
-                    "attributeDefinitions": [
-                      {
-                        "attributeName": "id",
-                        "attributeType": "S"
-                      }
-                    ],
-                    "provisionedThroughput": {
-                      "readCapacityUnits": 5,
-                      "writeCapacityUnits": 5
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
-                  "version": "2.47.0"
-                }
-              },
-              "ScalingRole": {
-                "id": "ScalingRole",
-                "path": "Datastore/StockSelectionDynamoDbTable/ScalingRole",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.Resource",
-                  "version": "2.47.0"
-                }
-              }
-            },
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_dynamodb.Table",
-              "version": "2.47.0"
-            }
-          },
-          "stockSelectionParameter": {
-            "id": "stockSelectionParameter",
-            "path": "Datastore/stockSelectionParameter",
-            "children": {
-              "Resource": {
-                "id": "Resource",
-                "path": "Datastore/stockSelectionParameter/Resource",
-                "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
-                  "aws:cdk:cloudformation:props": {
-                    "type": "String",
-                    "value": {
-                      "Ref": "StockSelectionDynamoDbTableBE2BF0F5"
                     },
-                    "name": "stock-selection"
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "ScalingRole": {
+                    "id": "ScalingRole",
+                    "path": "Datastore/DynamodbForecastedValues/forecastedValuesTable/ScalingRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.47.0"
+                    }
                   }
                 },
                 "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                  "fqn": "aws-cdk-lib.aws_dynamodb.Table",
+                  "version": "2.47.0"
+                }
+              },
+              "dynamodbModelMetadata": {
+                "id": "dynamodbModelMetadata",
+                "path": "Datastore/DynamodbForecastedValues/dynamodbModelMetadata",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Datastore/DynamodbForecastedValues/dynamodbModelMetadata/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
+                      "aws:cdk:cloudformation:props": {
+                        "type": "String",
+                        "value": {
+                          "Ref": "DynamodbForecastedValuesforecastedValuesTableE036920A"
+                        },
+                        "name": "dynamodb-forecasted-values"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
                   "version": "2.47.0"
                 }
               }
             },
             "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
-              "version": "2.47.0"
+              "fqn": "constructs.Construct",
+              "version": "10.0.0"
+            }
+          },
+          "DyanmodbModelMetadata": {
+            "id": "DyanmodbModelMetadata",
+            "path": "Datastore/DyanmodbModelMetadata",
+            "children": {
+              "modelMetaDataTable": {
+                "id": "modelMetaDataTable",
+                "path": "Datastore/DyanmodbModelMetadata/modelMetaDataTable",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Datastore/DyanmodbModelMetadata/modelMetaDataTable/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                      "aws:cdk:cloudformation:props": {
+                        "keySchema": [
+                          {
+                            "attributeName": "id",
+                            "keyType": "HASH"
+                          },
+                          {
+                            "attributeName": "dateCreated",
+                            "keyType": "RANGE"
+                          }
+                        ],
+                        "attributeDefinitions": [
+                          {
+                            "attributeName": "id",
+                            "attributeType": "S"
+                          },
+                          {
+                            "attributeName": "dateCreated",
+                            "attributeType": "S"
+                          }
+                        ],
+                        "provisionedThroughput": {
+                          "readCapacityUnits": 5,
+                          "writeCapacityUnits": 5
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "ScalingRole": {
+                    "id": "ScalingRole",
+                    "path": "Datastore/DyanmodbModelMetadata/modelMetaDataTable/ScalingRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_dynamodb.Table",
+                  "version": "2.47.0"
+                }
+              },
+              "dynamodbModelMetadata": {
+                "id": "dynamodbModelMetadata",
+                "path": "Datastore/DyanmodbModelMetadata/dynamodbModelMetadata",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Datastore/DyanmodbModelMetadata/dynamodbModelMetadata/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
+                      "aws:cdk:cloudformation:props": {
+                        "type": "String",
+                        "value": {
+                          "Ref": "DyanmodbModelMetadatamodelMetaDataTable3C4F9030"
+                        },
+                        "name": "dynamodb-model-metadata"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.0.0"
+            }
+          },
+          "DynamodbStockSelection": {
+            "id": "DynamodbStockSelection",
+            "path": "Datastore/DynamodbStockSelection",
+            "children": {
+              "StockSelectionDynamoDbTable": {
+                "id": "StockSelectionDynamoDbTable",
+                "path": "Datastore/DynamodbStockSelection/StockSelectionDynamoDbTable",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Datastore/DynamodbStockSelection/StockSelectionDynamoDbTable/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                      "aws:cdk:cloudformation:props": {
+                        "keySchema": [
+                          {
+                            "attributeName": "id",
+                            "keyType": "HASH"
+                          }
+                        ],
+                        "attributeDefinitions": [
+                          {
+                            "attributeName": "id",
+                            "attributeType": "S"
+                          }
+                        ],
+                        "provisionedThroughput": {
+                          "readCapacityUnits": 5,
+                          "writeCapacityUnits": 5
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "ScalingRole": {
+                    "id": "ScalingRole",
+                    "path": "Datastore/DynamodbStockSelection/StockSelectionDynamoDbTable/ScalingRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_dynamodb.Table",
+                  "version": "2.47.0"
+                }
+              },
+              "stockSelectionParameter": {
+                "id": "stockSelectionParameter",
+                "path": "Datastore/DynamodbStockSelection/stockSelectionParameter",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Datastore/DynamodbStockSelection/stockSelectionParameter/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
+                      "aws:cdk:cloudformation:props": {
+                        "type": "String",
+                        "value": {
+                          "Ref": "DynamodbStockSelectionStockSelectionDynamoDbTableD869E788"
+                        },
+                        "name": "dynamodb-stock-selection"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.0.0"
+            }
+          },
+          "TimestreamStockInfo": {
+            "id": "TimestreamStockInfo",
+            "path": "Datastore/TimestreamStockInfo",
+            "children": {
+              "StockInfoDatabase": {
+                "id": "StockInfoDatabase",
+                "path": "Datastore/TimestreamStockInfo/StockInfoDatabase",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Timestream::Database",
+                  "aws:cdk:cloudformation:props": {
+                    "databaseName": "stockInfoDatabase"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_timestream.CfnDatabase",
+                  "version": "2.47.0"
+                }
+              },
+              "stockInfoTable": {
+                "id": "stockInfoTable",
+                "path": "Datastore/TimestreamStockInfo/stockInfoTable",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Timestream::Table",
+                  "aws:cdk:cloudformation:props": {
+                    "databaseName": {
+                      "Ref": "TimestreamStockInfoStockInfoDatabaseCAB52C55"
+                    },
+                    "retentionProperties": {
+                      "MemoryStoreRetentionPeriodInHours": "8766",
+                      "MagneticStoreRetentionPeriodInDays": "73000"
+                    },
+                    "tableName": "stockInfoTable"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_timestream.CfnTable",
+                  "version": "2.47.0"
+                }
+              },
+              "timestreamStockInfoDatabaseName": {
+                "id": "timestreamStockInfoDatabaseName",
+                "path": "Datastore/TimestreamStockInfo/timestreamStockInfoDatabaseName",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Datastore/TimestreamStockInfo/timestreamStockInfoDatabaseName/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
+                      "aws:cdk:cloudformation:props": {
+                        "type": "String",
+                        "value": "stockInfoDatabase",
+                        "name": "timestream-stock-info-database"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.0.0"
             }
           },
           "CDKMetadata": {
@@ -1587,7 +1709,7 @@
                         "value": {
                           "Ref": "IWTUserPooluserpool17AD12D1"
                         },
-                        "name": "userPoolId"
+                        "name": "user-pool-id"
                       }
                     },
                     "constructInfo": {
@@ -1737,7 +1859,7 @@
                             ]
                           ]
                         },
-                        "name": "signInUrl"
+                        "name": "sign-in-url"
                       }
                     },
                     "constructInfo": {
@@ -1781,7 +1903,7 @@
                         "value": {
                           "Ref": "IWTUserPoolClientuserpoolclientF40C1407"
                         },
-                        "name": "userPoolClientId"
+                        "name": "user-pool-client-id"
                       }
                     },
                     "constructInfo": {

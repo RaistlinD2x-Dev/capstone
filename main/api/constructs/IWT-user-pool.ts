@@ -52,7 +52,7 @@ export class IWTUserPool extends Construct {
     });
 
     new ssm.StringParameter(this, 'userPoolIdParam', {
-      parameterName: 'userPoolId',
+      parameterName: 'user-pool-id',
       stringValue: this.userPool.userPoolId,
     });
   }

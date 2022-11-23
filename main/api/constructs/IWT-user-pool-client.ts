@@ -89,7 +89,7 @@ export class IWTUserPoolClient extends Construct {
     });
 
     new ssm.StringParameter(this, 'signInUrl', {
-      parameterName: 'signInUrl',
+      parameterName: 'sign-in-url',
       stringValue: signInUrl,
     });
 
@@ -102,7 +102,7 @@ export class IWTUserPoolClient extends Construct {
     });
 
     new ssm.StringParameter(this, 'userPoolClientIdParam', {
-      parameterName: 'userPoolClientId',
+      parameterName: 'user-pool-client-id',
       stringValue: userPoolClient.userPoolClientId,
     });
   }

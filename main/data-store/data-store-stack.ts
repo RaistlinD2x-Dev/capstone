@@ -1,49 +1,20 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import * as timestream from 'aws-cdk-lib/aws-timestream';
-import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
-import * as ssm from 'aws-cdk-lib/aws-ssm';
+import { DynamodbForecastedValues } from './constructs/dynamodb-forecasted-values';
+import { DynamodbModelMetadata } from './constructs/dynamodb-model-metadata';
+import { DynamodbStockSelection } from './constructs/dynamodb-stock-selection';
+import { TimestreamStockInfo } from './constructs/timestream-stock-info';
 
 export class DataStoreStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const stockInfoTimeStreamDatabaseName = 'stockInfoDatabase';
+    const dynamodbForecastedValues = new DynamodbForecastedValues(this, 'DynamodbForecastedValues');
 
-    const stockInfoTimeStreamDatabase = new timestream.CfnDatabase(this, 'StockInfoDatabase', {
-      databaseName: stockInfoTimeStreamDatabaseName,
-    });
+    const dyanmodbModelMetadata = new DynamodbModelMetadata(this, 'DyanmodbModelMetadata');
 
-    const stockInfoTimeStreamTableName = 'stockInfoTable';
+    const dynamodbStockSelection = new DynamodbStockSelection(this, 'DynamodbStockSelection');
 
-    const stockInfoTimeStreamTable = new timestream.CfnTable(this, 'stockInfoTable', {
-      databaseName: stockInfoTimeStreamDatabase.ref, // ref required to deal with tokenization of name
-      tableName: stockInfoTimeStreamTableName,
-      retentionProperties: {
-        MemoryStoreRetentionPeriodInHours: '336', // 14 days
-        MagneticStoreRetentionPeriodInDays: '73000', // 200 years
-      },
-    });
-
-    const modelMetaDataTable = new dynamodb.Table(this, 'modelMetaDataTable', {
-      partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
-      sortKey: { name: 'dateCreated', type: dynamodb.AttributeType.STRING },
-    });
-
-    const forecastedValuesTable = new dynamodb.Table(this, 'forecastedValuesTable', {
-      partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
-      sortKey: { name: 'timestamp', type: dynamodb.AttributeType.STRING },
-    });
-
-    // Choose up to 8 stocks and the interval of stock data to be received
-    const stockSelectionDynamoDbTable = new dynamodb.Table(this, 'StockSelectionDynamoDbTable', {
-      partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
-      removalPolicy: cdk.RemovalPolicy.DESTROY,
-    });
-
-    new ssm.StringParameter(this, 'stockSelectionParameter', {
-      parameterName: 'stock-selection',
-      stringValue: stockSelectionDynamoDbTable.tableName,
-    });
+    const timestreamStockInfo = new TimestreamStockInfo(this, 'TimestreamStockInfo');
   }
 }
