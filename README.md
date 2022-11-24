@@ -66,7 +66,7 @@ Website to vendor: https://rapidapi.com/twelvedata/api/twelve-data1
 
 ## **Useful commands**
 
-* `cdk deploy --all`      deploy this stack to your default AWS account/region
+* `cdk deploy --all --profile profileName` deploy all stacks using aws config profile name
 * `cdk diff`        compare deployed stack with current state
 * `cdk synth`       emits the synthesized CloudFormation template
 * `npm run build`   compile typescript to js
