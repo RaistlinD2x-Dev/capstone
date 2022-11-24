@@ -1,0 +1,16 @@
+title Data Ingestion - Stock Data Processor State Machine
+
+participant Amazon Event Bridge Cron
+participant AWS Step Functions
+participant AWS Lambda - PerMinuteStockData
+participant AWS Lambda - Stock Data Processor
+participant Amazon Timestream - Stock Info
+participant External Stock API
+Amazon Event Bridge Cron->AWS Step Functions:Cron initializes Step Function
+AWS Step Functions->AWS Lambda - PerMinuteStockData: Initializes first Lambda function
+External Stock API<-AWS Lambda - PerMinuteStockData: makes request for 5 minute payload for \nall stocks in Stock Selection DDB Table
+External Stock API-->AWS Lambda - PerMinuteStockData: Sends back payload for 1 OHLC of 5-min\nper stock in Stock Selection DDB Table
+AWS Lambda - PerMinuteStockData ->AWS Step Functions: sends stock data to Map iterator
+AWS Step Functions -> AWS Lambda - Stock Data Processor: Map iterator parallelizes execution \nof one lambda for each object received
+AWS Lambda - Stock Data Processor -> Amazon Timestream - Stock Info: Lambda posted new stock data to Amazon Timestream
+

@@ -81,5 +81,10 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
 <br>
 
-## Data Ingestion Step Function
-<img title="Data Ingestion Step Function" alt="Data Ingestion Step Function" src="./diagrams/DataIngestion-5MinTSProcessor.png">
+## 1. Data Ingestion Step Function
+
+### Step Function Diagram
+<img title="Data Ingestion Step Function Diagram" alt="Data Ingestion Step Function Diagram" src="./documentation/DataIngestion-5MinTSProcessor.png">
+
+### Sequence Diagram
+<img title="Data Ingestion Step Function Sequence Diagram" alt="Data Ingestion Step Function Sequence Diagram" src="./documentation/Data Ingestion - Stock Data Processor State Machine - Sequence Diagram.png">
