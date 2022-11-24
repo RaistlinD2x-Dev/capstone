@@ -9,7 +9,7 @@ This project is to support day trading efforts. It uses machine learning and tec
 
 ### **Solution Architecture**
 
-<img title="Architecture Diagram" alt="Architecture Diagram" src="./diagrams/architecture_diagram.png">
+<img title="Architecture Diagram" alt="Architecture Diagram" src="./documentation/architecture_diagram.png">
 
 <br>
 
