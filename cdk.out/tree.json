@@ -2038,7 +2038,7 @@
                               "Ref": "ApiGatewaycapstoneapi080D3FC1"
                             },
                             "deploymentId": {
-                              "Ref": "ApiGatewaycapstoneapiDeploymentDC5EF1DA4fbba3b4e04883f8af510f5bb87e9ada"
+                              "Ref": "ApiGatewaycapstoneapiDeploymentDC5EF1DA5dc88663d567576bb513bcb32c04b55f"
                             },
                             "stageName": "prod"
                           }
@@ -2766,6 +2766,191 @@
                           "fqn": "aws-cdk-lib.aws_apigateway.Resource",
                           "version": "2.47.0"
                         }
+                      },
+                      "forecasts": {
+                        "id": "forecasts",
+                        "path": "API/ApiGateway/capstone-api/Default/forecasts",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "API/ApiGateway/capstone-api/Default/forecasts/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
+                              "aws:cdk:cloudformation:props": {
+                                "parentId": {
+                                  "Fn::GetAtt": [
+                                    "ApiGatewaycapstoneapi080D3FC1",
+                                    "RootResourceId"
+                                  ]
+                                },
+                                "pathPart": "forecasts",
+                                "restApiId": {
+                                  "Ref": "ApiGatewaycapstoneapi080D3FC1"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.CfnResource",
+                              "version": "2.47.0"
+                            }
+                          },
+                          "POST": {
+                            "id": "POST",
+                            "path": "API/ApiGateway/capstone-api/Default/forecasts/POST",
+                            "children": {
+                              "ApiPermission.APIApiGatewaycapstoneapiAE8F62FC.POST..forecasts": {
+                                "id": "ApiPermission.APIApiGatewaycapstoneapiAE8F62FC.POST..forecasts",
+                                "path": "API/ApiGateway/capstone-api/Default/forecasts/POST/ApiPermission.APIApiGatewaycapstoneapiAE8F62FC.POST..forecasts",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                                  "aws:cdk:cloudformation:props": {
+                                    "action": "lambda:InvokeFunction",
+                                    "functionName": {
+                                      "Fn::GetAtt": [
+                                        "ApiGatewayForecastTrainingJobforecastTrainingJobLambda288EF1BF",
+                                        "Arn"
+                                      ]
+                                    },
+                                    "principal": "apigateway.amazonaws.com",
+                                    "sourceArn": {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "arn:",
+                                          {
+                                            "Ref": "AWS::Partition"
+                                          },
+                                          ":execute-api:",
+                                          {
+                                            "Ref": "AWS::Region"
+                                          },
+                                          ":",
+                                          {
+                                            "Ref": "AWS::AccountId"
+                                          },
+                                          ":",
+                                          {
+                                            "Ref": "ApiGatewaycapstoneapi080D3FC1"
+                                          },
+                                          "/",
+                                          {
+                                            "Ref": "ApiGatewaycapstoneapiDeploymentStageprod5FA68FCD"
+                                          },
+                                          "/POST/forecasts"
+                                        ]
+                                      ]
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                                  "version": "2.47.0"
+                                }
+                              },
+                              "ApiPermission.Test.APIApiGatewaycapstoneapiAE8F62FC.POST..forecasts": {
+                                "id": "ApiPermission.Test.APIApiGatewaycapstoneapiAE8F62FC.POST..forecasts",
+                                "path": "API/ApiGateway/capstone-api/Default/forecasts/POST/ApiPermission.Test.APIApiGatewaycapstoneapiAE8F62FC.POST..forecasts",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                                  "aws:cdk:cloudformation:props": {
+                                    "action": "lambda:InvokeFunction",
+                                    "functionName": {
+                                      "Fn::GetAtt": [
+                                        "ApiGatewayForecastTrainingJobforecastTrainingJobLambda288EF1BF",
+                                        "Arn"
+                                      ]
+                                    },
+                                    "principal": "apigateway.amazonaws.com",
+                                    "sourceArn": {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "arn:",
+                                          {
+                                            "Ref": "AWS::Partition"
+                                          },
+                                          ":execute-api:",
+                                          {
+                                            "Ref": "AWS::Region"
+                                          },
+                                          ":",
+                                          {
+                                            "Ref": "AWS::AccountId"
+                                          },
+                                          ":",
+                                          {
+                                            "Ref": "ApiGatewaycapstoneapi080D3FC1"
+                                          },
+                                          "/test-invoke-stage/POST/forecasts"
+                                        ]
+                                      ]
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                                  "version": "2.47.0"
+                                }
+                              },
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "API/ApiGateway/capstone-api/Default/forecasts/POST/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                                  "aws:cdk:cloudformation:props": {
+                                    "httpMethod": "POST",
+                                    "resourceId": {
+                                      "Ref": "ApiGatewaycapstoneapiforecasts68F65C58"
+                                    },
+                                    "restApiId": {
+                                      "Ref": "ApiGatewaycapstoneapi080D3FC1"
+                                    },
+                                    "authorizationType": "NONE",
+                                    "integration": {
+                                      "type": "AWS_PROXY",
+                                      "uri": {
+                                        "Fn::Join": [
+                                          "",
+                                          [
+                                            "arn:",
+                                            {
+                                              "Ref": "AWS::Partition"
+                                            },
+                                            ":apigateway:",
+                                            {
+                                              "Ref": "AWS::Region"
+                                            },
+                                            ":lambda:path/2015-03-31/functions/",
+                                            {
+                                              "Fn::GetAtt": [
+                                                "ApiGatewayForecastTrainingJobforecastTrainingJobLambda288EF1BF",
+                                                "Arn"
+                                              ]
+                                            },
+                                            "/invocations"
+                                          ]
+                                        ]
+                                      },
+                                      "integrationHttpMethod": "POST"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                                  "version": "2.47.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                              "version": "2.47.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.Resource",
+                          "version": "2.47.0"
+                        }
                       }
                     },
                     "constructInfo": {
@@ -3348,9 +3533,8 @@
                               ]
                             },
                             "handler": "index.handler",
-                            "memorySize": 512,
                             "runtime": "python3.9",
-                            "timeout": 300
+                            "timeout": 45
                           }
                         },
                         "constructInfo": {
@@ -3388,6 +3572,154 @@
                             "roles": [
                               {
                                 "Ref": "ApiGatewayPostStocksPricepostStocksDataRoleF5EB01AD"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.47.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.0.0"
+                }
+              },
+              "ForecastTrainingJob": {
+                "id": "ForecastTrainingJob",
+                "path": "API/ApiGateway/ForecastTrainingJob",
+                "children": {
+                  "forecastTrainingJobRole": {
+                    "id": "forecastTrainingJobRole",
+                    "path": "API/ApiGateway/ForecastTrainingJob/forecastTrainingJobRole",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "API/ApiGateway/ForecastTrainingJob/forecastTrainingJobRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "lambda.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.47.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "forecastTrainingJobLambda": {
+                    "id": "forecastTrainingJobLambda",
+                    "path": "API/ApiGateway/ForecastTrainingJob/forecastTrainingJobLambda",
+                    "children": {
+                      "Code": {
+                        "id": "Code",
+                        "path": "API/ApiGateway/ForecastTrainingJob/forecastTrainingJobLambda/Code",
+                        "children": {
+                          "Stage": {
+                            "id": "Stage",
+                            "path": "API/ApiGateway/ForecastTrainingJob/forecastTrainingJobLambda/Code/Stage",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.AssetStaging",
+                              "version": "2.47.0"
+                            }
+                          },
+                          "AssetBucket": {
+                            "id": "AssetBucket",
+                            "path": "API/ApiGateway/ForecastTrainingJob/forecastTrainingJobLambda/Code/AssetBucket",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                              "version": "2.47.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                          "version": "2.47.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "API/ApiGateway/ForecastTrainingJob/forecastTrainingJobLambda/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                          "aws:cdk:cloudformation:props": {
+                            "code": {
+                              "s3Bucket": {
+                                "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                              },
+                              "s3Key": "2ac307dfadbb8d3ffff8b2358c28cad991f77272df6a63779ae710a1bc9342f7.zip"
+                            },
+                            "role": {
+                              "Fn::GetAtt": [
+                                "ApiGatewayForecastTrainingJobforecastTrainingJobRole003F89FD",
+                                "Arn"
+                              ]
+                            },
+                            "handler": "index.handler",
+                            "runtime": "python3.9",
+                            "timeout": 45
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                          "version": "2.47.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.Function",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "forecastTrainingJobLambdaPolicy": {
+                    "id": "forecastTrainingJobLambdaPolicy",
+                    "path": "API/ApiGateway/ForecastTrainingJob/forecastTrainingJobLambdaPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "API/ApiGateway/ForecastTrainingJob/forecastTrainingJobLambdaPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "*",
+                                  "Effect": "Allow",
+                                  "Resource": "*"
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "ApiGatewayForecastTrainingJobforecastTrainingJobLambdaPolicyB385114E",
+                            "roles": [
+                              {
+                                "Ref": "ApiGatewayForecastTrainingJobforecastTrainingJobRole003F89FD"
                               }
                             ]
                           }

@@ -8,6 +8,7 @@ export class DataIngestionStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
+    // this got shifted to 5 minutes but I'm too lazy to change the name
     const perMinuteStockData = new PerMinuteStockData(this, 'PerMinuteStockData');
 
     const stockDataProcessor = new StockDataProcessor(this, 'StockDataProcessor');

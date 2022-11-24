@@ -3,6 +3,8 @@ from ssm import *
 from stock_data import *
 from constants import *
 
+# this got shifted to 5 minutes, too lazy to change the name
+
 
 def handler(event, context):
 

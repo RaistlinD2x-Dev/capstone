@@ -7,6 +7,7 @@ import { GetStocks } from './lambdas/get-stocks';
 import { GetStocksData } from './lambdas/get-stocks-data';
 import { GetStocksWithTicker } from './lambdas/get-stocks-with-ticker';
 import { PostStocksData } from './lambdas/post-stocks-data';
+import { ForecastTrainingJob } from './lambdas/post-forecast-training-job';
 
 interface ApiGatewayProps extends cdk.StackProps {
   userPool: UserPool;
@@ -24,12 +25,13 @@ export class ApiGateway extends Construct {
     });
     cognitoAuthorizer._attachToApi(api);
 
+    // define root resource paths
+    const stocks = api.root.addResource('stocks');
+    const forecasts = api.root.addResource('forecasts');
+
     // get all stocks on the NASDAQ Exchange
     // TODO think about possibly passing in query param for different exchanges
     const { getStocksLambda } = new GetStocks(this, 'GetStocks');
-
-    // assign get-stocks lambda to api resource path /stocks
-    const stocks = api.root.addResource('stocks');
     const stocksLambdaIntegration = new apigw.LambdaIntegration(getStocksLambda, {
       proxy: true,
     });
@@ -38,8 +40,6 @@ export class ApiGateway extends Construct {
     // get all stocks on the NASDAQ Exchange
     // TODO think about possibly passing in query param for different exchanges
     const { getStocksWithTickerLambda } = new GetStocksWithTicker(this, 'GetStocksWithTicker');
-
-    // assign get-stocks lambda to api resource path /stocks
     const stocksWithTicker = stocks.addResource('{ticker}');
     const stocksWithTickerLambdaIntegration = new apigw.LambdaIntegration(
       getStocksWithTickerLambda,
@@ -49,9 +49,8 @@ export class ApiGateway extends Construct {
     );
     stocksWithTicker.addMethod('GET', stocksWithTickerLambdaIntegration);
 
+    // get the real time price or a set of historical prices for a given stock
     const { getStocksDataLambda } = new GetStocksData(this, 'GetStocksPrice');
-
-    // assign get-stocks-price lambda to api resource path /stocks/{ticker}/price
     const stockPrice = stocksWithTicker.addResource('price');
     const stocksPriceLambdaIntegration = new apigw.LambdaIntegration(getStocksDataLambda, {
       proxy: true,
@@ -60,12 +59,20 @@ export class ApiGateway extends Construct {
 
     // Post stock data to timestream
     const { postStocksDataLambda } = new PostStocksData(this, 'PostStocksPrice');
-
-    // add post method to stock price resource path for pushing data to Amazon Timestream
     const postStocksPriceLambdaIntegration = new apigw.LambdaIntegration(postStocksDataLambda, {
       proxy: true,
     });
     stockPrice.addMethod('POST', postStocksPriceLambdaIntegration);
+
+    // kick off training job for a given stock
+    const { forecastTrainingJobLambda } = new ForecastTrainingJob(this, 'ForecastTrainingJob');
+    const forecastTrainingJobLambdaIntegration = new apigw.LambdaIntegration(
+      forecastTrainingJobLambda,
+      {
+        proxy: true,
+      }
+    );
+    forecasts.addResource('{ticker}').addMethod('POST', forecastTrainingJobLambdaIntegration);
 
     // storing API URL for use with front end
     new ssm.StringParameter(this, 'apiUrlParameter', {

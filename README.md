@@ -22,6 +22,8 @@ This project is to support day trading efforts. It uses machine learning and tec
 |    GET  |  /stocks/{ticker}/price | Retrieve most recent real-time price for a single stock |
 |    GET  |  /stocks/{ticker}/price?interval=#&numOfIntervals=# | Retrieves historical data based on interval* and quantity of data points |
 |    POST  |  /stocks/{ticker}/price?interval=#&numOfIntervals=# | Store historical data for stock in Amazon Timestream |
+|    POST  |  /forecasts/{ticker} | Kick off forecast training job NOTE: Might need to add query params for forecast horizon and stock data history span |
+
 
 > **__NOTE:__** *interval* is the OHLC segment or bar to be retrieved; 1min, 5min, 15min, 30min, 45min, 1h, 2h, 4h, 1day, 1week, 1month. *numOfIntervals* is the quantity of the OHLC bars to be retrieved; i.e., interval of 5 minutes, with quantity of 10, will retrieve 10 of the most recent 5 minute segments
 
