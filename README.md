@@ -75,3 +75,11 @@ Website to vendor: https://rapidapi.com/twelvedata/api/twelve-data1
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
+
+### **INDEX**
+---
+
+<br>
+
+## Data Ingestion Step Function
+<img title="Data Ingestion Step Function" alt="Data Ingestion Step Function" src="./diagrams/DataIngestion-5MinTSProcessor.png">
