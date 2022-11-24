@@ -1,13 +1,12 @@
 # **NOTE:** NOT COMPLETE
 Please note that this project is still a work in progress. As of 11/17/2022 the front end is commented out and the React app is simply the default project. Furthermore plenty of back end work is being done.
 
-# **isWealthy: True or iW:T for short**
+# **isWealthy: True, aka iW:T**
 
-This project is to support day trading efforts. It uses machine learning and technical indicators to determine ideal points to buy and sell. The differentiator here is to focus on sub-1% daily growth through trading on microfluctuations such that compound growth may get up to ~500%.
+This project is to support day trading efforts. It uses machine learning and technical indicators to determine ideal points to buy and sell. The differentiator here is to focus on sub-1% daily growth through trading on microfluctuations such that compound growth may get up to ~500% annual growth.
 
-**TODO** Possibly use anomaly detection to determine anomalies in forecasted values. If values achieve sufficient regularity and deviation from the mean of the values then the stock becomes a target for buy/sell transactions. The periodicity, or regularity, by which sufficient deviation occurs in the course of single days will be a prime indicator of probable success or failure. 
+**TODO** Possibly use anomaly detection to determine anomalies in forecasted values. If values achieve sufficient periodicity and magnitude then the stock becomes a target for buy/sell transactions. The Random Cut Forest machine learning model is based on anomalies being defined as a value being 3 standard deviations from the mean, I'll explore how this might relate to what is typical for blue-chip stocks. 
 
-### **TODO** Update architecture to include authorization
 ### **Solution Architecture**
 
 <img title="Architecture Diagram" alt="Architecture Diagram" src="./diagrams/architecture_diagram.png">
@@ -16,20 +15,15 @@ This project is to support day trading efforts. It uses machine learning and tec
 
 ### **API**
 
-    # Get all forecasts in metadata table
-    GET /forecasts
+| Methods | Resource Path | Description |
+|---------|---------------|-------------|
+|    GET  |    /stocks    | retrieve NASDAQ stock metadata from the exchange |
+|    GET  |  /stocks/{ticker} | retrieve specific stock based on ticker symbol |
+|    GET  |  /stocks/{ticker}/price | Retrieve most recent real-time price for a single stock |
+|    GET  |  /stocks/{ticker}/price?interval=#&numOfIntervals=# | Retrieves historical data based on interval* and quantity of data points |
+|    POST  |  /stocks/{ticker}/price?interval=#&numOfIntervals=# | Store historical data for stock in Amazon Timestream |
 
-    # Select single forecast model
-    GET /forecasts/{forecastId}
-
-    # Kick off forecast training job
-    POST /forecasts/stocks/{stockId}?begintime=YY-MM-DD%20HH:mm:ss&endtime=YY-MM-DD%20HH:mm:ss
-
-    # Get stock data, I'll have to check on the format for query parameters and update
-    # TODO I'll need to think about the business logic here, possibly just the same call to verify
-    # if forecasted values exist for this query in DDB and get them both simultaneously
-    GET /stocks/{symbol}?begintime=YY-MM-DD%20HH:mm:ss&endtime=YY-MM-DD%20HH:mm:ss
-
+> **__NOTE:__** *interval* is the OHLC segment or bar to be retrieved; 1min, 5min, 15min, 30min, 45min, 1h, 2h, 4h, 1day, 1week, 1month. *numOfIntervals* is the quantity of the OHLC bars to be retrieved; i.e., interval of 5 minutes, with quantity of 10, will retrieve 10 of the most recent 5 minute segments
 
 ### **Sagemaker**
 

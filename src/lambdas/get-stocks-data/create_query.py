@@ -11,7 +11,7 @@ def create_query_string(event_obj):
     else:
 
         interval = event_obj["queryStringParameters"]["interval"]
-        numOfInterval = event_obj["queryStringParameters"]["numOfInterval"]
+        numOfInterval = event_obj["queryStringParameters"]["numOfIntervals"]
         ticker = event_obj["pathParameters"]["ticker"]
 
         url = "https://twelve-data1.p.rapidapi.com/time_series"

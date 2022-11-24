@@ -5,7 +5,7 @@ from constants import *
 from ssm import *
 
 
-from query_params import *
+from create_query import *
 
 
 def handler(event, context):

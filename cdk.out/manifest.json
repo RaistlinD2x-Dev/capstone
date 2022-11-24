@@ -463,7 +463,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/86c97bd731bdb28dd577f82eba0bcac8139e48814698d541f8ea680b2f94bf75.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/de7ffe87d98ed7e359070dd18a5c2f7e9cca3aec79147a1546e4f6e2033f3553.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -548,7 +548,7 @@
         "/API/ApiGateway/capstone-api/Deployment/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ApiGatewaycapstoneapiDeploymentDC5EF1DAf062e6c2ec9fbea57f602504287ca308"
+            "data": "ApiGatewaycapstoneapiDeploymentDC5EF1DA4fbba3b4e04883f8af510f5bb87e9ada"
           }
         ],
         "/API/ApiGateway/capstone-api/DeploymentStage.prod/Resource": [
@@ -635,6 +635,24 @@
             "data": "ApiGatewaycapstoneapistockstickerpriceGET7ECE221C"
           }
         ],
+        "/API/ApiGateway/capstone-api/Default/stocks/{ticker}/price/POST/ApiPermission.APIApiGatewaycapstoneapiAE8F62FC.POST..stocks.{ticker}.price": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewaycapstoneapistockstickerpricePOSTApiPermissionAPIApiGatewaycapstoneapiAE8F62FCPOSTstockstickerpriceB1CD411A"
+          }
+        ],
+        "/API/ApiGateway/capstone-api/Default/stocks/{ticker}/price/POST/ApiPermission.Test.APIApiGatewaycapstoneapiAE8F62FC.POST..stocks.{ticker}.price": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewaycapstoneapistockstickerpricePOSTApiPermissionTestAPIApiGatewaycapstoneapiAE8F62FCPOSTstockstickerprice17031F4E"
+          }
+        ],
+        "/API/ApiGateway/capstone-api/Default/stocks/{ticker}/price/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewaycapstoneapistockstickerpricePOST90BDB22A"
+          }
+        ],
         "/API/ApiGateway/CognitoAuthorizer/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -677,22 +695,40 @@
             "data": "ApiGatewayGetStocksWithTickergetStocksWithTickerLambdaPolicy2240A4A1"
           }
         ],
-        "/API/ApiGateway/GetStocksPrice/GetStocksPriceRole/Resource": [
+        "/API/ApiGateway/GetStocksPrice/getStocksDataRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ApiGatewayGetStocksPriceGetStocksPriceRoleF47562BF"
+            "data": "ApiGatewayGetStocksPricegetStocksDataRole1CD1B005"
           }
         ],
-        "/API/ApiGateway/GetStocksPrice/GetStocksPriceLambda/Resource": [
+        "/API/ApiGateway/GetStocksPrice/getStocksDataLambda/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ApiGatewayGetStocksPriceGetStocksPriceLambdaEF0FDDE6"
+            "data": "ApiGatewayGetStocksPricegetStocksDataLambdaDD143247"
           }
         ],
-        "/API/ApiGateway/GetStocksPrice/GetStocksPriceLambdaPolicy/Resource": [
+        "/API/ApiGateway/GetStocksPrice/getStocksDataLambdaPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ApiGatewayGetStocksPriceGetStocksPriceLambdaPolicy4694424C"
+            "data": "ApiGatewayGetStocksPricegetStocksDataLambdaPolicyE37284FD"
+          }
+        ],
+        "/API/ApiGateway/PostStocksPrice/postStocksDataRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayPostStocksPricepostStocksDataRoleF5EB01AD"
+          }
+        ],
+        "/API/ApiGateway/PostStocksPrice/postStocksDataLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayPostStocksPricepostStocksDataLambdaEFADEA9F"
+          }
+        ],
+        "/API/ApiGateway/PostStocksPrice/postStocksDataLambdaPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayPostStocksPricepostStocksDataLambdaPolicyF27EF9FF"
           }
         ],
         "/API/ApiGateway/apiUrlParameter/Resource": [

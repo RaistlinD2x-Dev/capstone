@@ -12,9 +12,9 @@ export class stockDataCronEvent extends Construct {
   constructor(scope: Construct, id: string, props: StockDataCronEventProps) {
     super(scope, id);
 
-    // Every 1 minute, between the hours of 9AM and 5PM EST Monday through Friday, invoke the state machine
+    // Every 5 minute, between the hours of 9AM and 5PM EST Monday through Friday, invoke the state machine
     const rule = new events.Rule(this, 'Rule', {
-      schedule: events.Schedule.expression('cron(0/1 14-21 ? * MON-FRI *)'),
+      schedule: events.Schedule.expression('cron(0/5 14-21 ? * MON-FRI *)'),
       targets: [new targets.SfnStateMachine(props.dataIngestionStepFunction)],
     });
   }

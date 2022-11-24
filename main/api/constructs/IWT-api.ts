@@ -4,8 +4,9 @@ import * as apigw from 'aws-cdk-lib/aws-apigateway';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { UserPool } from 'aws-cdk-lib/aws-cognito';
 import { GetStocks } from './lambdas/get-stocks';
-import { GetStocksPrice } from './lambdas/get-stocks-price';
+import { GetStocksData } from './lambdas/get-stocks-data';
 import { GetStocksWithTicker } from './lambdas/get-stocks-with-ticker';
+import { PostStocksData } from './lambdas/post-stocks-data';
 
 interface ApiGatewayProps extends cdk.StackProps {
   userPool: UserPool;
@@ -48,15 +49,23 @@ export class ApiGateway extends Construct {
     );
     stocksWithTicker.addMethod('GET', stocksWithTickerLambdaIntegration);
 
-    // get real-time stock price, stock ticker received via query params
-    const { getStocksPriceLambda } = new GetStocksPrice(this, 'GetStocksPrice');
+    const { getStocksDataLambda } = new GetStocksData(this, 'GetStocksPrice');
 
-    // assign get-stocks-price lambda to api resource path /stocks/price
+    // assign get-stocks-price lambda to api resource path /stocks/{ticker}/price
     const stockPrice = stocksWithTicker.addResource('price');
-    const stocksPriceLambdaIntegration = new apigw.LambdaIntegration(getStocksPriceLambda, {
+    const stocksPriceLambdaIntegration = new apigw.LambdaIntegration(getStocksDataLambda, {
       proxy: true,
     });
     stockPrice.addMethod('GET', stocksPriceLambdaIntegration);
+
+    // Post stock data to timestream
+    const { postStocksDataLambda } = new PostStocksData(this, 'PostStocksPrice');
+
+    // add post method to stock price resource path for pushing data to Amazon Timestream
+    const postStocksPriceLambdaIntegration = new apigw.LambdaIntegration(postStocksDataLambda, {
+      proxy: true,
+    });
+    stockPrice.addMethod('POST', postStocksPriceLambdaIntegration);
 
     // storing API URL for use with front end
     new ssm.StringParameter(this, 'apiUrlParameter', {
