@@ -12,4 +12,4 @@ def convert_to_epoch_time(timestamp):
 def get_current_ms_epoch_time():
 
     millisec = time.time() * 1000
-    return millisec
+    return str(round(millisec))

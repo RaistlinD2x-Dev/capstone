@@ -1,3 +1,4 @@
+from decimal import Decimal
 from ssm import *
 from constants import *
 from utils import *
@@ -25,14 +26,27 @@ def update_items(ddb_table, dynamo_table_data, stock_selections):
     #         selection["id"] = get_current_ms_epoch_time()
     #         ddb_table.put_item(Item=selection)
 
-    for selection in stock_selections:
-        for item in dynamo_table_data:
-            if selection == item["ticker"]:
-                continue
-            else:
+    if dynamo_table_data == []:
+        for selection in stock_selections:
+            print(selection)
+            update_item = {
+                "id": get_current_ms_epoch_time(),
+                "ticker": selection,
+                "interval": "5",
+            }
+            print(update_item)
+            ddb_table.put_item(Item=update_item)
+
+    else:
+        update_item = {}
+        for selection in stock_selections:
+            print(selection)
+            for data in dynamo_table_data:
+                if selection == data["ticker"]:
+                    continue
                 update_item = {
                     "id": get_current_ms_epoch_time(),
                     "ticker": selection,
-                    "interval": "5min",
+                    "interval": 5,
                 }
-                ddb_table.put_item(Item=update_item)
+                print(update_item)
