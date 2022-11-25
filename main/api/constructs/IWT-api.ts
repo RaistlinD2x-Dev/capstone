@@ -8,6 +8,7 @@ import { GetStocksData } from './lambdas/get-stocks-data';
 import { GetStocksWithTicker } from './lambdas/get-stocks-with-ticker';
 import { PostStocksData } from './lambdas/post-stocks-data';
 import { ForecastTrainingJob } from './lambdas/post-forecast-training-job';
+import { PostStocksSelection } from './lambdas/post-stocks-selection';
 
 interface ApiGatewayProps extends cdk.StackProps {
   userPool: UserPool;
@@ -63,6 +64,16 @@ export class ApiGateway extends Construct {
       proxy: true,
     });
     stockPrice.addMethod('POST', postStocksPriceLambdaIntegration);
+
+    // Post stock selections for updating Amazon Timestream of 5 min OHLC bars
+    const { postStocksSelectionLambda } = new PostStocksSelection(this, 'PostStocksSelection');
+    const postStocksSelectionLambdaIntegration = new apigw.LambdaIntegration(
+      postStocksSelectionLambda,
+      {
+        proxy: true,
+      }
+    );
+    stocks.addMethod('POST', postStocksSelectionLambdaIntegration);
 
     // kick off training job for a given stock
     const { forecastTrainingJobLambda } = new ForecastTrainingJob(this, 'ForecastTrainingJob');

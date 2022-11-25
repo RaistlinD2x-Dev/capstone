@@ -255,7 +255,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/66c1df29b490984913c58a35928e72694abd3b81de2eee52c5c4648c56fc0d25.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c540f1e124b9129ca52669708c278a28016750a09e61956f696e949ef516296f.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -463,7 +463,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/b4bc0bde8d25e5f11c3bcbaba4e8ffc2929b7b52866fbc0d6fc844cd62886585.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/950d4fe98f5ba10866e23092d91666234e15fcf53501a6e955f39855db7576fc.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -548,7 +548,7 @@
         "/API/ApiGateway/capstone-api/Deployment/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ApiGatewaycapstoneapiDeploymentDC5EF1DA5dc88663d567576bb513bcb32c04b55f"
+            "data": "ApiGatewaycapstoneapiDeploymentDC5EF1DA7279ab2e925a9ea6181830a8d43dfb05"
           }
         ],
         "/API/ApiGateway/capstone-api/DeploymentStage.prod/Resource": [
@@ -653,28 +653,52 @@
             "data": "ApiGatewaycapstoneapistockstickerpricePOST90BDB22A"
           }
         ],
+        "/API/ApiGateway/capstone-api/Default/stocks/POST/ApiPermission.APIApiGatewaycapstoneapiAE8F62FC.POST..stocks": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewaycapstoneapistocksPOSTApiPermissionAPIApiGatewaycapstoneapiAE8F62FCPOSTstocksC18CB0A3"
+          }
+        ],
+        "/API/ApiGateway/capstone-api/Default/stocks/POST/ApiPermission.Test.APIApiGatewaycapstoneapiAE8F62FC.POST..stocks": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewaycapstoneapistocksPOSTApiPermissionTestAPIApiGatewaycapstoneapiAE8F62FCPOSTstocks60215A04"
+          }
+        ],
+        "/API/ApiGateway/capstone-api/Default/stocks/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewaycapstoneapistocksPOSTF9E851C7"
+          }
+        ],
         "/API/ApiGateway/capstone-api/Default/forecasts/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ApiGatewaycapstoneapiforecasts68F65C58"
           }
         ],
-        "/API/ApiGateway/capstone-api/Default/forecasts/POST/ApiPermission.APIApiGatewaycapstoneapiAE8F62FC.POST..forecasts": [
+        "/API/ApiGateway/capstone-api/Default/forecasts/{ticker}/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ApiGatewaycapstoneapiforecastsPOSTApiPermissionAPIApiGatewaycapstoneapiAE8F62FCPOSTforecastsCDE1C749"
+            "data": "ApiGatewaycapstoneapiforecaststicker68951885"
           }
         ],
-        "/API/ApiGateway/capstone-api/Default/forecasts/POST/ApiPermission.Test.APIApiGatewaycapstoneapiAE8F62FC.POST..forecasts": [
+        "/API/ApiGateway/capstone-api/Default/forecasts/{ticker}/POST/ApiPermission.APIApiGatewaycapstoneapiAE8F62FC.POST..forecasts.{ticker}": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ApiGatewaycapstoneapiforecastsPOSTApiPermissionTestAPIApiGatewaycapstoneapiAE8F62FCPOSTforecasts8B1F0E95"
+            "data": "ApiGatewaycapstoneapiforecaststickerPOSTApiPermissionAPIApiGatewaycapstoneapiAE8F62FCPOSTforecaststicker9EABF0DB"
           }
         ],
-        "/API/ApiGateway/capstone-api/Default/forecasts/POST/Resource": [
+        "/API/ApiGateway/capstone-api/Default/forecasts/{ticker}/POST/ApiPermission.Test.APIApiGatewaycapstoneapiAE8F62FC.POST..forecasts.{ticker}": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ApiGatewaycapstoneapiforecastsPOSTEB75748C"
+            "data": "ApiGatewaycapstoneapiforecaststickerPOSTApiPermissionTestAPIApiGatewaycapstoneapiAE8F62FCPOSTforecaststicker73576E8A"
+          }
+        ],
+        "/API/ApiGateway/capstone-api/Default/forecasts/{ticker}/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewaycapstoneapiforecaststickerPOSTB9BC8289"
           }
         ],
         "/API/ApiGateway/CognitoAuthorizer/Resource": [
@@ -753,6 +777,24 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "ApiGatewayPostStocksPricepostStocksDataLambdaPolicyF27EF9FF"
+          }
+        ],
+        "/API/ApiGateway/PostStocksSelection/postStockSelectionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayPostStocksSelectionpostStockSelectionRole83A2E8C3"
+          }
+        ],
+        "/API/ApiGateway/PostStocksSelection/postStockSelectionLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayPostStocksSelectionpostStockSelectionLambda418FC670"
+          }
+        ],
+        "/API/ApiGateway/PostStocksSelection/postStockSelectionLambdaPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiGatewayPostStocksSelectionpostStockSelectionLambdaPolicyBBD3B1D3"
           }
         ],
         "/API/ApiGateway/ForecastTrainingJob/forecastTrainingJobRole/Resource": [
