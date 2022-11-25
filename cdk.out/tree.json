@@ -2038,7 +2038,7 @@
                               "Ref": "ApiGatewaycapstoneapi080D3FC1"
                             },
                             "deploymentId": {
-                              "Ref": "ApiGatewaycapstoneapiDeploymentDC5EF1DA7279ab2e925a9ea6181830a8d43dfb05"
+                              "Ref": "ApiGatewaycapstoneapiDeploymentDC5EF1DA4bf03025a3e3487bb1e85459974ab975"
                             },
                             "stageName": "prod"
                           }
@@ -2761,155 +2761,185 @@
                               "version": "2.47.0"
                             }
                           },
-                          "POST": {
-                            "id": "POST",
-                            "path": "API/ApiGateway/capstone-api/Default/stocks/POST",
+                          "selection": {
+                            "id": "selection",
+                            "path": "API/ApiGateway/capstone-api/Default/stocks/selection",
                             "children": {
-                              "ApiPermission.APIApiGatewaycapstoneapiAE8F62FC.POST..stocks": {
-                                "id": "ApiPermission.APIApiGatewaycapstoneapiAE8F62FC.POST..stocks",
-                                "path": "API/ApiGateway/capstone-api/Default/stocks/POST/ApiPermission.APIApiGatewaycapstoneapiAE8F62FC.POST..stocks",
-                                "attributes": {
-                                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
-                                  "aws:cdk:cloudformation:props": {
-                                    "action": "lambda:InvokeFunction",
-                                    "functionName": {
-                                      "Fn::GetAtt": [
-                                        "ApiGatewayPostStocksSelectionpostStockSelectionLambda418FC670",
-                                        "Arn"
-                                      ]
-                                    },
-                                    "principal": "apigateway.amazonaws.com",
-                                    "sourceArn": {
-                                      "Fn::Join": [
-                                        "",
-                                        [
-                                          "arn:",
-                                          {
-                                            "Ref": "AWS::Partition"
-                                          },
-                                          ":execute-api:",
-                                          {
-                                            "Ref": "AWS::Region"
-                                          },
-                                          ":",
-                                          {
-                                            "Ref": "AWS::AccountId"
-                                          },
-                                          ":",
-                                          {
-                                            "Ref": "ApiGatewaycapstoneapi080D3FC1"
-                                          },
-                                          "/",
-                                          {
-                                            "Ref": "ApiGatewaycapstoneapiDeploymentStageprod5FA68FCD"
-                                          },
-                                          "/POST/stocks"
-                                        ]
-                                      ]
-                                    }
-                                  }
-                                },
-                                "constructInfo": {
-                                  "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
-                                  "version": "2.47.0"
-                                }
-                              },
-                              "ApiPermission.Test.APIApiGatewaycapstoneapiAE8F62FC.POST..stocks": {
-                                "id": "ApiPermission.Test.APIApiGatewaycapstoneapiAE8F62FC.POST..stocks",
-                                "path": "API/ApiGateway/capstone-api/Default/stocks/POST/ApiPermission.Test.APIApiGatewaycapstoneapiAE8F62FC.POST..stocks",
-                                "attributes": {
-                                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
-                                  "aws:cdk:cloudformation:props": {
-                                    "action": "lambda:InvokeFunction",
-                                    "functionName": {
-                                      "Fn::GetAtt": [
-                                        "ApiGatewayPostStocksSelectionpostStockSelectionLambda418FC670",
-                                        "Arn"
-                                      ]
-                                    },
-                                    "principal": "apigateway.amazonaws.com",
-                                    "sourceArn": {
-                                      "Fn::Join": [
-                                        "",
-                                        [
-                                          "arn:",
-                                          {
-                                            "Ref": "AWS::Partition"
-                                          },
-                                          ":execute-api:",
-                                          {
-                                            "Ref": "AWS::Region"
-                                          },
-                                          ":",
-                                          {
-                                            "Ref": "AWS::AccountId"
-                                          },
-                                          ":",
-                                          {
-                                            "Ref": "ApiGatewaycapstoneapi080D3FC1"
-                                          },
-                                          "/test-invoke-stage/POST/stocks"
-                                        ]
-                                      ]
-                                    }
-                                  }
-                                },
-                                "constructInfo": {
-                                  "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
-                                  "version": "2.47.0"
-                                }
-                              },
                               "Resource": {
                                 "id": "Resource",
-                                "path": "API/ApiGateway/capstone-api/Default/stocks/POST/Resource",
+                                "path": "API/ApiGateway/capstone-api/Default/stocks/selection/Resource",
                                 "attributes": {
-                                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
                                   "aws:cdk:cloudformation:props": {
-                                    "httpMethod": "POST",
-                                    "resourceId": {
+                                    "parentId": {
                                       "Ref": "ApiGatewaycapstoneapistocksA9C1001F"
                                     },
+                                    "pathPart": "selection",
                                     "restApiId": {
                                       "Ref": "ApiGatewaycapstoneapi080D3FC1"
-                                    },
-                                    "authorizationType": "NONE",
-                                    "integration": {
-                                      "type": "AWS_PROXY",
-                                      "uri": {
-                                        "Fn::Join": [
-                                          "",
-                                          [
-                                            "arn:",
-                                            {
-                                              "Ref": "AWS::Partition"
-                                            },
-                                            ":apigateway:",
-                                            {
-                                              "Ref": "AWS::Region"
-                                            },
-                                            ":lambda:path/2015-03-31/functions/",
-                                            {
-                                              "Fn::GetAtt": [
-                                                "ApiGatewayPostStocksSelectionpostStockSelectionLambda418FC670",
-                                                "Arn"
-                                              ]
-                                            },
-                                            "/invocations"
-                                          ]
-                                        ]
-                                      },
-                                      "integrationHttpMethod": "POST"
                                     }
                                   }
                                 },
                                 "constructInfo": {
-                                  "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                                  "fqn": "aws-cdk-lib.aws_apigateway.CfnResource",
+                                  "version": "2.47.0"
+                                }
+                              },
+                              "POST": {
+                                "id": "POST",
+                                "path": "API/ApiGateway/capstone-api/Default/stocks/selection/POST",
+                                "children": {
+                                  "ApiPermission.APIApiGatewaycapstoneapiAE8F62FC.POST..stocks.selection": {
+                                    "id": "ApiPermission.APIApiGatewaycapstoneapiAE8F62FC.POST..stocks.selection",
+                                    "path": "API/ApiGateway/capstone-api/Default/stocks/selection/POST/ApiPermission.APIApiGatewaycapstoneapiAE8F62FC.POST..stocks.selection",
+                                    "attributes": {
+                                      "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                                      "aws:cdk:cloudformation:props": {
+                                        "action": "lambda:InvokeFunction",
+                                        "functionName": {
+                                          "Fn::GetAtt": [
+                                            "ApiGatewayPostStocksSelectionpostStockSelectionLambda418FC670",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "principal": "apigateway.amazonaws.com",
+                                        "sourceArn": {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              "arn:",
+                                              {
+                                                "Ref": "AWS::Partition"
+                                              },
+                                              ":execute-api:",
+                                              {
+                                                "Ref": "AWS::Region"
+                                              },
+                                              ":",
+                                              {
+                                                "Ref": "AWS::AccountId"
+                                              },
+                                              ":",
+                                              {
+                                                "Ref": "ApiGatewaycapstoneapi080D3FC1"
+                                              },
+                                              "/",
+                                              {
+                                                "Ref": "ApiGatewaycapstoneapiDeploymentStageprod5FA68FCD"
+                                              },
+                                              "/POST/stocks/selection"
+                                            ]
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                                      "version": "2.47.0"
+                                    }
+                                  },
+                                  "ApiPermission.Test.APIApiGatewaycapstoneapiAE8F62FC.POST..stocks.selection": {
+                                    "id": "ApiPermission.Test.APIApiGatewaycapstoneapiAE8F62FC.POST..stocks.selection",
+                                    "path": "API/ApiGateway/capstone-api/Default/stocks/selection/POST/ApiPermission.Test.APIApiGatewaycapstoneapiAE8F62FC.POST..stocks.selection",
+                                    "attributes": {
+                                      "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                                      "aws:cdk:cloudformation:props": {
+                                        "action": "lambda:InvokeFunction",
+                                        "functionName": {
+                                          "Fn::GetAtt": [
+                                            "ApiGatewayPostStocksSelectionpostStockSelectionLambda418FC670",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "principal": "apigateway.amazonaws.com",
+                                        "sourceArn": {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              "arn:",
+                                              {
+                                                "Ref": "AWS::Partition"
+                                              },
+                                              ":execute-api:",
+                                              {
+                                                "Ref": "AWS::Region"
+                                              },
+                                              ":",
+                                              {
+                                                "Ref": "AWS::AccountId"
+                                              },
+                                              ":",
+                                              {
+                                                "Ref": "ApiGatewaycapstoneapi080D3FC1"
+                                              },
+                                              "/test-invoke-stage/POST/stocks/selection"
+                                            ]
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                                      "version": "2.47.0"
+                                    }
+                                  },
+                                  "Resource": {
+                                    "id": "Resource",
+                                    "path": "API/ApiGateway/capstone-api/Default/stocks/selection/POST/Resource",
+                                    "attributes": {
+                                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                                      "aws:cdk:cloudformation:props": {
+                                        "httpMethod": "POST",
+                                        "resourceId": {
+                                          "Ref": "ApiGatewaycapstoneapistocksselection779A33FB"
+                                        },
+                                        "restApiId": {
+                                          "Ref": "ApiGatewaycapstoneapi080D3FC1"
+                                        },
+                                        "authorizationType": "NONE",
+                                        "integration": {
+                                          "type": "AWS_PROXY",
+                                          "uri": {
+                                            "Fn::Join": [
+                                              "",
+                                              [
+                                                "arn:",
+                                                {
+                                                  "Ref": "AWS::Partition"
+                                                },
+                                                ":apigateway:",
+                                                {
+                                                  "Ref": "AWS::Region"
+                                                },
+                                                ":lambda:path/2015-03-31/functions/",
+                                                {
+                                                  "Fn::GetAtt": [
+                                                    "ApiGatewayPostStocksSelectionpostStockSelectionLambda418FC670",
+                                                    "Arn"
+                                                  ]
+                                                },
+                                                "/invocations"
+                                              ]
+                                            ]
+                                          },
+                                          "integrationHttpMethod": "POST"
+                                        }
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                                      "version": "2.47.0"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_apigateway.Method",
                                   "version": "2.47.0"
                                 }
                               }
                             },
                             "constructInfo": {
-                              "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                              "fqn": "aws-cdk-lib.aws_apigateway.Resource",
                               "version": "2.47.0"
                             }
                           }

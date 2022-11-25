@@ -22,6 +22,7 @@ This project is to support day trading efforts. It uses machine learning and tec
 |    GET  |  /stocks/{ticker}/price | Retrieve most recent real-time price for a single stock |
 |    GET  |  /stocks/{ticker}/price?interval=#&numOfIntervals=# | Retrieves historical data based on interval* and quantity of data points |
 |    POST  |  /stocks/{ticker}/price?interval=#&numOfIntervals=# | Store historical data for stock in Amazon Timestream |
+|    POST  |  /stocks/selection | Pass String[] in body of NASDAQ Stock Exchange ticker symbols to add stocks to ingestion pipeline |
 |    POST  |  /forecasts/{ticker} | Kick off forecast training job NOTE: Might need to add query params for forecast horizon and stock data history span |
 
 

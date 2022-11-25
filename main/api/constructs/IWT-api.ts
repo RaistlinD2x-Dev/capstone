@@ -73,7 +73,7 @@ export class ApiGateway extends Construct {
         proxy: true,
       }
     );
-    stocks.addMethod('POST', postStocksSelectionLambdaIntegration);
+    stocks.addResource('selection').addMethod('POST', postStocksSelectionLambdaIntegration);
 
     // kick off training job for a given stock
     const { forecastTrainingJobLambda } = new ForecastTrainingJob(this, 'ForecastTrainingJob');
