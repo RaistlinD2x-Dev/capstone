@@ -5,7 +5,7 @@ import { NetworkStack } from './main/network/network-stack';
 // import { FrontendStack } from './main/ui/frontend-stack';
 import { DataStoreStack } from './main/data-store/data-store-stack';
 import { DataIngestionStack } from './main/data-ingestion/data-ingestion-stack';
-import { MachineLearningStack } from './main/machine-learning/machine-learning-stack';
+import { AnomalyDetectionStack } from './main/machine-learning/anomaly-detection';
 import { ApiStack } from './main/api/api-stack';
 import { AuthStack } from './main/auth/auth-stack';
 
@@ -23,7 +23,7 @@ const datastore = new DataStoreStack(app, 'Datastore', {});
 
 const dataIngestion = new DataIngestionStack(app, 'DataIngestion', {});
 
-const machineLearning = new MachineLearningStack(app, 'Forecast', {
+const anomalyDetection = new AnomalyDetectionStack(app, 'Forecast', {
   vpc: network.vpc,
 });
 
