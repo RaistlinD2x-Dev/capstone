@@ -80,10 +80,6 @@ def update_dataset_group(client, dataset_group_arn, datasets_list):
 
 def create_dataset_import_jobs(datasets_list, bucket_name, role_arn, dataset_names):
 
-    # Create list of objects containing timestamp, stock name, bucket, and role_arn
-    # Pass list to map iterator to generate datasets and put into bucket partitions
-    # Then perform dataset import jobs on each of those locations
-
     timestamp = get_current_ms_epoch_time()
 
     dataset_info_list = []
@@ -123,8 +119,3 @@ def start_dataset_import_job(dataset_info):
     )
 
     return response["DatasetImportJobArn"]
-
-
-def main():
-
-    return
