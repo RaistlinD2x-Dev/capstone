@@ -1278,125 +1278,174 @@
         "id": "Forecast",
         "path": "Forecast",
         "children": {
-          "front-end": {
-            "id": "front-end",
-            "path": "Forecast/front-end",
+          "AnomalyDetection": {
+            "id": "AnomalyDetection",
+            "path": "Forecast/AnomalyDetection",
             "children": {
-              "Resource": {
-                "id": "Resource",
-                "path": "Forecast/front-end/Resource",
-                "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::ECS::Cluster",
-                  "aws:cdk:cloudformation:props": {}
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_ecs.CfnCluster",
-                  "version": "2.47.0"
-                }
-              }
-            },
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_ecs.Cluster",
-              "version": "2.47.0"
-            }
-          },
-          "sagemakerTrainingJobRole": {
-            "id": "sagemakerTrainingJobRole",
-            "path": "Forecast/sagemakerTrainingJobRole",
-            "children": {
-              "Resource": {
-                "id": "Resource",
-                "path": "Forecast/sagemakerTrainingJobRole/Resource",
-                "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
-                  "aws:cdk:cloudformation:props": {
-                    "assumeRolePolicyDocument": {
-                      "Statement": [
-                        {
-                          "Action": "sts:AssumeRole",
-                          "Effect": "Allow",
-                          "Principal": {
-                            "Service": "ecs-tasks.amazonaws.com"
-                          }
-                        }
-                      ],
-                      "Version": "2012-10-17"
+              "front-end": {
+                "id": "front-end",
+                "path": "Forecast/AnomalyDetection/front-end",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Forecast/AnomalyDetection/front-end/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ECS::Cluster",
+                      "aws:cdk:cloudformation:props": {}
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ecs.CfnCluster",
+                      "version": "2.47.0"
                     }
                   }
                 },
                 "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                  "fqn": "aws-cdk-lib.aws_ecs.Cluster",
                   "version": "2.47.0"
                 }
               },
-              "DefaultPolicy": {
-                "id": "DefaultPolicy",
-                "path": "Forecast/sagemakerTrainingJobRole/DefaultPolicy",
+              "anomalyDetectionTrainingJobRole": {
+                "id": "anomalyDetectionTrainingJobRole",
+                "path": "Forecast/AnomalyDetection/anomalyDetectionTrainingJobRole",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "Forecast/sagemakerTrainingJobRole/DefaultPolicy/Resource",
+                    "path": "Forecast/AnomalyDetection/anomalyDetectionTrainingJobRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "ecs-tasks.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "Forecast/AnomalyDetection/anomalyDetectionTrainingJobRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "Forecast/AnomalyDetection/anomalyDetectionTrainingJobRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "ecr:BatchCheckLayerAvailability",
+                                    "ecr:BatchGetImage",
+                                    "ecr:GetDownloadUrlForLayer"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":ecr:",
+                                        {
+                                          "Ref": "AWS::Region"
+                                        },
+                                        ":",
+                                        {
+                                          "Ref": "AWS::AccountId"
+                                        },
+                                        ":repository/",
+                                        {
+                                          "Fn::Sub": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}"
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                },
+                                {
+                                  "Action": "ecr:GetAuthorizationToken",
+                                  "Effect": "Allow",
+                                  "Resource": "*"
+                                },
+                                {
+                                  "Action": [
+                                    "logs:CreateLogStream",
+                                    "logs:PutLogEvents"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": {
+                                    "Fn::GetAtt": [
+                                      "AnomalyDetectionanomalyDetectionTrainingJobTaskDefinitionanomalyDetectionTrainingJobLogGroupAA9E1651",
+                                      "Arn"
+                                    ]
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "AnomalyDetectionanomalyDetectionTrainingJobRoleDefaultPolicyACB39758",
+                            "roles": [
+                              {
+                                "Ref": "AnomalyDetectionanomalyDetectionTrainingJobRoleDAF46CF5"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.47.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.47.0"
+                }
+              },
+              "ecsTask": {
+                "id": "ecsTask",
+                "path": "Forecast/AnomalyDetection/ecsTask",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Forecast/AnomalyDetection/ecsTask/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                       "aws:cdk:cloudformation:props": {
                         "policyDocument": {
                           "Statement": [
                             {
-                              "Action": [
-                                "ecr:BatchCheckLayerAvailability",
-                                "ecr:BatchGetImage",
-                                "ecr:GetDownloadUrlForLayer"
-                              ],
-                              "Effect": "Allow",
-                              "Resource": {
-                                "Fn::Join": [
-                                  "",
-                                  [
-                                    "arn:",
-                                    {
-                                      "Ref": "AWS::Partition"
-                                    },
-                                    ":ecr:",
-                                    {
-                                      "Ref": "AWS::Region"
-                                    },
-                                    ":",
-                                    {
-                                      "Ref": "AWS::AccountId"
-                                    },
-                                    ":repository/",
-                                    {
-                                      "Fn::Sub": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}"
-                                    }
-                                  ]
-                                ]
-                              }
-                            },
-                            {
-                              "Action": "ecr:GetAuthorizationToken",
+                              "Action": "*",
                               "Effect": "Allow",
                               "Resource": "*"
-                            },
-                            {
-                              "Action": [
-                                "logs:CreateLogStream",
-                                "logs:PutLogEvents"
-                              ],
-                              "Effect": "Allow",
-                              "Resource": {
-                                "Fn::GetAtt": [
-                                  "sagemakerTrainingJobTaskDefinitionsagemakerTrainingJobLogGroup64904309",
-                                  "Arn"
-                                ]
-                              }
                             }
                           ],
                           "Version": "2012-10-17"
                         },
-                        "policyName": "sagemakerTrainingJobRoleDefaultPolicy1CF5B503",
+                        "policyName": "AnomalyDetectionecsTaskB101E8D5",
                         "roles": [
                           {
-                            "Ref": "sagemakerTrainingJobRoleAE43F10E"
+                            "Ref": "AnomalyDetectionanomalyDetectionTrainingJobRoleDAF46CF5"
                           }
                         ]
                       }
@@ -1411,172 +1460,133 @@
                   "fqn": "aws-cdk-lib.aws_iam.Policy",
                   "version": "2.47.0"
                 }
-              }
-            },
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_iam.Role",
-              "version": "2.47.0"
-            }
-          },
-          "ecsTask": {
-            "id": "ecsTask",
-            "path": "Forecast/ecsTask",
-            "children": {
-              "Resource": {
-                "id": "Resource",
-                "path": "Forecast/ecsTask/Resource",
-                "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
-                  "aws:cdk:cloudformation:props": {
-                    "policyDocument": {
-                      "Statement": [
-                        {
-                          "Action": "*",
-                          "Effect": "Allow",
-                          "Resource": "*"
-                        }
-                      ],
-                      "Version": "2012-10-17"
-                    },
-                    "policyName": "ecsTask4520BF7C",
-                    "roles": [
-                      {
-                        "Ref": "sagemakerTrainingJobRoleAE43F10E"
-                      }
-                    ]
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
-                  "version": "2.47.0"
-                }
-              }
-            },
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_iam.Policy",
-              "version": "2.47.0"
-            }
-          },
-          "sagemakerTrainingJobTaskDefinition": {
-            "id": "sagemakerTrainingJobTaskDefinition",
-            "path": "Forecast/sagemakerTrainingJobTaskDefinition",
-            "children": {
-              "Resource": {
-                "id": "Resource",
-                "path": "Forecast/sagemakerTrainingJobTaskDefinition/Resource",
-                "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::ECS::TaskDefinition",
-                  "aws:cdk:cloudformation:props": {
-                    "containerDefinitions": [
-                      {
-                        "essential": true,
-                        "image": {
-                          "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:84701dced33b0982230c08939300215a2d08c071c3335101bb5e99de142dc65e"
-                        },
-                        "name": "sagemakerTrainingJob",
-                        "logConfiguration": {
-                          "logDriver": "awslogs",
-                          "options": {
-                            "awslogs-group": {
-                              "Ref": "sagemakerTrainingJobTaskDefinitionsagemakerTrainingJobLogGroup64904309"
-                            },
-                            "awslogs-stream-prefix": "sagemakerTrainingJob",
-                            "awslogs-region": {
-                              "Ref": "AWS::Region"
-                            },
-                            "mode": "non-blocking"
-                          }
-                        }
-                      }
-                    ],
-                    "cpu": "512",
-                    "executionRoleArn": {
-                      "Fn::GetAtt": [
-                        "sagemakerTrainingJobRoleAE43F10E",
-                        "Arn"
-                      ]
-                    },
-                    "family": "ForecastsagemakerTrainingJobTaskDefinition6AFF6690",
-                    "memory": "1024",
-                    "networkMode": "awsvpc",
-                    "requiresCompatibilities": [
-                      "FARGATE"
-                    ],
-                    "taskRoleArn": {
-                      "Fn::GetAtt": [
-                        "sagemakerTrainingJobRoleAE43F10E",
-                        "Arn"
-                      ]
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_ecs.CfnTaskDefinition",
-                  "version": "2.47.0"
-                }
               },
-              "sagemakerTrainingJob": {
-                "id": "sagemakerTrainingJob",
-                "path": "Forecast/sagemakerTrainingJobTaskDefinition/sagemakerTrainingJob",
+              "anomalyDetectionTrainingJobTaskDefinition": {
+                "id": "anomalyDetectionTrainingJobTaskDefinition",
+                "path": "Forecast/AnomalyDetection/anomalyDetectionTrainingJobTaskDefinition",
                 "children": {
-                  "AssetImage": {
-                    "id": "AssetImage",
-                    "path": "Forecast/sagemakerTrainingJobTaskDefinition/sagemakerTrainingJob/AssetImage",
-                    "children": {
-                      "Staging": {
-                        "id": "Staging",
-                        "path": "Forecast/sagemakerTrainingJobTaskDefinition/sagemakerTrainingJob/AssetImage/Staging",
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.AssetStaging",
-                          "version": "2.47.0"
-                        }
-                      },
-                      "Repository": {
-                        "id": "Repository",
-                        "path": "Forecast/sagemakerTrainingJobTaskDefinition/sagemakerTrainingJob/AssetImage/Repository",
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.aws_ecr.RepositoryBase",
-                          "version": "2.47.0"
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Forecast/AnomalyDetection/anomalyDetectionTrainingJobTaskDefinition/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ECS::TaskDefinition",
+                      "aws:cdk:cloudformation:props": {
+                        "containerDefinitions": [
+                          {
+                            "essential": true,
+                            "image": {
+                              "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:84701dced33b0982230c08939300215a2d08c071c3335101bb5e99de142dc65e"
+                            },
+                            "name": "anomalyDetectionTrainingJob",
+                            "logConfiguration": {
+                              "logDriver": "awslogs",
+                              "options": {
+                                "awslogs-group": {
+                                  "Ref": "AnomalyDetectionanomalyDetectionTrainingJobTaskDefinitionanomalyDetectionTrainingJobLogGroupAA9E1651"
+                                },
+                                "awslogs-stream-prefix": "anomalyDetectionTrainingJob",
+                                "awslogs-region": {
+                                  "Ref": "AWS::Region"
+                                },
+                                "mode": "non-blocking"
+                              }
+                            }
+                          }
+                        ],
+                        "cpu": "512",
+                        "executionRoleArn": {
+                          "Fn::GetAtt": [
+                            "AnomalyDetectionanomalyDetectionTrainingJobRoleDAF46CF5",
+                            "Arn"
+                          ]
+                        },
+                        "family": "ForecastAnomalyDetectionanomalyDetectionTrainingJobTaskDefinition160A9F0D",
+                        "memory": "1024",
+                        "networkMode": "awsvpc",
+                        "requiresCompatibilities": [
+                          "FARGATE"
+                        ],
+                        "taskRoleArn": {
+                          "Fn::GetAtt": [
+                            "AnomalyDetectionanomalyDetectionTrainingJobRoleDAF46CF5",
+                            "Arn"
+                          ]
                         }
                       }
                     },
                     "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ecr_assets.DockerImageAsset",
+                      "fqn": "aws-cdk-lib.aws_ecs.CfnTaskDefinition",
                       "version": "2.47.0"
                     }
                   },
-                  "LogGroup": {
-                    "id": "LogGroup",
-                    "path": "Forecast/sagemakerTrainingJobTaskDefinition/sagemakerTrainingJob/LogGroup",
+                  "anomalyDetectionTrainingJob": {
+                    "id": "anomalyDetectionTrainingJob",
+                    "path": "Forecast/AnomalyDetection/anomalyDetectionTrainingJobTaskDefinition/anomalyDetectionTrainingJob",
                     "children": {
-                      "Resource": {
-                        "id": "Resource",
-                        "path": "Forecast/sagemakerTrainingJobTaskDefinition/sagemakerTrainingJob/LogGroup/Resource",
-                        "attributes": {
-                          "aws:cdk:cloudformation:type": "AWS::Logs::LogGroup",
-                          "aws:cdk:cloudformation:props": {}
+                      "AssetImage": {
+                        "id": "AssetImage",
+                        "path": "Forecast/AnomalyDetection/anomalyDetectionTrainingJobTaskDefinition/anomalyDetectionTrainingJob/AssetImage",
+                        "children": {
+                          "Staging": {
+                            "id": "Staging",
+                            "path": "Forecast/AnomalyDetection/anomalyDetectionTrainingJobTaskDefinition/anomalyDetectionTrainingJob/AssetImage/Staging",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.AssetStaging",
+                              "version": "2.47.0"
+                            }
+                          },
+                          "Repository": {
+                            "id": "Repository",
+                            "path": "Forecast/AnomalyDetection/anomalyDetectionTrainingJobTaskDefinition/anomalyDetectionTrainingJob/AssetImage/Repository",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ecr.RepositoryBase",
+                              "version": "2.47.0"
+                            }
+                          }
                         },
                         "constructInfo": {
-                          "fqn": "aws-cdk-lib.aws_logs.CfnLogGroup",
+                          "fqn": "aws-cdk-lib.aws_ecr_assets.DockerImageAsset",
+                          "version": "2.47.0"
+                        }
+                      },
+                      "LogGroup": {
+                        "id": "LogGroup",
+                        "path": "Forecast/AnomalyDetection/anomalyDetectionTrainingJobTaskDefinition/anomalyDetectionTrainingJob/LogGroup",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "Forecast/AnomalyDetection/anomalyDetectionTrainingJobTaskDefinition/anomalyDetectionTrainingJob/LogGroup/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Logs::LogGroup",
+                              "aws:cdk:cloudformation:props": {}
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_logs.CfnLogGroup",
+                              "version": "2.47.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_logs.LogGroup",
                           "version": "2.47.0"
                         }
                       }
                     },
                     "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_logs.LogGroup",
+                      "fqn": "aws-cdk-lib.aws_ecs.ContainerDefinition",
                       "version": "2.47.0"
                     }
                   }
                 },
                 "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_ecs.ContainerDefinition",
+                  "fqn": "aws-cdk-lib.aws_ecs.TaskDefinition",
                   "version": "2.47.0"
                 }
               }
             },
             "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_ecs.TaskDefinition",
-              "version": "2.47.0"
+              "fqn": "constructs.Construct",
+              "version": "10.0.0"
             }
           },
           "CDKMetadata": {
@@ -3884,7 +3894,7 @@
                               "s3Bucket": {
                                 "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                               },
-                              "s3Key": "10cf1d4102d00163896b3ebf7bcf5d7c0480916e35bd2d226e6cf66435bc71b5.zip"
+                              "s3Key": "a8d00f78f08fe69300e2eb130819aa4c2c0ca53f71243ae240365147273f2e60.zip"
                             },
                             "role": {
                               "Fn::GetAtt": [

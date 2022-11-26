@@ -368,7 +368,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ce7729a950e7dbd0b19a7f3db9cd016ebe0e0783a868c54b509fba037c5399d2.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/9ac59e8a7fcb3876562faa0500d2d5e3e3177be99375d77d5380091e36f812c5.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -384,40 +384,40 @@
         "Forecast.assets"
       ],
       "metadata": {
-        "/Forecast/front-end/Resource": [
+        "/Forecast/AnomalyDetection/front-end/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "frontend6FE5971B"
+            "data": "AnomalyDetectionfrontendF3215327"
           }
         ],
-        "/Forecast/sagemakerTrainingJobRole/Resource": [
+        "/Forecast/AnomalyDetection/anomalyDetectionTrainingJobRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "sagemakerTrainingJobRoleAE43F10E"
+            "data": "AnomalyDetectionanomalyDetectionTrainingJobRoleDAF46CF5"
           }
         ],
-        "/Forecast/sagemakerTrainingJobRole/DefaultPolicy/Resource": [
+        "/Forecast/AnomalyDetection/anomalyDetectionTrainingJobRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "sagemakerTrainingJobRoleDefaultPolicy1CF5B503"
+            "data": "AnomalyDetectionanomalyDetectionTrainingJobRoleDefaultPolicyACB39758"
           }
         ],
-        "/Forecast/ecsTask/Resource": [
+        "/Forecast/AnomalyDetection/ecsTask/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ecsTask4520BF7C"
+            "data": "AnomalyDetectionecsTaskB101E8D5"
           }
         ],
-        "/Forecast/sagemakerTrainingJobTaskDefinition/Resource": [
+        "/Forecast/AnomalyDetection/anomalyDetectionTrainingJobTaskDefinition/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "sagemakerTrainingJobTaskDefinition36624659"
+            "data": "AnomalyDetectionanomalyDetectionTrainingJobTaskDefinitionB9C4E414"
           }
         ],
-        "/Forecast/sagemakerTrainingJobTaskDefinition/sagemakerTrainingJob/LogGroup/Resource": [
+        "/Forecast/AnomalyDetection/anomalyDetectionTrainingJobTaskDefinition/anomalyDetectionTrainingJob/LogGroup/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "sagemakerTrainingJobTaskDefinitionsagemakerTrainingJobLogGroup64904309"
+            "data": "AnomalyDetectionanomalyDetectionTrainingJobTaskDefinitionanomalyDetectionTrainingJobLogGroupAA9E1651"
           }
         ],
         "/Forecast/CDKMetadata/Default": [
@@ -463,7 +463,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/42c3bc888d732a2d45b7c74c8372efa4cceee8f6596e9dd4dff53d29b4c7d0d1.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/5ed5478bcfb2c8deaf4af319d1819c78bcb9d322aaf7a8b8a24ce709b9d53852.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
