@@ -5,7 +5,7 @@ from ssm import *
 
 s3 = boto3.client("s3")
 
-bucket_name = f"IWT-forecast-bucket-{get_account_number(sts)}"
+bucket_name = f"IWTforecastbucket{get_account_number(sts)}"
 
 
 def bucket_exists(client, bucket_name):
@@ -17,6 +17,7 @@ def bucket_exists(client, bucket_name):
     else:
         for bucket in buckets["Buckets"]:
             if bucket_name == bucket["Name"]:
+                print(bucket["Arn"])
                 return bucket["Arn"]
             else:
                 False

@@ -25,9 +25,10 @@ export class ForecastStepFunction extends Construct {
 
     const forecastDatasetsInvoke = new tasks.LambdaInvoke(this, 'forecastDatasetsTask', {
       lambdaFunction: props.forecastDatasetsLambda,
+      outputPath: '$.Payload',
     });
 
-    const forecastMap = new sfn.Map(this, 'forecastMap');
+    const forecastMap = new sfn.Map(this, 'forecastMap', {});
 
     const forecastImportJobInvoke = new tasks.LambdaInvoke(this, 'forecastImportJobTask', {
       lambdaFunction: props.forecastImportJobLambda,

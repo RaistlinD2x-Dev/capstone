@@ -1,0 +1,11 @@
+{
+  "errorMessage": "An error occurred (ValidationException) when calling the CreateDatasetImportJob operation: 1 validation error detected: Value 's3://IWT-forecast-bucket-315730708373/MSFT/1669563858873/MSFT1669563858873.csv' at 'dataSource.s3Config.path' failed to satisfy constraint: Member must satisfy regular expression pattern: ^s3://[a-z0-9].+$",
+  "errorType": "ClientError",
+  "requestId": "12a53ea9-8665-48ab-98cd-ac8246548a8a",
+  "stackTrace": [
+    "  File \"/var/task/index.py\", line 26, in handler\n    start_dataset_import_job(forecast, event, filename)\n",
+    "  File \"/var/task/forecast.py\", line 19, in start_dataset_import_job\n    response = client.create_dataset_import_job(\n",
+    "  File \"/var/runtime/botocore/client.py\", line 391, in _api_call\n    return self._make_api_call(operation_name, kwargs)\n",
+    "  File \"/var/runtime/botocore/client.py\", line 719, in _make_api_call\n    raise error_class(parsed_response, operation_name)\n"
+  ]
+}

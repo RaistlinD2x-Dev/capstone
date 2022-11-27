@@ -1,7 +1,6 @@
 import boto3
 
 from utils import *
-from ssm import *
 
 
 forecast = boto3.client("forecast")
@@ -13,6 +12,8 @@ def create_datasets(
     client,
     dataset_names,
 ):
+
+    print(dataset_names)
 
     timestamp = get_current_ms_epoch_time()
 
@@ -41,6 +42,8 @@ def create_datasets(
 
 def dataset_group_exists(client, dataset_group_name):
 
+    # Deprecated, will create new dataset group for each forecast
+
     dataset_groups = client.list_dataset_groups()
 
     if dataset_groups["DatasetGroups"] == []:
@@ -54,58 +57,55 @@ def dataset_group_exists(client, dataset_group_name):
                 return False
 
 
-def create_dataset_group(client, dataset_group_exists):
+def create_dataset_group(client, datasets_list):
 
-    if dataset_group_exists == False:
+    dataset_info_list = []
+    for dataset_arn in datasets_list:
+        identifier = dataset_arn.split("/")[-1]
 
         response = client.create_dataset_group(
-            DatasetGroupName=dataset_group_name,
-            Domain="METRICS",
+            DatasetGroupName=f"{identifier}", Domain="METRICS"
         )
+        dataset_info = {
+            "dataset_group_arn": response["DatasetGroupArn"],
+            "dataset_arn": dataset_arn,
+        }
+        dataset_info_list.append(dataset_info)
 
-        return response["DatasetGroupArn"]
-
-    return dataset_group_exists
+    return dataset_info_list
 
 
-def update_dataset_group(client, dataset_group_arn, datasets_list):
+def update_dataset_group(client, dataset_info_list):
 
-    iterations = len(datasets_list) // 3
-
-    if len(datasets_list) % 3 != 0:
-        iterations += 1
-
-    start = 0
-    for i in range(iterations):
+    for dataset_info in dataset_info_list:
 
         client.update_dataset_group(
-            DatasetGroupArn=dataset_group_arn,
-            DatasetArns=datasets_list[start : start + 3],
+            DatasetGroupArn=dataset_info["dataset_group_arn"],
+            DatasetArns=[dataset_info["dataset_arn"]],
         )
 
-        start += 3
-
-    print(f"Dataset Group {dataset_group_arn} updated with dataset list.")
+    print(
+        f"Dataset Group {dataset_info['dataset_group_arn']} updated with dataset list."
+    )
 
 
 def create_dataset_import_jobs(datasets_list, bucket_name, role_arn, dataset_names):
 
     timestamp = get_current_ms_epoch_time()
 
-    dataset_info_list = []
+    dataset_import_info_list = []
 
+    count = 0
     for dataset in datasets_list:
-        dataset_info = {}
-        for name in dataset_names:
-            dataset_info.update(
-                {
-                    "timestamp": timestamp,
-                    "dataset_arn": dataset,
-                    "stock_name": name,
-                    "bucket_name": bucket_name,
-                    "role_arn": role_arn,
-                }
-            )
-        dataset_info_list.append(dataset_info)
 
-    return dataset_info_list
+        dataset_info = {
+            "timestamp": timestamp,
+            "dataset_arn": dataset,
+            "stock_name": dataset_names[count],
+            "bucket_name": bucket_name,
+            "role_arn": role_arn,
+        }
+        dataset_import_info_list.append(dataset_info)
+        count += 1
+
+    return dataset_import_info_list

@@ -688,7 +688,7 @@
                       "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
                       "aws:cdk:cloudformation:props": {
                         "type": "String",
-                        "value": "stockInfoDatabase",
+                        "value": "stockInfoTable",
                         "name": "timestream-stock-info-table"
                       }
                     },
@@ -1730,7 +1730,7 @@
                           "s3Bucket": {
                             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                           },
-                          "s3Key": "c73ea12229be75e1fa4770f87b83e2b411381496318fcc49dc547b69d649a25b.zip"
+                          "s3Key": "d8d9a6a2043fda34e5b1220f696b3a0fd51d36260cbcafe264e24a09ede1a450.zip"
                         },
                         "role": {
                           "Fn::GetAtt": [
@@ -2026,7 +2026,7 @@
                           "s3Bucket": {
                             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                           },
-                          "s3Key": "0536f8be404e974941bc3792d74bd9f664177112e03d3fe8eef0ad6369d33fc1.zip"
+                          "s3Key": "f33a50f80f2fcc7b0f26acc53398a933eb7fac1a48a55a16ac537dbfd8cea8de.zip"
                         },
                         "role": {
                           "Fn::GetAtt": [
@@ -2174,7 +2174,7 @@
                           "s3Bucket": {
                             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                           },
-                          "s3Key": "4a8e3d0eabed99f6aa1d419bfcb9324925f04576bb1f872801526f685df8acfe.zip"
+                          "s3Key": "d41c5b83d59b6f43d0081d7863bdcf4f368e7ca8f51f0590b06ca6af36c40d01.zip"
                         },
                         "role": {
                           "Fn::GetAtt": [
@@ -2503,7 +2503,7 @@
                                   "Arn"
                                 ]
                               },
-                              "\",\"Payload.$\":\"$\"}},\"forecastDatasetsTask\":{\"Next\":\"forecastMap\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"Resource\":\"arn:",
+                              "\",\"Payload.$\":\"$\"}},\"forecastDatasetsTask\":{\"Next\":\"forecastMap\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"OutputPath\":\"$.Payload\",\"Resource\":\"arn:",
                               {
                                 "Ref": "AWS::Partition"
                               },
@@ -4853,7 +4853,7 @@
                               "s3Bucket": {
                                 "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                               },
-                              "s3Key": "a8d00f78f08fe69300e2eb130819aa4c2c0ca53f71243ae240365147273f2e60.zip"
+                              "s3Key": "6e8a765e4888532d1dc8a624eddb823a1f0a51b931b9f1470d43bf72c3383317.zip"
                             },
                             "role": {
                               "Fn::GetAtt": [

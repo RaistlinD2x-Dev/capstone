@@ -32,7 +32,7 @@ export class TimestreamStockInfo extends Construct {
 
     new ssm.StringParameter(this, 'timestreamStockInfoTableName', {
       parameterName: 'timestream-stock-info-table',
-      stringValue: stockInfoTimeStreamDatabase.databaseName!,
+      stringValue: stockInfoTimeStreamTable.tableName!,
     });
   }
 }
