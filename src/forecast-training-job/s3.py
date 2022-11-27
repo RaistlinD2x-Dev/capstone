@@ -5,12 +5,14 @@ from ssm import *
 
 s3 = boto3.client("s3")
 
-bucket_name = f"IWTforecastbucket{get_account_number(sts)}"
+bucket_name = f"iwtforecastbucket{get_account_number(sts)}"
 
 
 def bucket_exists(client, bucket_name):
 
     buckets = client.list_buckets()
+
+    print(buckets)
 
     if buckets["Buckets"] == []:
         return False
@@ -20,12 +22,14 @@ def bucket_exists(client, bucket_name):
                 print(bucket["Arn"])
                 return bucket["Arn"]
             else:
-                False
+                return False
 
 
 def create_bucket(client, bucket_exists):
 
     if bucket_exists == False:
+
+        print(bucket_exists)
 
         response = client.create_bucket(Bucket=bucket_name)
 

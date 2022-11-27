@@ -22,7 +22,7 @@ def timestream_query_to_dataframe(query_results):
     for result in query_results:
         # timestamp = datetime.strptime(result[1]["ScalarValue"], "%Y-%m-%d %H:%m:%S")
         training_dataset["metric_name"].append(result[0]["ScalarValue"]),
-        training_dataset["timestamp"].append(result[1]["ScalarValue"]),
+        training_dataset["timestamp"].append(result[1]["ScalarValue"].split(".")[0]),
         training_dataset["metric_value"].append(result[2]["ScalarValue"])
 
     print(training_dataset)
@@ -34,6 +34,6 @@ def timestream_query_to_dataframe(query_results):
 
 def convert_df_to_csv(dataframe, file_name):
 
-    dataframe.to_csv(f"/tmp/{file_name}")
+    dataframe.to_csv(f"/tmp/{file_name}", index=False)
 
     print(f"CSV successfully created with name {file_name}")
