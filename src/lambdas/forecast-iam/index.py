@@ -8,7 +8,7 @@ def handler(event, context):
 
     role_arn = create_role(iam, is_role_present)
 
-    create_ssm_parameter(iam, data_set_role_param_name, role_arn)
+    create_ssm_parameter(ssm, data_set_role_param_name, role_arn)
 
     policy_arn = create_role_policy(iam, role_policy_name)
 

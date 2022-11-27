@@ -2,7 +2,7 @@ import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { StockDataProcessor } from './constructs/lambdas/stock-data-processor';
 import { PerMinuteStockData } from './constructs/lambdas/per-minute-stock-data';
-import { StockDataProcessorStateMachine } from './constructs/stock-data-processor-state-machine';
+import { StockDataProcessorStepFunction } from './constructs/stock-data-processor-state-machine';
 
 export class DataIngestionStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -13,7 +13,7 @@ export class DataIngestionStack extends cdk.Stack {
 
     const stockDataProcessor = new StockDataProcessor(this, 'StockDataProcessor');
 
-    new StockDataProcessorStateMachine(this, 'StockDataProcessorStateMachine', {
+    new StockDataProcessorStepFunction(this, 'StockDataProcessorStepFunction', {
       perMinuteStockData: perMinuteStockData.perMinuteStockDataLambda,
       stockDataProcessor: stockDataProcessor.stockDataProcessorLambda,
     });

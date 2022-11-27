@@ -4,13 +4,13 @@ import { Function } from 'aws-cdk-lib/aws-lambda';
 import * as tasks from 'aws-cdk-lib/aws-stepfunctions-tasks';
 import * as sfn from 'aws-cdk-lib/aws-stepfunctions';
 
-interface StockDataProcessorStateMachineProps extends cdk.StackProps {
+interface StockDataProcessorStepFunctionProps extends cdk.StackProps {
   perMinuteStockData: Function;
   stockDataProcessor: Function;
 }
 
-export class StockDataProcessorStateMachine extends Construct {
-  constructor(scope: Construct, id: string, props: StockDataProcessorStateMachineProps) {
+export class StockDataProcessorStepFunction extends Construct {
+  constructor(scope: Construct, id: string, props: StockDataProcessorStepFunctionProps) {
     super(scope, id);
 
     const stockDataInvoke = new tasks.LambdaInvoke(this, 'stockDataTask', {

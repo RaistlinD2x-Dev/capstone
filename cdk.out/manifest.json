@@ -142,7 +142,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/6d7c349c4c3fd8deea212ca5bd1be19379aeecd458ba2951bad38b4488bc79e6.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/b0f126ac2a0611f964e1759b0a930473a296420f32eaa9d160f685971c145815.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -212,6 +212,12 @@
             "data": "TimestreamStockInfotimestreamStockInfoDatabaseNameB76B5B80"
           }
         ],
+        "/Datastore/TimestreamStockInfo/timestreamStockInfoTableName/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TimestreamStockInfotimestreamStockInfoTableName55B99B02"
+          }
+        ],
         "/Datastore/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
@@ -255,7 +261,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c540f1e124b9129ca52669708c278a28016750a09e61956f696e949ef516296f.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/8b12156f4aaaec399a0e41893125864ec59ead60c056232cfe3d9aac537f5642.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -307,22 +313,22 @@
             "data": "StockDataProcessorStockDataProcessorLambdaPolicyE184FC14"
           }
         ],
-        "/DataIngestion/StockDataProcessorStateMachine/dataIngestionStepFunction/Role/Resource": [
+        "/DataIngestion/StockDataProcessorStepFunction/dataIngestionStepFunction/Role/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "StockDataProcessorStateMachinedataIngestionStepFunctionRole47C06F38"
+            "data": "StockDataProcessorStepFunctiondataIngestionStepFunctionRoleA8D8C957"
           }
         ],
-        "/DataIngestion/StockDataProcessorStateMachine/dataIngestionStepFunction/Role/DefaultPolicy/Resource": [
+        "/DataIngestion/StockDataProcessorStepFunction/dataIngestionStepFunction/Role/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "StockDataProcessorStateMachinedataIngestionStepFunctionRoleDefaultPolicyB847C559"
+            "data": "StockDataProcessorStepFunctiondataIngestionStepFunctionRoleDefaultPolicyB666083E"
           }
         ],
-        "/DataIngestion/StockDataProcessorStateMachine/dataIngestionStepFunction/Resource": [
+        "/DataIngestion/StockDataProcessorStepFunction/dataIngestionStepFunction/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "StockDataProcessorStateMachinedataIngestionStepFunction26147C63"
+            "data": "StockDataProcessorStepFunctiondataIngestionStepFunction02C46E9E"
           }
         ],
         "/DataIngestion/CDKMetadata/Default": [
@@ -352,6 +358,101 @@
       },
       "displayName": "DataIngestion"
     },
+    "AnomalyDetection.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "AnomalyDetection.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "AnomalyDetection": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "AnomalyDetection.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/861d00a20e59747e07523198fa773f8c978be4eb435d2d674b08d8aac30611ca.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "AnomalyDetection.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "AnomalyDetection.assets"
+      ],
+      "metadata": {
+        "/AnomalyDetection/AnomalyDetection/front-end/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AnomalyDetectionfrontendF3215327"
+          }
+        ],
+        "/AnomalyDetection/AnomalyDetection/anomalyDetectionTrainingJobTrainingJobRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AnomalyDetectionanomalyDetectionTrainingJobTrainingJobRoleEEC7A86F"
+          }
+        ],
+        "/AnomalyDetection/AnomalyDetection/anomalyDetectionTrainingJobTrainingJobRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AnomalyDetectionanomalyDetectionTrainingJobTrainingJobRoleDefaultPolicyCB69FE6E"
+          }
+        ],
+        "/AnomalyDetection/AnomalyDetection/ecsTask/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AnomalyDetectionecsTaskB101E8D5"
+          }
+        ],
+        "/AnomalyDetection/AnomalyDetection/anomalyDetectionTrainingJobTrainingJobTaskDefinition/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AnomalyDetectionanomalyDetectionTrainingJobTrainingJobTaskDefinition09BA16CE"
+          }
+        ],
+        "/AnomalyDetection/AnomalyDetection/anomalyDetectionTrainingJobTrainingJobTaskDefinition/anomalyDetectionTrainingJobTrainingJob/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AnomalyDetectionanomalyDetectionTrainingJobTrainingJobTaskDefinitionanomalyDetectionTrainingJobTrainingJobLogGroup753407EB"
+          }
+        ],
+        "/AnomalyDetection/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/AnomalyDetection/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/AnomalyDetection/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/AnomalyDetection/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "AnomalyDetection"
+    },
     "Forecast.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
@@ -368,7 +469,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/9ac59e8a7fcb3876562faa0500d2d5e3e3177be99375d77d5380091e36f812c5.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/4f73f1a2745c84264bdcf51f80d935104dc83c769b9c385968b391b76d7db8de.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -384,40 +485,94 @@
         "Forecast.assets"
       ],
       "metadata": {
-        "/Forecast/AnomalyDetection/front-end/Resource": [
+        "/Forecast/ForecastDatasets/forecastDatasetsRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "AnomalyDetectionfrontendF3215327"
+            "data": "ForecastDatasetsforecastDatasetsRoleA4E82A71"
           }
         ],
-        "/Forecast/AnomalyDetection/anomalyDetectionTrainingJobRole/Resource": [
+        "/Forecast/ForecastDatasets/forecastDatasetsLambda/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "AnomalyDetectionanomalyDetectionTrainingJobRoleDAF46CF5"
+            "data": "ForecastDatasetsforecastDatasetsLambdaB2ED04DB"
           }
         ],
-        "/Forecast/AnomalyDetection/anomalyDetectionTrainingJobRole/DefaultPolicy/Resource": [
+        "/Forecast/ForecastDatasets/forecastDatasetsLambdaPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "AnomalyDetectionanomalyDetectionTrainingJobRoleDefaultPolicyACB39758"
+            "data": "ForecastDatasetsforecastDatasetsLambdaPolicy5CD0D265"
           }
         ],
-        "/Forecast/AnomalyDetection/ecsTask/Resource": [
+        "/Forecast/ForecastIAM/forecastIAMRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "AnomalyDetectionecsTaskB101E8D5"
+            "data": "ForecastIAMforecastIAMRoleF320B192"
           }
         ],
-        "/Forecast/AnomalyDetection/anomalyDetectionTrainingJobTaskDefinition/Resource": [
+        "/Forecast/ForecastIAM/forecastIAMLambda/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "AnomalyDetectionanomalyDetectionTrainingJobTaskDefinitionB9C4E414"
+            "data": "ForecastIAMforecastIAMLambda8584682E"
           }
         ],
-        "/Forecast/AnomalyDetection/anomalyDetectionTrainingJobTaskDefinition/anomalyDetectionTrainingJob/LogGroup/Resource": [
+        "/Forecast/ForecastIAM/forecastIAMLambdaPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "AnomalyDetectionanomalyDetectionTrainingJobTaskDefinitionanomalyDetectionTrainingJobLogGroupAA9E1651"
+            "data": "ForecastIAMforecastIAMLambdaPolicyF0A0EB40"
+          }
+        ],
+        "/Forecast/ForecastS3/forecastS3Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ForecastS3forecastS3Role856E2598"
+          }
+        ],
+        "/Forecast/ForecastS3/forecastS3Lambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ForecastS3forecastS3Lambda46CA0D25"
+          }
+        ],
+        "/Forecast/ForecastS3/forecastS3LambdaPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ForecastS3forecastS3LambdaPolicy0DF03B18"
+          }
+        ],
+        "/Forecast/ForecastImportJob/forecastImportJobRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ForecastImportJobforecastImportJobRole673B1640"
+          }
+        ],
+        "/Forecast/ForecastImportJob/forecastImportJobLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ForecastImportJobforecastImportJobLambda0092A902"
+          }
+        ],
+        "/Forecast/ForecastImportJob/forecastImportJobLambdaPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ForecastImportJobforecastImportJobLambdaPolicy535FB3FB"
+          }
+        ],
+        "/Forecast/ForecastStepFunction/dataIngestionStepFunction/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ForecastStepFunctiondataIngestionStepFunctionRole0C7FA02E"
+          }
+        ],
+        "/Forecast/ForecastStepFunction/dataIngestionStepFunction/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ForecastStepFunctiondataIngestionStepFunctionRoleDefaultPolicy1F27E2FF"
+          }
+        ],
+        "/Forecast/ForecastStepFunction/dataIngestionStepFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ForecastStepFunctiondataIngestionStepFunction274551ED"
           }
         ],
         "/Forecast/CDKMetadata/Default": [

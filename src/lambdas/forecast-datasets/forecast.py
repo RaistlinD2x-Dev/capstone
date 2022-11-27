@@ -1,13 +1,12 @@
 import boto3
 
-from iam import *
 from utils import *
 from ssm import *
 
 
 forecast = boto3.client("forecast")
 
-dataset_group_name = "stocks-dataset-group"
+dataset_group_name = "StocksDatasetGroup"
 
 
 def create_datasets(
@@ -22,7 +21,7 @@ def create_datasets(
     for dataset_name in dataset_names:
 
         response = client.create_dataset(
-            DatasetName=f"{dataset_name}-{timestamp}",
+            DatasetName=f"{dataset_name}{timestamp}",
             Domain="METRICS",
             DataFrequency="5min",
             DatasetType="TARGET_TIME_SERIES",
@@ -49,7 +48,7 @@ def dataset_group_exists(client, dataset_group_name):
     else:
         for dataset_group in dataset_groups["DatasetGroups"]:
             if dataset_group["DatasetGroupName"] == dataset_group_name:
-                print(f"Dataset Group exists: {dataset_group['Arn']}")
+                print(f"Dataset Group exists: {dataset_group['DatasetGroupArn']}")
                 return dataset_group["DatasetGroupArn"]
             else:
                 return False
@@ -71,9 +70,20 @@ def create_dataset_group(client, dataset_group_exists):
 
 def update_dataset_group(client, dataset_group_arn, datasets_list):
 
-    client.update_dataset_group(
-        DatasetGroupArn=dataset_group_arn, DatasetArns=datasets_list
-    )
+    iterations = len(datasets_list) // 3
+
+    if len(datasets_list) % 3 != 0:
+        iterations += 1
+
+    start = 0
+    for i in range(iterations):
+
+        client.update_dataset_group(
+            DatasetGroupArn=dataset_group_arn,
+            DatasetArns=datasets_list[start : start + 3],
+        )
+
+        start += 3
 
     print(f"Dataset Group {dataset_group_arn} updated with dataset list.")
 
@@ -99,23 +109,3 @@ def create_dataset_import_jobs(datasets_list, bucket_name, role_arn, dataset_nam
         dataset_info_list.append(dataset_info)
 
     return dataset_info_list
-
-
-def start_dataset_import_job(dataset_info):
-
-    forecast = boto3.client("forecast")
-
-    timestamp = dataset_info["timestamp"]
-    stock_name = dataset_info["stock_name"]
-    dataset_arn = dataset_info["Arn"]
-    bucket_name = dataset_info["bucket_name"]
-    role_arn = dataset_info["role_arn"]
-    s3_path_location = f"s3://{bucket_name}/{stock_name}/{timestamp}"
-
-    response = forecast.create_dataset_import_job(
-        DatasetImportJobName=f"DatasetImportJob-{stock_name}-{timestamp}",
-        DatasetArn=dataset_arn,
-        DataSource={"S3Config": {"Path": s3_path_location, "RoleArn": role_arn}},
-    )
-
-    return response["DatasetImportJobArn"]
