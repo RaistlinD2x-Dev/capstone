@@ -8,7 +8,7 @@ export class NetworkStack extends cdk.Stack {
     super(scope, id, props);
 
     this.vpc = new ec2.Vpc(this, 'ApplicationVpc', {
-      maxAzs: 1,
+      maxAzs: 2,
       natGateways: 0,
     });
   }

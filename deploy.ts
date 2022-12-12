@@ -28,6 +28,8 @@ const anomalyDetection = new AnomalyDetectionStack(app, 'AnomalyDetection', {
   vpc: network.vpc,
 });
 
-const forecast = new ForecastStack(app, 'Forecast', {});
+const forecast = new ForecastStack(app, 'Forecast', {
+  vpc: network.vpc,
+});
 
 const api = new ApiStack(app, 'API');

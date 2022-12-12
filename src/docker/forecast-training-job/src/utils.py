@@ -34,6 +34,6 @@ def timestream_query_to_dataframe(query_results):
 
 def convert_df_to_csv(dataframe, file_name):
 
-    dataframe.to_csv(f"/tmp/{file_name}", index=False)
+    dataframe.to_csv(f"{file_name}", index=False)
 
     print(f"CSV successfully created with name {file_name}")

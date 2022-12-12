@@ -64,7 +64,7 @@
                             }
                           ]
                         },
-                        "cidrBlock": "10.0.0.0/17",
+                        "cidrBlock": "10.0.0.0/18",
                         "mapPublicIpOnLaunch": true,
                         "tags": [
                           {
@@ -162,6 +162,125 @@
                   "version": "2.47.0"
                 }
               },
+              "PublicSubnet2": {
+                "id": "PublicSubnet2",
+                "path": "NetworkStack/ApplicationVpc/PublicSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "NetworkStack/ApplicationVpc/PublicSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "ApplicationVpc8AE6A859"
+                        },
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            1,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.64.0/18",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "NetworkStack/ApplicationVpc/PublicSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "NetworkStack/ApplicationVpc/PublicSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "NetworkStack/ApplicationVpc/PublicSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "ApplicationVpc8AE6A859"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "NetworkStack/ApplicationVpc/PublicSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "NetworkStack/ApplicationVpc/PublicSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "ApplicationVpcPublicSubnet2RouteTableA5B5B5A5"
+                        },
+                        "subnetId": {
+                          "Ref": "ApplicationVpcPublicSubnet2SubnetE792D9E8"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "NetworkStack/ApplicationVpc/PublicSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "ApplicationVpcPublicSubnet2RouteTableA5B5B5A5"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "ApplicationVpcIGWAE2F3715"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.47.0"
+                }
+              },
               "IsolatedSubnet1": {
                 "id": "IsolatedSubnet1",
                 "path": "NetworkStack/ApplicationVpc/IsolatedSubnet1",
@@ -183,7 +302,7 @@
                             }
                           ]
                         },
-                        "cidrBlock": "10.0.128.0/17",
+                        "cidrBlock": "10.0.128.0/18",
                         "mapPublicIpOnLaunch": false,
                         "tags": [
                           {
@@ -261,6 +380,105 @@
                   "version": "2.47.0"
                 }
               },
+              "IsolatedSubnet2": {
+                "id": "IsolatedSubnet2",
+                "path": "NetworkStack/ApplicationVpc/IsolatedSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "NetworkStack/ApplicationVpc/IsolatedSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "ApplicationVpc8AE6A859"
+                        },
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            1,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.192.0/18",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Isolated"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Isolated"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "NetworkStack/ApplicationVpc/IsolatedSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "NetworkStack/ApplicationVpc/IsolatedSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "NetworkStack/ApplicationVpc/IsolatedSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "ApplicationVpc8AE6A859"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "NetworkStack/ApplicationVpc/IsolatedSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "NetworkStack/ApplicationVpc/IsolatedSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "ApplicationVpcIsolatedSubnet2RouteTableCA123533"
+                        },
+                        "subnetId": {
+                          "Ref": "ApplicationVpcIsolatedSubnet2SubnetA3CEE8FC"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.47.0"
+                }
+              },
               "IGW": {
                 "id": "IGW",
                 "path": "NetworkStack/ApplicationVpc/IGW",
@@ -322,6 +540,24 @@
                 "path": "NetworkStack/CDKMetadata/Condition",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.0.0"
+            }
+          },
+          "Exports": {
+            "id": "Exports",
+            "path": "NetworkStack/Exports",
+            "children": {
+              "Output{\"Ref\":\"ApplicationVpcPublicSubnet1Subnet7014005F\"}": {
+                "id": "Output{\"Ref\":\"ApplicationVpcPublicSubnet1Subnet7014005F\"}",
+                "path": "NetworkStack/Exports/Output{\"Ref\":\"ApplicationVpcPublicSubnet1Subnet7014005F\"}",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
                   "version": "2.47.0"
                 }
               }
@@ -1651,17 +1887,39 @@
         "id": "Forecast",
         "path": "Forecast",
         "children": {
-          "ForecastDatasets": {
-            "id": "ForecastDatasets",
-            "path": "Forecast/ForecastDatasets",
+          "ForecastTrainingJob": {
+            "id": "ForecastTrainingJob",
+            "path": "Forecast/ForecastTrainingJob",
             "children": {
-              "forecastDatasetsRole": {
-                "id": "forecastDatasetsRole",
-                "path": "Forecast/ForecastDatasets/forecastDatasetsRole",
+              "ForecastJob": {
+                "id": "ForecastJob",
+                "path": "Forecast/ForecastTrainingJob/ForecastJob",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "Forecast/ForecastDatasets/forecastDatasetsRole/Resource",
+                    "path": "Forecast/ForecastTrainingJob/ForecastJob/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ECS::Cluster",
+                      "aws:cdk:cloudformation:props": {}
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ecs.CfnCluster",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ecs.Cluster",
+                  "version": "2.47.0"
+                }
+              },
+              "ForecastEcsRole": {
+                "id": "ForecastEcsRole",
+                "path": "Forecast/ForecastTrainingJob/ForecastEcsRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Forecast/ForecastTrainingJob/ForecastEcsRole/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                       "aws:cdk:cloudformation:props": {
@@ -1671,7 +1929,7 @@
                               "Action": "sts:AssumeRole",
                               "Effect": "Allow",
                               "Principal": {
-                                "Service": "lambda.amazonaws.com"
+                                "Service": "ecs-tasks.amazonaws.com"
                               }
                             }
                           ],
@@ -1683,862 +1941,377 @@
                       "fqn": "aws-cdk-lib.aws_iam.CfnRole",
                       "version": "2.47.0"
                     }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_iam.Role",
-                  "version": "2.47.0"
-                }
-              },
-              "forecastDatasetsLambda": {
-                "id": "forecastDatasetsLambda",
-                "path": "Forecast/ForecastDatasets/forecastDatasetsLambda",
-                "children": {
-                  "Code": {
-                    "id": "Code",
-                    "path": "Forecast/ForecastDatasets/forecastDatasetsLambda/Code",
-                    "children": {
-                      "Stage": {
-                        "id": "Stage",
-                        "path": "Forecast/ForecastDatasets/forecastDatasetsLambda/Code/Stage",
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.AssetStaging",
-                          "version": "2.47.0"
-                        }
-                      },
-                      "AssetBucket": {
-                        "id": "AssetBucket",
-                        "path": "Forecast/ForecastDatasets/forecastDatasetsLambda/Code/AssetBucket",
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.aws_s3.BucketBase",
-                          "version": "2.47.0"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
-                      "version": "2.47.0"
-                    }
                   },
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "Forecast/ForecastDatasets/forecastDatasetsLambda/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
-                      "aws:cdk:cloudformation:props": {
-                        "code": {
-                          "s3Bucket": {
-                            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
-                          },
-                          "s3Key": "d8d9a6a2043fda34e5b1220f696b3a0fd51d36260cbcafe264e24a09ede1a450.zip"
-                        },
-                        "role": {
-                          "Fn::GetAtt": [
-                            "ForecastDatasetsforecastDatasetsRoleA4E82A71",
-                            "Arn"
-                          ]
-                        },
-                        "handler": "index.handler",
-                        "runtime": "python3.9",
-                        "timeout": 90
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
-                      "version": "2.47.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_lambda.Function",
-                  "version": "2.47.0"
-                }
-              },
-              "forecastDatasetsLambdaPolicy": {
-                "id": "forecastDatasetsLambdaPolicy",
-                "path": "Forecast/ForecastDatasets/forecastDatasetsLambdaPolicy",
-                "children": {
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "Forecast/ForecastDatasets/forecastDatasetsLambdaPolicy/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
-                      "aws:cdk:cloudformation:props": {
-                        "policyDocument": {
-                          "Statement": [
-                            {
-                              "Action": "*",
-                              "Effect": "Allow",
-                              "Resource": "*"
-                            }
-                          ],
-                          "Version": "2012-10-17"
-                        },
-                        "policyName": "ForecastDatasetsforecastDatasetsLambdaPolicy5CD0D265",
-                        "roles": [
-                          {
-                            "Ref": "ForecastDatasetsforecastDatasetsRoleA4E82A71"
-                          }
-                        ]
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
-                      "version": "2.47.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_iam.Policy",
-                  "version": "2.47.0"
-                }
-              }
-            },
-            "constructInfo": {
-              "fqn": "constructs.Construct",
-              "version": "10.0.0"
-            }
-          },
-          "ForecastIAM": {
-            "id": "ForecastIAM",
-            "path": "Forecast/ForecastIAM",
-            "children": {
-              "forecastIAMRole": {
-                "id": "forecastIAMRole",
-                "path": "Forecast/ForecastIAM/forecastIAMRole",
-                "children": {
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "Forecast/ForecastIAM/forecastIAMRole/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
-                      "aws:cdk:cloudformation:props": {
-                        "assumeRolePolicyDocument": {
-                          "Statement": [
-                            {
-                              "Action": "sts:AssumeRole",
-                              "Effect": "Allow",
-                              "Principal": {
-                                "Service": "lambda.amazonaws.com"
-                              }
-                            }
-                          ],
-                          "Version": "2012-10-17"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
-                      "version": "2.47.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_iam.Role",
-                  "version": "2.47.0"
-                }
-              },
-              "forecastIAMLambda": {
-                "id": "forecastIAMLambda",
-                "path": "Forecast/ForecastIAM/forecastIAMLambda",
-                "children": {
-                  "Code": {
-                    "id": "Code",
-                    "path": "Forecast/ForecastIAM/forecastIAMLambda/Code",
-                    "children": {
-                      "Stage": {
-                        "id": "Stage",
-                        "path": "Forecast/ForecastIAM/forecastIAMLambda/Code/Stage",
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.AssetStaging",
-                          "version": "2.47.0"
-                        }
-                      },
-                      "AssetBucket": {
-                        "id": "AssetBucket",
-                        "path": "Forecast/ForecastIAM/forecastIAMLambda/Code/AssetBucket",
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.aws_s3.BucketBase",
-                          "version": "2.47.0"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
-                      "version": "2.47.0"
-                    }
-                  },
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "Forecast/ForecastIAM/forecastIAMLambda/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
-                      "aws:cdk:cloudformation:props": {
-                        "code": {
-                          "s3Bucket": {
-                            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
-                          },
-                          "s3Key": "013928b2e57817670c7733a51f4820627d8d0d734f4bb087c661740356324eb9.zip"
-                        },
-                        "role": {
-                          "Fn::GetAtt": [
-                            "ForecastIAMforecastIAMRoleF320B192",
-                            "Arn"
-                          ]
-                        },
-                        "handler": "index.handler",
-                        "runtime": "python3.9",
-                        "timeout": 90
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
-                      "version": "2.47.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_lambda.Function",
-                  "version": "2.47.0"
-                }
-              },
-              "forecastIAMLambdaPolicy": {
-                "id": "forecastIAMLambdaPolicy",
-                "path": "Forecast/ForecastIAM/forecastIAMLambdaPolicy",
-                "children": {
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "Forecast/ForecastIAM/forecastIAMLambdaPolicy/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
-                      "aws:cdk:cloudformation:props": {
-                        "policyDocument": {
-                          "Statement": [
-                            {
-                              "Action": "*",
-                              "Effect": "Allow",
-                              "Resource": "*"
-                            }
-                          ],
-                          "Version": "2012-10-17"
-                        },
-                        "policyName": "ForecastIAMforecastIAMLambdaPolicyF0A0EB40",
-                        "roles": [
-                          {
-                            "Ref": "ForecastIAMforecastIAMRoleF320B192"
-                          }
-                        ]
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
-                      "version": "2.47.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_iam.Policy",
-                  "version": "2.47.0"
-                }
-              }
-            },
-            "constructInfo": {
-              "fqn": "constructs.Construct",
-              "version": "10.0.0"
-            }
-          },
-          "ForecastS3": {
-            "id": "ForecastS3",
-            "path": "Forecast/ForecastS3",
-            "children": {
-              "forecastS3Role": {
-                "id": "forecastS3Role",
-                "path": "Forecast/ForecastS3/forecastS3Role",
-                "children": {
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "Forecast/ForecastS3/forecastS3Role/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
-                      "aws:cdk:cloudformation:props": {
-                        "assumeRolePolicyDocument": {
-                          "Statement": [
-                            {
-                              "Action": "sts:AssumeRole",
-                              "Effect": "Allow",
-                              "Principal": {
-                                "Service": "lambda.amazonaws.com"
-                              }
-                            }
-                          ],
-                          "Version": "2012-10-17"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
-                      "version": "2.47.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_iam.Role",
-                  "version": "2.47.0"
-                }
-              },
-              "forecastS3Lambda": {
-                "id": "forecastS3Lambda",
-                "path": "Forecast/ForecastS3/forecastS3Lambda",
-                "children": {
-                  "Code": {
-                    "id": "Code",
-                    "path": "Forecast/ForecastS3/forecastS3Lambda/Code",
-                    "children": {
-                      "Stage": {
-                        "id": "Stage",
-                        "path": "Forecast/ForecastS3/forecastS3Lambda/Code/Stage",
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.AssetStaging",
-                          "version": "2.47.0"
-                        }
-                      },
-                      "AssetBucket": {
-                        "id": "AssetBucket",
-                        "path": "Forecast/ForecastS3/forecastS3Lambda/Code/AssetBucket",
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.aws_s3.BucketBase",
-                          "version": "2.47.0"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
-                      "version": "2.47.0"
-                    }
-                  },
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "Forecast/ForecastS3/forecastS3Lambda/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
-                      "aws:cdk:cloudformation:props": {
-                        "code": {
-                          "s3Bucket": {
-                            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
-                          },
-                          "s3Key": "685f3b5d836601568a564def0390ff6f57545e5c2973f4924c0ac3b5161e4c01.zip"
-                        },
-                        "role": {
-                          "Fn::GetAtt": [
-                            "ForecastS3forecastS3Role856E2598",
-                            "Arn"
-                          ]
-                        },
-                        "handler": "index.handler",
-                        "runtime": "python3.9",
-                        "timeout": 90
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
-                      "version": "2.47.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_lambda.Function",
-                  "version": "2.47.0"
-                }
-              },
-              "forecastS3LambdaPolicy": {
-                "id": "forecastS3LambdaPolicy",
-                "path": "Forecast/ForecastS3/forecastS3LambdaPolicy",
-                "children": {
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "Forecast/ForecastS3/forecastS3LambdaPolicy/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
-                      "aws:cdk:cloudformation:props": {
-                        "policyDocument": {
-                          "Statement": [
-                            {
-                              "Action": "*",
-                              "Effect": "Allow",
-                              "Resource": "*"
-                            }
-                          ],
-                          "Version": "2012-10-17"
-                        },
-                        "policyName": "ForecastS3forecastS3LambdaPolicy0DF03B18",
-                        "roles": [
-                          {
-                            "Ref": "ForecastS3forecastS3Role856E2598"
-                          }
-                        ]
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
-                      "version": "2.47.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_iam.Policy",
-                  "version": "2.47.0"
-                }
-              }
-            },
-            "constructInfo": {
-              "fqn": "constructs.Construct",
-              "version": "10.0.0"
-            }
-          },
-          "ForecastImportJob": {
-            "id": "ForecastImportJob",
-            "path": "Forecast/ForecastImportJob",
-            "children": {
-              "forecastImportJobRole": {
-                "id": "forecastImportJobRole",
-                "path": "Forecast/ForecastImportJob/forecastImportJobRole",
-                "children": {
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "Forecast/ForecastImportJob/forecastImportJobRole/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
-                      "aws:cdk:cloudformation:props": {
-                        "assumeRolePolicyDocument": {
-                          "Statement": [
-                            {
-                              "Action": "sts:AssumeRole",
-                              "Effect": "Allow",
-                              "Principal": {
-                                "Service": "lambda.amazonaws.com"
-                              }
-                            }
-                          ],
-                          "Version": "2012-10-17"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
-                      "version": "2.47.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_iam.Role",
-                  "version": "2.47.0"
-                }
-              },
-              "forecastImportJobLambda": {
-                "id": "forecastImportJobLambda",
-                "path": "Forecast/ForecastImportJob/forecastImportJobLambda",
-                "children": {
-                  "Code": {
-                    "id": "Code",
-                    "path": "Forecast/ForecastImportJob/forecastImportJobLambda/Code",
-                    "children": {
-                      "Stage": {
-                        "id": "Stage",
-                        "path": "Forecast/ForecastImportJob/forecastImportJobLambda/Code/Stage",
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.AssetStaging",
-                          "version": "2.47.0"
-                        }
-                      },
-                      "AssetBucket": {
-                        "id": "AssetBucket",
-                        "path": "Forecast/ForecastImportJob/forecastImportJobLambda/Code/AssetBucket",
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.aws_s3.BucketBase",
-                          "version": "2.47.0"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
-                      "version": "2.47.0"
-                    }
-                  },
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "Forecast/ForecastImportJob/forecastImportJobLambda/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
-                      "aws:cdk:cloudformation:props": {
-                        "code": {
-                          "s3Bucket": {
-                            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
-                          },
-                          "s3Key": "9a585ba84c5070c9b7406316b9f4e4290fbdd807b1f64c0d973fc7a8bc2e92fc.zip"
-                        },
-                        "role": {
-                          "Fn::GetAtt": [
-                            "ForecastImportJobforecastImportJobRole673B1640",
-                            "Arn"
-                          ]
-                        },
-                        "handler": "index.handler",
-                        "runtime": "python3.9",
-                        "timeout": 90
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
-                      "version": "2.47.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_lambda.Function",
-                  "version": "2.47.0"
-                }
-              },
-              "forecastImportJobLambdaPolicy": {
-                "id": "forecastImportJobLambdaPolicy",
-                "path": "Forecast/ForecastImportJob/forecastImportJobLambdaPolicy",
-                "children": {
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "Forecast/ForecastImportJob/forecastImportJobLambdaPolicy/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
-                      "aws:cdk:cloudformation:props": {
-                        "policyDocument": {
-                          "Statement": [
-                            {
-                              "Action": "*",
-                              "Effect": "Allow",
-                              "Resource": "*"
-                            }
-                          ],
-                          "Version": "2012-10-17"
-                        },
-                        "policyName": "ForecastImportJobforecastImportJobLambdaPolicy535FB3FB",
-                        "roles": [
-                          {
-                            "Ref": "ForecastImportJobforecastImportJobRole673B1640"
-                          }
-                        ]
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
-                      "version": "2.47.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_iam.Policy",
-                  "version": "2.47.0"
-                }
-              }
-            },
-            "constructInfo": {
-              "fqn": "constructs.Construct",
-              "version": "10.0.0"
-            }
-          },
-          "ForecastStepFunction": {
-            "id": "ForecastStepFunction",
-            "path": "Forecast/ForecastStepFunction",
-            "children": {
-              "forecastIAMTask": {
-                "id": "forecastIAMTask",
-                "path": "Forecast/ForecastStepFunction/forecastIAMTask",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_stepfunctions_tasks.LambdaInvoke",
-                  "version": "2.47.0"
-                }
-              },
-              "forecastS3Task": {
-                "id": "forecastS3Task",
-                "path": "Forecast/ForecastStepFunction/forecastS3Task",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_stepfunctions_tasks.LambdaInvoke",
-                  "version": "2.47.0"
-                }
-              },
-              "forecastDatasetsTask": {
-                "id": "forecastDatasetsTask",
-                "path": "Forecast/ForecastStepFunction/forecastDatasetsTask",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_stepfunctions_tasks.LambdaInvoke",
-                  "version": "2.47.0"
-                }
-              },
-              "forecastMap": {
-                "id": "forecastMap",
-                "path": "Forecast/ForecastStepFunction/forecastMap",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_stepfunctions.Map",
-                  "version": "2.47.0"
-                }
-              },
-              "forecastImportJobTask": {
-                "id": "forecastImportJobTask",
-                "path": "Forecast/ForecastStepFunction/forecastImportJobTask",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_stepfunctions_tasks.LambdaInvoke",
-                  "version": "2.47.0"
-                }
-              },
-              "startState": {
-                "id": "startState",
-                "path": "Forecast/ForecastStepFunction/startState",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_stepfunctions.Pass",
-                  "version": "2.47.0"
-                }
-              },
-              "dataIngestionStepFunction": {
-                "id": "dataIngestionStepFunction",
-                "path": "Forecast/ForecastStepFunction/dataIngestionStepFunction",
-                "children": {
-                  "Role": {
-                    "id": "Role",
-                    "path": "Forecast/ForecastStepFunction/dataIngestionStepFunction/Role",
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "Forecast/ForecastTrainingJob/ForecastEcsRole/DefaultPolicy",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "Forecast/ForecastStepFunction/dataIngestionStepFunction/Role/Resource",
+                        "path": "Forecast/ForecastTrainingJob/ForecastEcsRole/DefaultPolicy/Resource",
                         "attributes": {
-                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                           "aws:cdk:cloudformation:props": {
-                            "assumeRolePolicyDocument": {
+                            "policyDocument": {
                               "Statement": [
                                 {
-                                  "Action": "sts:AssumeRole",
+                                  "Action": [
+                                    "ecr:BatchCheckLayerAvailability",
+                                    "ecr:BatchGetImage",
+                                    "ecr:GetDownloadUrlForLayer"
+                                  ],
                                   "Effect": "Allow",
-                                  "Principal": {
-                                    "Service": {
-                                      "Fn::Join": [
-                                        "",
-                                        [
-                                          "states.",
-                                          {
-                                            "Ref": "AWS::Region"
-                                          },
-                                          ".amazonaws.com"
-                                        ]
+                                  "Resource": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":ecr:",
+                                        {
+                                          "Ref": "AWS::Region"
+                                        },
+                                        ":",
+                                        {
+                                          "Ref": "AWS::AccountId"
+                                        },
+                                        ":repository/",
+                                        {
+                                          "Fn::Sub": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}"
+                                        }
                                       ]
-                                    }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "Action": "ecr:GetAuthorizationToken",
+                                  "Effect": "Allow",
+                                  "Resource": "*"
+                                },
+                                {
+                                  "Action": [
+                                    "logs:CreateLogStream",
+                                    "logs:PutLogEvents"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": {
+                                    "Fn::GetAtt": [
+                                      "ForecastTrainingJobForecastJobTaskForecastJobTrainingJobLogGroup0EF56034",
+                                      "Arn"
+                                    ]
                                   }
                                 }
                               ],
                               "Version": "2012-10-17"
-                            }
+                            },
+                            "policyName": "ForecastTrainingJobForecastEcsRoleDefaultPolicy34311FD7",
+                            "roles": [
+                              {
+                                "Ref": "ForecastTrainingJobForecastEcsRole91906620"
+                              }
+                            ]
                           }
                         },
                         "constructInfo": {
-                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
                           "version": "2.47.0"
                         }
-                      },
-                      "DefaultPolicy": {
-                        "id": "DefaultPolicy",
-                        "path": "Forecast/ForecastStepFunction/dataIngestionStepFunction/Role/DefaultPolicy",
-                        "children": {
-                          "Resource": {
-                            "id": "Resource",
-                            "path": "Forecast/ForecastStepFunction/dataIngestionStepFunction/Role/DefaultPolicy/Resource",
-                            "attributes": {
-                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
-                              "aws:cdk:cloudformation:props": {
-                                "policyDocument": {
-                                  "Statement": [
-                                    {
-                                      "Action": "lambda:InvokeFunction",
-                                      "Effect": "Allow",
-                                      "Resource": [
-                                        {
-                                          "Fn::GetAtt": [
-                                            "ForecastDatasetsforecastDatasetsLambdaB2ED04DB",
-                                            "Arn"
-                                          ]
-                                        },
-                                        {
-                                          "Fn::GetAtt": [
-                                            "ForecastIAMforecastIAMLambda8584682E",
-                                            "Arn"
-                                          ]
-                                        },
-                                        {
-                                          "Fn::GetAtt": [
-                                            "ForecastImportJobforecastImportJobLambda0092A902",
-                                            "Arn"
-                                          ]
-                                        },
-                                        {
-                                          "Fn::GetAtt": [
-                                            "ForecastS3forecastS3Lambda46CA0D25",
-                                            "Arn"
-                                          ]
-                                        },
-                                        {
-                                          "Fn::Join": [
-                                            "",
-                                            [
-                                              {
-                                                "Fn::GetAtt": [
-                                                  "ForecastDatasetsforecastDatasetsLambdaB2ED04DB",
-                                                  "Arn"
-                                                ]
-                                              },
-                                              ":*"
-                                            ]
-                                          ]
-                                        },
-                                        {
-                                          "Fn::Join": [
-                                            "",
-                                            [
-                                              {
-                                                "Fn::GetAtt": [
-                                                  "ForecastIAMforecastIAMLambda8584682E",
-                                                  "Arn"
-                                                ]
-                                              },
-                                              ":*"
-                                            ]
-                                          ]
-                                        },
-                                        {
-                                          "Fn::Join": [
-                                            "",
-                                            [
-                                              {
-                                                "Fn::GetAtt": [
-                                                  "ForecastImportJobforecastImportJobLambda0092A902",
-                                                  "Arn"
-                                                ]
-                                              },
-                                              ":*"
-                                            ]
-                                          ]
-                                        },
-                                        {
-                                          "Fn::Join": [
-                                            "",
-                                            [
-                                              {
-                                                "Fn::GetAtt": [
-                                                  "ForecastS3forecastS3Lambda46CA0D25",
-                                                  "Arn"
-                                                ]
-                                              },
-                                              ":*"
-                                            ]
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ],
-                                  "Version": "2012-10-17"
-                                },
-                                "policyName": "ForecastStepFunctiondataIngestionStepFunctionRoleDefaultPolicy1F27E2FF",
-                                "roles": [
-                                  {
-                                    "Ref": "ForecastStepFunctiondataIngestionStepFunctionRole0C7FA02E"
-                                  }
-                                ]
-                              }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.47.0"
+                }
+              },
+              "ForecastJobECSTask": {
+                "id": "ForecastJobECSTask",
+                "path": "Forecast/ForecastTrainingJob/ForecastJobECSTask",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Forecast/ForecastTrainingJob/ForecastJobECSTask/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                      "aws:cdk:cloudformation:props": {
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "*",
+                              "Effect": "Allow",
+                              "Resource": "*"
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "policyName": "ForecastTrainingJobForecastJobECSTask2753A297",
+                        "roles": [
+                          {
+                            "Ref": "ForecastTrainingJobForecastEcsRole91906620"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Policy",
+                  "version": "2.47.0"
+                }
+              },
+              "ForecastJobTask": {
+                "id": "ForecastJobTask",
+                "path": "Forecast/ForecastTrainingJob/ForecastJobTask",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Forecast/ForecastTrainingJob/ForecastJobTask/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ECS::TaskDefinition",
+                      "aws:cdk:cloudformation:props": {
+                        "containerDefinitions": [
+                          {
+                            "essential": true,
+                            "image": {
+                              "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:622e9d38983e827b99c0509c965b1d33c248c0d5ac66ebf735affb140df625ed"
                             },
+                            "name": "ForecastJobTrainingJob",
+                            "portMappings": [
+                              {
+                                "containerPort": 80,
+                                "protocol": "tcp"
+                              }
+                            ],
+                            "logConfiguration": {
+                              "logDriver": "awslogs",
+                              "options": {
+                                "awslogs-group": {
+                                  "Ref": "ForecastTrainingJobForecastJobTaskForecastJobTrainingJobLogGroup0EF56034"
+                                },
+                                "awslogs-stream-prefix": "ILOVEDICK",
+                                "awslogs-region": {
+                                  "Ref": "AWS::Region"
+                                }
+                              }
+                            }
+                          }
+                        ],
+                        "cpu": "1024",
+                        "executionRoleArn": {
+                          "Fn::GetAtt": [
+                            "ForecastTrainingJobForecastEcsRole91906620",
+                            "Arn"
+                          ]
+                        },
+                        "family": "ForecastForecastTrainingJobForecastJobTask9B87CF9A",
+                        "memory": "2048",
+                        "networkMode": "awsvpc",
+                        "requiresCompatibilities": [
+                          "FARGATE"
+                        ],
+                        "taskRoleArn": {
+                          "Fn::GetAtt": [
+                            "ForecastTrainingJobForecastEcsRole91906620",
+                            "Arn"
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ecs.CfnTaskDefinition",
+                      "version": "2.47.0"
+                    }
+                  },
+                  "ForecastJobTrainingJob": {
+                    "id": "ForecastJobTrainingJob",
+                    "path": "Forecast/ForecastTrainingJob/ForecastJobTask/ForecastJobTrainingJob",
+                    "children": {
+                      "AssetImage": {
+                        "id": "AssetImage",
+                        "path": "Forecast/ForecastTrainingJob/ForecastJobTask/ForecastJobTrainingJob/AssetImage",
+                        "children": {
+                          "Staging": {
+                            "id": "Staging",
+                            "path": "Forecast/ForecastTrainingJob/ForecastJobTask/ForecastJobTrainingJob/AssetImage/Staging",
                             "constructInfo": {
-                              "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                              "fqn": "aws-cdk-lib.AssetStaging",
+                              "version": "2.47.0"
+                            }
+                          },
+                          "Repository": {
+                            "id": "Repository",
+                            "path": "Forecast/ForecastTrainingJob/ForecastJobTask/ForecastJobTrainingJob/AssetImage/Repository",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ecr.RepositoryBase",
                               "version": "2.47.0"
                             }
                           }
                         },
                         "constructInfo": {
-                          "fqn": "aws-cdk-lib.aws_iam.Policy",
+                          "fqn": "aws-cdk-lib.aws_ecr_assets.DockerImageAsset",
+                          "version": "2.47.0"
+                        }
+                      },
+                      "LogGroup": {
+                        "id": "LogGroup",
+                        "path": "Forecast/ForecastTrainingJob/ForecastJobTask/ForecastJobTrainingJob/LogGroup",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "Forecast/ForecastTrainingJob/ForecastJobTask/ForecastJobTrainingJob/LogGroup/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Logs::LogGroup",
+                              "aws:cdk:cloudformation:props": {}
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_logs.CfnLogGroup",
+                              "version": "2.47.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_logs.LogGroup",
                           "version": "2.47.0"
                         }
                       }
                     },
                     "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_iam.Role",
-                      "version": "2.47.0"
-                    }
-                  },
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "Forecast/ForecastStepFunction/dataIngestionStepFunction/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::StepFunctions::StateMachine",
-                      "aws:cdk:cloudformation:props": {
-                        "roleArn": {
-                          "Fn::GetAtt": [
-                            "ForecastStepFunctiondataIngestionStepFunctionRole0C7FA02E",
-                            "Arn"
-                          ]
-                        },
-                        "definitionString": {
-                          "Fn::Join": [
-                            "",
-                            [
-                              "{\"StartAt\":\"startState\",\"States\":{\"startState\":{\"Type\":\"Pass\",\"Next\":\"forecastIAMTask\"},\"forecastIAMTask\":{\"Next\":\"forecastS3Task\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"Resource\":\"arn:",
-                              {
-                                "Ref": "AWS::Partition"
-                              },
-                              ":states:::lambda:invoke\",\"Parameters\":{\"FunctionName\":\"",
-                              {
-                                "Fn::GetAtt": [
-                                  "ForecastIAMforecastIAMLambda8584682E",
-                                  "Arn"
-                                ]
-                              },
-                              "\",\"Payload.$\":\"$\"}},\"forecastS3Task\":{\"Next\":\"forecastDatasetsTask\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"Resource\":\"arn:",
-                              {
-                                "Ref": "AWS::Partition"
-                              },
-                              ":states:::lambda:invoke\",\"Parameters\":{\"FunctionName\":\"",
-                              {
-                                "Fn::GetAtt": [
-                                  "ForecastS3forecastS3Lambda46CA0D25",
-                                  "Arn"
-                                ]
-                              },
-                              "\",\"Payload.$\":\"$\"}},\"forecastDatasetsTask\":{\"Next\":\"forecastMap\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"OutputPath\":\"$.Payload\",\"Resource\":\"arn:",
-                              {
-                                "Ref": "AWS::Partition"
-                              },
-                              ":states:::lambda:invoke\",\"Parameters\":{\"FunctionName\":\"",
-                              {
-                                "Fn::GetAtt": [
-                                  "ForecastDatasetsforecastDatasetsLambdaB2ED04DB",
-                                  "Arn"
-                                ]
-                              },
-                              "\",\"Payload.$\":\"$\"}},\"forecastMap\":{\"Type\":\"Map\",\"End\":true,\"Iterator\":{\"StartAt\":\"forecastImportJobTask\",\"States\":{\"forecastImportJobTask\":{\"End\":true,\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"Resource\":\"arn:",
-                              {
-                                "Ref": "AWS::Partition"
-                              },
-                              ":states:::lambda:invoke\",\"Parameters\":{\"FunctionName\":\"",
-                              {
-                                "Fn::GetAtt": [
-                                  "ForecastImportJobforecastImportJobLambda0092A902",
-                                  "Arn"
-                                ]
-                              },
-                              "\",\"Payload.$\":\"$\"}}}}}}}"
-                            ]
-                          ]
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_stepfunctions.CfnStateMachine",
+                      "fqn": "aws-cdk-lib.aws_ecs.ContainerDefinition",
                       "version": "2.47.0"
                     }
                   }
                 },
                 "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_stepfunctions.StateMachine",
+                  "fqn": "aws-cdk-lib.aws_ecs.TaskDefinition",
+                  "version": "2.47.0"
+                }
+              },
+              "ForecastJobTaskDefintionARN": {
+                "id": "ForecastJobTaskDefintionARN",
+                "path": "Forecast/ForecastTrainingJob/ForecastJobTaskDefintionARN",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Forecast/ForecastTrainingJob/ForecastJobTaskDefintionARN/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
+                      "aws:cdk:cloudformation:props": {
+                        "type": "String",
+                        "value": {
+                          "Ref": "ForecastTrainingJobForecastJobTaskE0ECE844"
+                        },
+                        "name": "forecast-task-definition-arn"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
+                  "version": "2.47.0"
+                }
+              },
+              "JobTaskRole": {
+                "id": "JobTaskRole",
+                "path": "Forecast/ForecastTrainingJob/JobTaskRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Forecast/ForecastTrainingJob/JobTaskRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
+                      "aws:cdk:cloudformation:props": {
+                        "type": "String",
+                        "value": {
+                          "Fn::GetAtt": [
+                            "ForecastTrainingJobForecastEcsRole91906620",
+                            "Arn"
+                          ]
+                        },
+                        "name": "forecast-task-role"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
+                  "version": "2.47.0"
+                }
+              },
+              "ForecastJobEcsCluster": {
+                "id": "ForecastJobEcsCluster",
+                "path": "Forecast/ForecastTrainingJob/ForecastJobEcsCluster",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Forecast/ForecastTrainingJob/ForecastJobEcsCluster/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
+                      "aws:cdk:cloudformation:props": {
+                        "type": "String",
+                        "value": {
+                          "Fn::GetAtt": [
+                            "ForecastTrainingJobForecastJobF0227B0C",
+                            "Arn"
+                          ]
+                        },
+                        "name": "forecast-ecs-cluster"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
+                  "version": "2.47.0"
+                }
+              },
+              "ForecastJobContainerSubnets": {
+                "id": "ForecastJobContainerSubnets",
+                "path": "Forecast/ForecastTrainingJob/ForecastJobContainerSubnets",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Forecast/ForecastTrainingJob/ForecastJobContainerSubnets/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
+                      "aws:cdk:cloudformation:props": {
+                        "type": "String",
+                        "value": {
+                          "Fn::ImportValue": "NetworkStack:ExportsOutputRefApplicationVpcPublicSubnet1Subnet7014005F4D6884CE"
+                        },
+                        "name": "forecast-container-subnets"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
                   "version": "2.47.0"
                 }
               }

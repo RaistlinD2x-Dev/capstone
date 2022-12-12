@@ -42,3 +42,10 @@ def create_bucket(client, bucket_exists):
         print(f"Bucket with bucket name {bucket_name} exists!")
 
         return bucket_name
+
+
+def upload_csv(client, local_file_name, bucket_name, key):
+
+    client.meta.client.upload_file(local_file_name, bucket_name, key)
+
+    print(f"{local_file_name} uploaded to {bucket_name}/{key}")

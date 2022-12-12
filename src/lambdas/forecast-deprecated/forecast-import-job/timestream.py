@@ -1,6 +1,8 @@
 import boto3
 
 tsq = boto3.client("timestream-query")
+timestream_database_param_name = "timestream-stock-info-database"
+timestream_table_param_name = "timestream-stock-info-table"
 
 
 def query_timestream(client, database_name, table_name, stock_name):
